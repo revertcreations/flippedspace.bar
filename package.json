@@ -1,0 +1,12 @@
+{
+  "name": "flippedspace.bar",
+  "version": "1.0.0",
+  "description": "keyboard enthusiasts marketplace",
+  "main": "index.js",
+  "repository": "flippedspace.bar",
+  "author": "Trever Hillis",
+  "license": "MIT",
+  "scripts": {
+    "start": "node ."
+  }
+}
