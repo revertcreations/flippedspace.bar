@@ -7,7 +7,8 @@
   "author": "Trever Hillis",
   "license": "MIT",
   "scripts": {
-    "start": "babel-node src/server",
+    "start": "yarn dev:start",
+    "dev:start": "nodemon --ignore lib --exec babel-node src/server",
     "test": "eslint src && flow && jest --coverage",
     "precommit": "yarn test",
     "prepush": "yarn test"
@@ -27,7 +28,8 @@
     "eslint-plugin-react": "^7.11.0",
     "flow-bin": "^0.83.0",
     "husky": "^1.1.2",
-    "jest": "^23.6.0"
+    "jest": "^23.6.0",
+    "nodemon": "^1.18.4"
   },
   "browserslist": [
     "> 1%"
