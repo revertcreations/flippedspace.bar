@@ -1,0 +1,10 @@
+body {
+  width: 960px;
+  background: lightslategray;
+  margin: auto;
+  font-family: sans-serif;
+}
+
+h1 {
+  color: whitesmoke;
+}

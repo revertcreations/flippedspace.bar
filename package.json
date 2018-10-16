@@ -7,7 +7,7 @@
   "author": "Trever Hillis",
   "license": "MIT",
   "scripts": {
-    "start": "babel-node src",
+    "start": "babel-node src/server",
     "test": "eslint src && flow && jest --coverage",
     "precommit": "yarn test",
     "prepush": "yarn test"
@@ -31,5 +31,9 @@
   },
   "browserslist": [
     "> 1%"
-  ]
+  ],
+  "dependencies": {
+    "compression": "^1.7.3",
+    "express": "^4.16.4"
+  }
 }
