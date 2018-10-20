@@ -6,3 +6,4 @@ flippedspace.bar.ascii.txt
 node_modules/
 /coverage/
 /lib/
+/dist/
