@@ -5,3 +5,4 @@ todo.txt
 flippedspace.bar.ascii.txt
 node_modules/
 /coverage/
+/lib/
