@@ -1,0 +1,38 @@
+flippedspace.bar
+----------------
+
+-- users
+	-- sell (member)
+		-- categories
+			-- keycaps
+			-- artisans
+			-- switches 
+			-- plates
+			-- cases
+			-- diy kits
+			-- completes
+			-- misc
+	-- create builds (non & member)
+		-- adding images, videos, gifs
+		-- adding text blocks
+		-- have a chat, websockets if enabled
+	-- buy (non & member)
+	-- create group buy (member)
+
+-- chat
+	-- interactive global chat
+	-- each 'post' have individual channels you can join
+	-- perhaps we store chat logs in db somehow
+
+-- classifieds
+	-- members can post ads
+	-- heavily searchable interface
+	-- images required
+  -- stripe connect
+
+-- builds
+	-- blog entry style
+  -- comments
+
+-- reviews
+	-- probably can use the same builds interface 
