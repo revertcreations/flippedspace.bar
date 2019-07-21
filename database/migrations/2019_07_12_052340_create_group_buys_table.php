@@ -15,6 +15,8 @@ class CreateGroupBuysTable extends Migration
     {
         Schema::create('group_buys', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('user_id');
+            $table->integer('group_buys_category_id');
             $table->timestamps();
         });
     }

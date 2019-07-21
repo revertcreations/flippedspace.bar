@@ -15,6 +15,11 @@ class CreateArtisansTable extends Migration
     {
         Schema::create('artisans', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('user_id');
+            $table->integer('raffle_id');
+            $table->integer('artisans_category_id');
+            $table->string('name');
+            $table->enum('status', ['on_hold','active','complete']);
             $table->timestamps();
         });
     }

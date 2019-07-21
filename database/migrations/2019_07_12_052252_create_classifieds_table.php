@@ -15,7 +15,15 @@ class CreateClassifiedsTable extends Migration
     {
         Schema::create('classifieds', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('user_id');
+            $table->integer('group_buys_id');
+            $table->integer('interest_checks_id');
+            $table->integer('classifieds_category_id');
+            $table->integer('discount_id');
             $table->string('name');
+            $table->longText('description');
+            $table->decimal('price', 8, 2);
+            $table->boolean('tradable');
             $table->timestamps();
         });
     }
