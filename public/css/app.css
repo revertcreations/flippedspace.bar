@@ -21,15 +21,43 @@ a {
     color: #000;
 }
 a:hover {
-    color: lightpink;
+    color: #a2a2a2;
 }
 a:visited {
     color: #000;
 }
-.logo {
-  font-size: 7px;
+
+/***** NAVIGATION *****/
+header {
+    border-bottom: 5px solid #000;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
 }
-#site_search_icon {
+.main-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 100%;
+    background: #FFF;
+}
+.main-nav .logo {
+    font-size: 7px;
+    margin-bottom: 30px;
+}
+.main-nav .logo-link {
+    margin-left: 20px;
+    font-weight: 800;
+    text-decoration: none;
+    color: #000;
+}
+.main-nav .search-bar {
+    align-self: center;
+    position: relative;
+    min-width: 270px;
+    margin-left: 40px;
+}
+.main-nav .search-bar .search-icon {
     transform-origin: 0 0;
     transform: rotate(45deg);
     font-size: 30px;
@@ -38,37 +66,11 @@ a:visited {
     left: 0;
 }
 
-/***** NAVIGATION *****/
-header {
-    border-bottom: 5px solid #000;
-    padding-bottom: 10px;
-}
-.main-nav {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    width: 100%;
-    background: #FFF;
-}
-.main-nav .logo-link {
-    margin-left: 20px;
-    font-weight: 800;
-    text-decoration: none;
-    color: #000;
-}
-/* .main-nav .logo-link:hover > pre{
-    color: #000;
-} */
-.main-nav .search-bar {
-    align-self: center;
-    min-width: 400px;
-    position: relative;
-    margin-left: 40px;
-}
 .main-nav .search-bar input {
     width: 90%;
     height: 40px;
     padding-left: 10px;
+    margin-bottom: 10px;
 }
 .main-nav .search-bar input::-moz-placeholder {
     color: rgb(128, 128, 128);
@@ -86,11 +88,18 @@ header {
     margin-right: 20px;
 }
 
+.main-nav ul .nav-link {
+    padding: 12px;
+}
+.main-nav ul li:nth-child(n+2) {
+    border-left: 2px solid black;
+}
+
 
 /***** CONTENT *****/
 
 .content {
-    padding: 40px;
+    padding: 20px;
     background: #F5F5F5;
 }
 
@@ -108,19 +117,37 @@ header {
 }
 .item-card-wrap {
     flex: 1;
-    flex-direction: column;
     margin: 10px 5px;
+    align-self: baseline;
 }
 .item-card {
+    max-width: 300px;
     margin: 0 auto;
     align-self: center;
     padding: 20px;
     background: white;
     border-bottom: 5px solid #000;
 }
-.item-card, .item-card img{
-    width: 300px;
+.item-card img{
+    max-width: 100%;
+    min-width: 180px;
+}
+.item-card img {
+    text-align: center;
 }
 .item-card h3 {
     margin-top: 20px;
+}
+
+.item-card .offers {
+    color: #4d4d4d;
+}
+
+@media only screen and (max-width: 824px) {
+    .main-nav ul {
+        display: none;
+    }
+    .main-nav .logo-link {
+        overflow-x: scroll;
+    }
 }

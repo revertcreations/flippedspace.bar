@@ -2,9 +2,9 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="{{ asset('css/app.css') }}" />
-        <title>@yield('title', 'flippedspace.bar - buy/sell custom keyboards')</title>
+        <title>@yield('title', 'Buy & Sale - Mechanical Keyboard Classifieds | flippedspace.bar')</title>
     </head>
     <body>
         <header>
@@ -23,15 +23,15 @@
                 </a>
 
                 <div class="search-bar">
-                    <label for="site-search" id="site_search_icon">&#9906;</label for="site-search">
+                    <label for="site-search" class="search-icon">&#9906;</label for="site-search">
                     <input name="site-search" type="text" placeholder="search &amp; watch the wallet burn...">
                 </div>
 
                 <ul>
-                    <li><a href="/classifieds">classifieds</a> |&nbsp;</li>
-                    <li><a href="/sell">sell</a> |&nbsp;</li>
-                    <li><a href="/login">login</a> |&nbsp;</li>
-                    <li><a href="/register">register</a></li>
+                    <li><a class="nav-link" href="/classifieds">classifieds</a></li>
+                    <li><a class="nav-link" href="/sell">sell</a></li>
+                    <li><a class="nav-link" href="/login">login</a></li>
+                    <li><a class="nav-link" href="/register">register</a></li>
                 </ul>
 
         </nav>
