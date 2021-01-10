@@ -11,7 +11,7 @@
             <nav class="main-nav">
                 
                 <a class="logo-link" href="/">            
-<pre class="logo">
+                    <pre class="logo">
  _______  ___      ___   _______  _______  _______  ______   _______  _______  _______  _______  _______        _______  _______  ______   
 |       ||   |    |   | |       ||       ||       ||      | |       ||       ||   _   ||       ||       |      |  _    ||   _   ||    _ |  
 |    ___||   |    |   | |    _  ||    _  ||    ___||  _    ||  _____||    _  ||  |_|  ||      _||    ___|      | |_|   ||  |_|  ||   | ||  
@@ -19,7 +19,7 @@
 |    ___||   |___ |   | |    ___||    ___||    ___|| |_|   ||_____  ||    ___||       ||     |_ |    ___| ___  |  _   | |       ||    __  |
 |   |    |       ||   | |   |    |   |    |   |___ |       | _____| ||   |    |   _   ||       ||   |___ |   | | |_|   ||   _   ||   |  | |
 |___|    |_______||___| |___|    |___|    |_______||______| |_______||___|    |__| |__||_______||_______||___| |_______||__| |__||___|  |_|
-</pre>
+                    </pre>
                 </a>
 
                 <div class="search-bar">
@@ -30,11 +30,21 @@
                 <ul>
                     <li><a class="nav-link" href="/classifieds">classifieds</a></li>
                     <li><a class="nav-link" href="/sell">sell</a></li>
-                    <li><a class="nav-link" href="/login">login</a></li>
+                    @guest
                     <li><a class="nav-link" href="/register">register</a></li>
+                    <li><a class="nav-link" href="/login">login</a></li>
+                    @else
+                    <li>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <a class="nav-link" onclick="event.preventDefault();this.closest('form').submit();">logout</a>
+                        </form>
+                    </li>
+                    @endguest
+
                 </ul>
 
-        </nav>
+            </nav>
         </header>
 
         <div class="content">

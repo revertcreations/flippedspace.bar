@@ -5,6 +5,7 @@ html * {
 }
 body {
     margin: unset;
+    background: #F5F5F5;
 }
 h1,h2,h3,h4,h5,h6,b {
     font-family: Lato,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
@@ -26,6 +27,18 @@ a:hover {
 a:visited {
     color: #000;
 }
+input {
+    width: 100%;
+    height: 40px;
+    padding-left: 10px;
+    margin: 10px 0;
+}
+input[type="submit"] {
+    margin-top: 40px;
+}
+input[type="text"], input[type="password"], input[type="email"] {
+    width: calc(100% - 14px);
+}
 
 /***** NAVIGATION *****/
 header {
@@ -42,7 +55,7 @@ header {
 }
 .main-nav .logo {
     font-size: 7px;
-    margin-bottom: 30px;
+    margin: 0px 0 10px 30px;
 }
 .main-nav .logo-link {
     margin-left: 20px;
@@ -69,9 +82,6 @@ header {
 }
 
 .main-nav .search-bar input {
-    width: 90%;
-    height: 40px;
-    padding-left: 10px;
     margin-bottom: 10px;
 }
 .main-nav .search-bar input::placeholder {
@@ -96,9 +106,7 @@ header {
 
 .content {
     padding: 20px;
-    background: #F5F5F5;
 }
-
 .content p {
     padding: 15px;
 }
@@ -117,19 +125,18 @@ header {
     align-self: baseline;
 }
 .item-card {
+    display: flex;
+    flex-direction: column;
     max-width: 300px;
     margin: 0 auto;
-    align-self: center;
     padding: 20px;
     background: white;
     border-bottom: 5px solid #000;
 }
-.item-card img{
+.item-card img {
     max-width: 100%;
     min-width: 180px;
-}
-.item-card img {
-    text-align: center;
+    align-self: center;
 }
 .item-card h3 {
     margin-top: 20px;
