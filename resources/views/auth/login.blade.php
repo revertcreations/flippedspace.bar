@@ -21,15 +21,16 @@
                                required autocomplete="current-password" />
                     </div>
                     <div class="form-group">
-                        <label for="remember">Remember Me?</label>
                         <input type="checkbox" name="remember">
+                        <label for="remember">Remember Me?</label>
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Submit">
                     </div>
                 </div>
-
-                <small>Don't have an account? <a href="{{ route('register') }}">Register</a></small>
+                <div class="form-group">
+                    <small>Forgot Password? <a href="{{ route('password.request') }}">Reset</a></small>
+                </div>
             </form>
         </div>
     </div>
