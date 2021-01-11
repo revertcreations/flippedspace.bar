@@ -2,31 +2,13 @@
 
 @section('content')
 
-    <div class="item-card-wrap">
+    <div class="item-card-wrap form">
         <div class="item-card form">
             <form method="POST" action="{{ route('register') }}">
                 @csrf
                 <div class="info">
                     <h2 class="title">Register</h2>
-                    
-                    <div class="form-group">
-                        <label for="f_name">
-                            First Name
-                        </label>
-                        <input id="f_name" name="f_name" type="text" value="{{ old('f_name') }}" autofocus />
-                        @error('f_name')
-                        <small class="error input-error">{{ $message }}</small>
-                        @enderror                  
-                    </div>
-                    <div class="form-group">
-                        <label for="l_name">
-                            Last Name
-                        </label>
-                        <input id="l_name" name="l_name" type="text" value="{{ old('l_name') }}"  autofocus />
-                        @error('l_name')
-                        <small class="error input-error">{{ $message }}</small>
-                        @enderror
-                    </div>
+
                     <div class="form-group">
                         <label for="email">
                             Email
@@ -36,6 +18,17 @@
                         <small class="error input-error">{{ $message }}</small>
                         @enderror   
                     </div>
+                    
+                    <div class="form-group">
+                        <label for="username">
+                            Username
+                        </label>
+                        <input id="" name="username" type="text" value="{{ old('username') }}" autofocus />
+                        @error('username')
+                        <small class="error input-error">{{ $message }}</small>
+                        @enderror                  
+                    </div>
+
                     <div class="form-group">
                         <label for="password">
                             Password                      
@@ -49,18 +42,7 @@
                         <small class="error input-error">{{ $message }}</small>
                         @enderror      
                     </div>
-                    <div class="form-group">
-                        <label for="password_confirmation">
-                            Confirm Password                 
-                        </label>
-                        <input id="password_confirmation"
-                               type="password"
-                               name="password_confirmation"
-                                />
-                        @error('password_confirmation')
-                        <small class="error input-error">{{ $message }}</small>
-                        @enderror
-                    </div>
+
                     <div class="form-group">
                         <input type="submit" value="Submit">
                     </div>

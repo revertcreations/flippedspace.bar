@@ -25,9 +25,10 @@ a {
 }
 a:hover {
     border-bottom: 2px solid black;
+    cursor: pointer;
 }
-a:visited {
-    /* color: #000; */
+a.disable-underline:hover{
+    border-bottom: unset;
 }
 input:not([type="checkbox"]) {
     width: 100%;
@@ -37,6 +38,9 @@ input:not([type="checkbox"]) {
 }
 input[type="submit"] {
     margin-top: 40px;
+}
+input[type="submit"]:hover {
+    cursor: pointer;
 }
 input[type="text"], input[type="password"], input[type="email"] {
     width: calc(100% - 14px);
@@ -104,8 +108,21 @@ header {
     align-self: flex-end;
     margin-right: 20px;
 }
-.main-nav ul .nav-link {
+.main-nav ul li {
     padding: 12px;
+}
+.main-nav ul .user-menu{
+    width: 32px;
+    height: 32px;
+    border: 2px solid black;
+    padding: 0;
+}
+.main-nav ul .user-menu .img-wrap {
+    text-align: center;
+    font-size: 30px;
+    width: 100%;
+    height: 100%;
+    background-color: #C8C8C8;
 }
 .main-nav ul li:nth-child(n+2) {
     border-left: 2px solid black;
@@ -154,10 +171,18 @@ header {
 }
 
 /***** FROM ITEM CARDS *****/
-.item-card.form {
+.item-card-wrap.form {
+    display: flex;
+    align-self: unset;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.item-card-wrap.form .item-card.form {
     max-width: 500px;
+    min-width: 320px;
+    flex: 1;
     position: relative;
-    margin-top: 0px;
+    margin: 25px;
 }
 .item-card.form .error.input-error {
     background: unset;
@@ -178,6 +203,10 @@ header {
 .item-card.form .error.label-error {
     color: green;
     background: black;
+}
+.item-card.form .form-group img {
+    margin-top: 10px;
+    display: block;
 }
 .item-form-status-bar {
     max-width: 500px;

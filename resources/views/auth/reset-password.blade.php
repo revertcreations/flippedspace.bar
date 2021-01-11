@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="item-card-wrap">
+    <div class="item-card-wrap form">
         <div class="item-card form">
             @if (session('status'))
             <small class="success form-success">{{ session('status') }}</small>

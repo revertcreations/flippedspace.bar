@@ -10,7 +10,7 @@
         <header>
             <nav class="main-nav">
                 
-                <a class="logo-link disable-scrollbars" href="/">            
+                <a class="logo-link disable-scrollbars disable-underline" href="/">            
                     <pre class="logo">
  _______  ___      ___   _______  _______  _______  ______   _______  _______  _______  _______  _______        _______  _______  ______   
 |       ||   |    |   | |       ||       ||       ||      | |       ||       ||   _   ||       ||       |      |  _    ||   _   ||    _ |  
@@ -34,14 +34,24 @@
                     <li><a class="nav-link" href="/register">register</a></li>
                     <li><a class="nav-link" href="/login">login</a></li>
                     @else
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
                     <li>
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <a class="nav-link" onclick="event.preventDefault();this.closest('form').submit();">logout</a>
-                        </form>
+                        <a class="nav-link" onclick="event.preventDefault();this.closest('form').submit();">logout</a>
+                    </li>
+                    </form>
+                    <li class="user-menu">
+                        <div class="img-wrap">
+                            <a href="{{ route('dashboard') }}">
+                                @if (empty($user->avatar))
+                                &#9787;
+                                @else
+                                <img width="32" height="32" class="avatar" src="{{ asset('img/avatar.jpeg') }}" />
+                                @endif
+                            </a>
+                        </div>
                     </li>
                     @endguest
-
                 </ul>
 
             </nav>

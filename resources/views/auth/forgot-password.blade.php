@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="item-card-wrap">
+    <div class="item-card-wrap form">
         <div class="item-card form">
             <form method="POST" action="{{ route('password.email') }}">
                 @csrf

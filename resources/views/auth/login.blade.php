@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="item-card-wrap">
+    <div class="item-card-wrap form">
         <div class="item-card form">
             <form method="POST" action="{{ route('login') }}">
                 @csrf
@@ -11,7 +11,7 @@
 
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input id="email" type="email" name="email" type="email" required autofocus />
+                        <input id="email" type="email" name="email" type="email" value="{{ old('email') }}" required autofocus />
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
@@ -33,13 +33,11 @@
                 </div>
             </form>
         </div>
-
         @foreach($errors->all() as $message)
         <div class="item-form-status-bar error">
             <div class="message">{{ $message }}</div>
         </div>
         @endforeach
-
     </div>
 
 @endsection
