@@ -1,3 +1,4 @@
+/***** MAIN STUFF *****/
 @import url(https://fonts.googleapis.com/css?family=Noto+Sans:700i&display=swap);
 @import url(https://fonts.googleapis.com/css?family=Inconsolata&display=swap);
 html * {
@@ -6,6 +7,7 @@ html * {
 body {
     margin: unset;
     background: #F5F5F5;
+    background: #C8C8C8;
 }
 h1,h2,h3,h4,h5,h6,b {
     font-family: Lato,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
@@ -22,10 +24,10 @@ a {
     color: #000;
 }
 a:hover {
-    color: #a2a2a2;
+    border-bottom: 2px solid black;
 }
 a:visited {
-    color: #000;
+    /* color: #000; */
 }
 input:not([type="checkbox"]) {
     width: 100%;
@@ -40,11 +42,21 @@ input[type="text"], input[type="password"], input[type="email"] {
     width: calc(100% - 14px);
 }
 
+.disable-scrollbars {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE 10+ */
+}
+.disable-scrollbars::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* Chrome/Safari/Webkit */
+}
+
 /***** NAVIGATION *****/
 header {
     border-bottom: 5px solid #000;
     position: sticky;
     top: 0;
+    z-index: 2;
 }
 .main-nav {
     display: flex;
@@ -53,15 +65,15 @@ header {
     width: 100%;
     background: #FFF;
 }
-.main-nav .logo {
-    font-size: 7px;
-    margin: 0px 0 10px 30px;
-}
 .main-nav .logo-link {
     margin-left: 20px;
     font-weight: 800;
     text-decoration: none;
     color: #000;
+}
+.main-nav .logo-link .logo {
+    font-size: 7px;
+    margin: 10px 0;
 }
 .main-nav .search-bar {
     align-self: center;
@@ -77,23 +89,21 @@ header {
     transform: rotate(45deg);
     font-size: 30px;
     position: absolute;
-    top: 0;
+    top: 10px;
     left: 0;
 }
-
 .main-nav .search-bar input {
     margin-bottom: 10px;
+    margin-left: 5px;
 }
 .main-nav .search-bar input::placeholder {
     color: rgb(128, 128, 128);
 }
-
 .main-nav ul {
     display: flex;
     align-self: flex-end;
     margin-right: 20px;
 }
-
 .main-nav ul .nav-link {
     padding: 12px;
 }
@@ -103,7 +113,6 @@ header {
 
 
 /***** CONTENT *****/
-
 .content {
     padding: 20px;
 }
@@ -112,7 +121,6 @@ header {
 }
 
 /***** ITEM CARD *****/
-
 .items-container {
     display: flex;
     flex-wrap: wrap;
@@ -133,9 +141,6 @@ header {
     background: white;
     border-bottom: 5px solid #000;
 }
-.item-card.single {
-    max-width: 500px;
-}
 .item-card img {
     max-width: 100%;
     min-width: 180px;
@@ -144,11 +149,51 @@ header {
 .item-card h3 {
     margin-top: 20px;
 }
-
 .item-card .offers {
     color: #4d4d4d;
 }
 
+/***** FROM ITEM CARDS *****/
+.item-card.form {
+    max-width: 500px;
+    position: relative;
+    margin-top: 0px;
+}
+.item-card.form .error.input-error {
+    background: unset;
+    border: unset;
+    position: absolute;
+    margin-top: -10px;
+    right: 20px;
+}
+.item-card.form .success.form-success, .item-card.form .error.form-error {
+    position: absolute;
+}
+.item-card.form .success {
+    color: #025b02;
+}
+.item-card.form .error {
+    color: #464646;
+}
+.item-card.form .error.label-error {
+    color: green;
+    background: black;
+}
+.item-form-status-bar {
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: #000000;
+    color: white;
+    padding: 6px 20px 10px 20px;
+    padding: 0px 20px;
+    height: 35px;
+    transition: all .5s ease-in-out;
+}
+.item-form-status-bar .message {
+    padding: 6px 0px 10px 0px;
+}
+
+/***** MEDIA QUERIES *****/
 @media only screen and (max-width: 824px) {
     .main-nav ul {
         display: none;

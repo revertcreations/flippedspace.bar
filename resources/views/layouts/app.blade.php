@@ -10,7 +10,7 @@
         <header>
             <nav class="main-nav">
                 
-                <a class="logo-link" href="/">            
+                <a class="logo-link disable-scrollbars" href="/">            
                     <pre class="logo">
  _______  ___      ___   _______  _______  _______  ______   _______  _______  _______  _______  _______        _______  _______  ______   
 |       ||   |    |   | |       ||       ||       ||      | |       ||       ||   _   ||       ||       |      |  _    ||   _   ||    _ |  
@@ -51,5 +51,7 @@
             @yield('content')
         </div>
 
+
+        <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
     </body>
 </html>
