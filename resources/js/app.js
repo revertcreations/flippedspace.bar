@@ -1,6 +1,6 @@
 (function () {
 
-    document.querySelectorAll(".item-form-status-bar.error")
+    document.querySelectorAll(".card-status-bar.error")
         .forEach(function(el){
             setTimeout(function(){
                 console.log('Doing the things')
@@ -9,7 +9,7 @@
             },100)
         });
 
-    document.querySelectorAll(".item-form-status-bar.success")
+    document.querySelectorAll(".card-status-bar.success")
         .forEach(function(el){
             setTimeout(function(){
                 el.style.backgroundColor = "rgb(66, 191, 66)";

@@ -8,8 +8,8 @@
         <hr>
         <div class="items-container">
         @foreach($category as $artisan)
-        <div class="item-card-wrap">
-            <div class="item-card">
+        <div class="card-wrap">
+            <div class="card">
                 <img src="{{ $artisan->image_src }}" alt="{{ $artisan->maker_name }} : {{ $artisan->sculpt_name }} - {{ $artisan->colorway_name }}"></img>
                 <div class="info">
                     <h2 class="title">{{ $artisan->maker_name }}</h2>

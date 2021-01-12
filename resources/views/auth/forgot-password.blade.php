@@ -2,43 +2,43 @@
 
 @section('content')
 
-    <div class="item-card-wrap form">
-        <div class="item-card form">
-            <form method="POST" action="{{ route('password.email') }}">
-                @csrf
-                <div class="info">
-                    <h2 class="title">Forgot Password?</h2>
+    <form class="flex-form" method="POST" action="{{ route('password.email') }}">
+        <div class="card">
+            @csrf
+            <div class="fields">
+                <h2 class="title">Forgot Password?</h2>
 
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input id="email" type="email" name="email" type="email"  value="{{ old('email') }}" required autofocus />   
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" value="Submit">
-                    </div>
-                </div>
                 <div class="form-group">
-                    <small>Did ya remember it? <a href="{{ route('login') }}">Login</a></small>
+                    <label for="email">Email</label>
+                    <input id="email" type="email" name="email" type="email"  value="{{ old('email') }}" required autofocus />   
                 </div>
-            </form>
+
+                <div class="form-group">
+                    <input type="submit" value="Submit">
+                </div>
+
+                <small>Did ya remember it? <a href="{{ route('login') }}">Login</a></small>
+
+            </div>
         </div>
-        @if (session('status'))
-        <div class="item-form-status-bar success">
-            <div class="message">{{ session('status') }}</div>
-        </div>
-        @endif
-        @error('email')
-        <div class="item-form-status-bar error">
-            <div class="message">{{ $message }}</div>
-        </div>
-        @enderror
+    </form>
+
+    @if (session('status'))
+    <div class="card-status-bar success">
+        <div class="message">{{ session('status') }}</div>
     </div>
+    @endif
+    @error('email')
+    <div class="card-status-bar error">
+        <div class="message">{{ $message }}</div>
+    </div>
+    @enderror    
 
 @endsection
 
 
 {{-- @if (!empty($errors->all()))
-<div class="item-form-status-bar error">
+<div class="card-status-bar error">
     @error('token')
     <div class="message">{{ $message }}</div>
     @enderror

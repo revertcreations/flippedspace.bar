@@ -116,8 +116,8 @@ header {
     padding: 12px;
 }
 .main-nav ul .user-menu{
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
     border: 2px solid black;
     padding: 0;
 }
@@ -126,7 +126,6 @@ header {
     font-size: 30px;
     width: 100%;
     height: 100%;
-    background-color: #C8C8C8;
 }
 .main-nav ul li:nth-child(n+2) {
     border-left: 2px solid black;
@@ -148,13 +147,14 @@ header {
     padding: 20px;
     align-content: space-around;
 }
-.item-card-wrap {
+.card-wrap {
     flex: 1;
     margin: 10px 5px;
     align-self: baseline;
 }
-.item-card {
+.card {
     display: flex;
+    position: relative;
     flex-direction: column;
     max-width: 300px;
     margin: 0 auto;
@@ -162,68 +162,64 @@ header {
     background: white;
     border-bottom: 5px solid #000;
 }
-.item-card img {
+.card img {
     max-width: 100%;
     min-width: 180px;
     align-self: center;
 }
-.item-card h3 {
+.card h3 {
     margin-top: 20px;
 }
-.item-card .offers {
+.card .offers {
     color: #4d4d4d;
+}
+.card-status-bar {
+    max-width: 500px;
+    min-width: 320px;
+    margin: 0 auto;
 }
 
 /***** FROM ITEM CARDS *****/
-.item-card-wrap.form {
+.flex-form {
     display: flex;
-    align-self: unset;
     flex-wrap: wrap;
     justify-content: center;
+    position:relative;
 }
-.item-card-wrap.form .item-card.form {
+.flex-form .card, .card-status-bar {
+    flex: 1;
     max-width: 500px;
     min-width: 320px;
-    flex: 1;
-    position: relative;
-    margin: 25px;
 }
-.item-card.form .error.input-error {
+.flex-form .card .error.input-error {
     background: unset;
     border: unset;
     position: absolute;
     margin-top: -10px;
     right: 20px;
 }
-.item-card.form .success.form-success, .item-card.form .error.form-error {
+.flex-form .card .success.form-success, .flex-form .card .error.form-error {
     position: absolute;
 }
-.item-card.form .success {
+.flex-form .card .success {
     color: #025b02;
 }
-.item-card.form .error {
+.flex-form .card .error {
     color: #464646;
 }
-.item-card.form .error.label-error {
+.flex-form .card .error.label-error {
     color: green;
     background: black;
 }
-.item-card.form .form-group img {
+.flex-form .card .form-group img {
     margin-top: 10px;
     display: block;
 }
-.item-form-status-bar {
-    max-width: 500px;
-    margin: 0 auto;
+.card-status-bar {
+    padding: 10px 20px;
     background-color: #000000;
     color: white;
-    padding: 6px 20px 10px 20px;
-    padding: 0px 20px;
-    height: 35px;
     transition: all .5s ease-in-out;
-}
-.item-form-status-bar .message {
-    padding: 6px 0px 10px 0px;
 }
 
 /***** MEDIA QUERIES *****/

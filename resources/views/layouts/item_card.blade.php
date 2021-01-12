@@ -1,3 +1,3 @@
-<div class="item-card">
+<div class="card">
   <img src="{{ $thumbnail }}" alt="{{ $title }}"></img>
 </div>
