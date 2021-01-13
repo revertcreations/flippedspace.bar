@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <form class="flex-form" method="POST" action="{{ route('register') }}">
+    <form class="flex-form collasped" method="POST" action="{{ route('register') }}">
         <div class="card">
             <h2 class="title">Register</h2>
             

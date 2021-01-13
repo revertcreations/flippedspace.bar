@@ -13,4 +13,24 @@ class UserDashboardController extends Controller
         $user = Auth::user();
         return view('auth.dashboard', ['user' => $user]);
     }
+
+    public function store(User $user) {
+        $user = Auth::user();
+        return view('auth.dashboard', ['user' => $user]);
+
+        $request->validate([
+            'username' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8'
+        ]);
+
+        Auth::login($user = User::create([
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]));
+
+        event(new Registered($user));
+
+    }
 }

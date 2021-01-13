@@ -30,7 +30,7 @@ a:hover {
 a.disable-underline:hover{
     border-bottom: unset;
 }
-input:not([type="checkbox"]) {
+input:not([type="checkbox"]), select {
     width: 100%;
     height: 40px;
     padding-left: 10px;
@@ -45,7 +45,6 @@ input[type="submit"]:hover {
 input[type="text"], input[type="password"], input[type="email"] {
     width: calc(100% - 14px);
 }
-
 .disable-scrollbars {
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none;  /* IE 10+ */
@@ -158,6 +157,12 @@ header {
     background: white;
     border-bottom: 5px solid #000;
 }
+.card.collapsed, .card .title .click {
+    cursor:pointer;
+}
+.card.collapsed .form-group {
+    display: none;
+}
 .card img {
     max-width: 100%;
     min-width: 180px;
@@ -165,6 +170,9 @@ header {
 }
 .card h3 {
     margin-top: 20px;
+}
+.card .title .click {
+    float: right;
 }
 .card .offers {
     color: #4d4d4d;
@@ -216,6 +224,20 @@ header {
     background-color: #000000;
     color: white;
     transition: all .5s ease-in-out;
+}
+
+/***** DASHBOARD  *****/
+
+form.dashboard {
+    text-align: center;
+}
+form.dashboard .card {
+    max-width: 500px;
+    text-align: left;
+    margin: 0 auto;
+}
+form.dashboard .card img {
+    display: block;
 }
 
 /***** MEDIA QUERIES *****/

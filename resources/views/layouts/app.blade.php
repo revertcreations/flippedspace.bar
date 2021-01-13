@@ -4,7 +4,9 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="{{ asset('css/app.css') }}" />
+
         <title>@yield('title', 'Buy & Sale - Mechanical Keyboard Classifieds | flippedspace.bar')</title>
+        <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
     </head>
     <body>
         <header>
@@ -61,7 +63,5 @@
             @yield('content')
         </div>
 
-
-        <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
     </body>
 </html>
