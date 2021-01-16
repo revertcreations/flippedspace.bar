@@ -160,7 +160,7 @@ header {
 .card.collapsed, .card .title .click {
     cursor:pointer;
 }
-.card.collapsed .form-group {
+.card.collapsed .form-group, .card.collapsed + .card-status-bar {
     display: none;
 }
 .card img {
@@ -172,7 +172,10 @@ header {
     margin-top: 20px;
 }
 .card .title .click {
-    float: right;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 50px;
 }
 .card .offers {
     color: #4d4d4d;
@@ -220,10 +223,13 @@ header {
     display: block;
 }
 .card-status-bar {
-    padding: 10px 20px;
+    padding: 16px 20px 20px 20px;
     background-color: #000000;
     color: white;
     transition: all .5s ease-in-out;
+}
+.card-status-bar .message {
+    text-align: left;
 }
 
 /***** DASHBOARD  *****/

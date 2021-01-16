@@ -7,7 +7,7 @@
         @csrf
         <div class="card">
 
-            <h2 class="title"><span onclick="console.log('edit the username')">&#9787;</span>{{ $user->username }}</h2>
+            <h2 class="title"><span>&#9787; </span>{{ $user->username }} <span class="click" onclick="toggle_form_groups(this)">&#8722;</span></h2>
 
             <div class="form-group">
                 <label for="upload">
@@ -16,6 +16,16 @@
                 <img width="256" height="256" src="{{ asset('img/avatar.jpeg') }}" />
                 <input id="upload" name="upload" type="file"  value="upload photo" />
                 @error('upload')
+                <small class="error input-error">{{ $message }}</small>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label for="email">
+                    Username
+                </label>
+                <input id="f_name" name="f_name" type="text"  value="{{ $user->username }}" autofocus />
+                @error('f_name')
                 <small class="error input-error">{{ $message }}</small>
                 @enderror   
             </div>
@@ -49,13 +59,20 @@
                 <small class="error input-error">{{ $message }}</small>
                 @enderror   
             </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save Changes">
+            </div>
     
         </div>
+        <div class="card-status-bar">
+            <div class="message">First and Last name is used for shipping and billing purposes, and only displayed privatedly.</div>
+        </div>
 
+        
+        <div class="card collapsed">
 
-        <div class="card collapsed" onclick="toggle_form_groups(this)">
-
-            <h2 class="title">&#8962; Address <span class="click">&#43;</span></h2>
+            <h2 class="title">&#8962; Addresses <span class="click" onclick="toggle_form_groups(this);">&#x270E;</span></h2>
 
             <div class="form-group">
                 <label for="name">
@@ -119,13 +136,16 @@
                 @enderror                  
             </div>
 
-        </div>
-
-        <div class="card">
             <div class="form-group">
                 <input type="submit" value="Save Changes">
             </div>
+
         </div>
+    
+        <div class="card-status-bar">
+            <div class="message">Address is used for prefilling shipping and billing information.</div>
+        </div>
+
 
     </form>
         {{-- @foreach($errors->all() as $message)

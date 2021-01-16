@@ -24,15 +24,15 @@
 })();
 
 window.toggle_form_groups = function (el) {
-  console.log(el);
+  var form_card = el.parentElement.parentElement;
+  console.log('clicking it, yo', form_card); // console.log(el)
 
-  if (el.classList.contains('collapsed')) {
-    el.classList.remove('collapsed');
-    el.querySelectorAll('.click')[0].innerHTML = '&#8722;';
+  if (form_card.classList.contains('collapsed')) {
+    form_card.classList.remove('collapsed');
+    el.innerHTML = '&#8722';
   } else {
-    el.classList.add('collapsed');
-    el.querySelectorAll('.click')[0].innerHTML = '&#43;';
-    console.log(el.querySelectorAll('.click'));
+    form_card.classList.add('collapsed');
+    el.innerHTML = '&#x270E;';
   }
 };
 
