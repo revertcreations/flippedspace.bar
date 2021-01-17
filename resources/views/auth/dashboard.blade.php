@@ -66,7 +66,7 @@
     
         </div>
         <div class="card-status-bar">
-            <div class="message">First and Last name is used for shipping and billing purposes, and only displayed privatedly.</div>
+            <div class="message">First and Last name are used for shipping, and billing purposes in private transactions.</div>
         </div>
 
         
