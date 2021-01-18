@@ -1,8 +1,4 @@
-@extends('layouts/app')
-
-@section('content')
-
-
+<x-layout>
     <form class="dashboard" method="POST" action="{{ route('dashboard') }}">
         @csrf
         <div class="card">
@@ -153,4 +149,4 @@
             <div class="message">{{ $message }}</div>
         </div>
         @endforeach --}}
-@endsection
+</x-layout>

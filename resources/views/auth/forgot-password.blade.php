@@ -1,6 +1,4 @@
-@extends('layouts/app')
-
-@section('content')
+<x-layout>
 
     <form class="flex-form" method="POST" action="{{ route('password.email') }}">
         <div class="card">
@@ -34,7 +32,7 @@
     </div>
     @enderror    
 
-@endsection
+</x-layout>
 
 
 {{-- @if (!empty($errors->all()))

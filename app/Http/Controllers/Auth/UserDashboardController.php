@@ -9,12 +9,14 @@ use Illuminate\Http\Request;
 
 class UserDashboardController extends Controller
 {
-    public function show(User $user) {
+    public function show(User $user) 
+    {
         $user = Auth::user();
         return view('auth.dashboard', ['user' => $user]);
     }
 
-    public function store(User $user) {
+    public function store(User $user) 
+    {
         $user = Auth::user();
         return view('auth.dashboard', ['user' => $user]);
 

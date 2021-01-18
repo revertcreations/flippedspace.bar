@@ -17,7 +17,7 @@ Route::get('/', function () {
 
     $response = Http::get('https://raw.githubusercontent.com/keycap-archivist/database/master/db/catalog.json');
     $all_artisans = $response->json();
-    dd($all_artisans[11]['sculpts']);
+    // dd($all_artisans[11]['sculpts']);
 
     $home_categories = ['Watch List', 'Popular', 'Newest', 'Ending Soon'];
     $artisans = array();

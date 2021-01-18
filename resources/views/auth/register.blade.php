@@ -1,6 +1,4 @@
-@extends('layouts/app')
-
-@section('content')
+<x-layout>
 
     <form class="flex-form collasped" method="POST" action="{{ route('register') }}">
         <div class="card">
@@ -57,4 +55,4 @@
     </div>
     @endforeach --}}
 
-@endsection
+</x-layout>

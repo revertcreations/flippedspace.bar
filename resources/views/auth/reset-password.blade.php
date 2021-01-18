@@ -1,6 +1,4 @@
-@extends('layouts/app')
-
-@section('content')
+<x-layout>
 
     <form class="flex-form" method="POST" action="{{ route('password.update') }}">
         <div class="card">
@@ -51,5 +49,4 @@
     </div>
     @endif
 
-
-@endsection
+</x-layout>

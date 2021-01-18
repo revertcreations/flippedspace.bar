@@ -1,7 +1,4 @@
-@extends('layouts/app')
-
-@section('content')
-
+<x-layout>
     <form class="flex-form" method="POST" action="{{ route('login') }}">
         <div class="card">
             <h2 class="title">Login</h2>
@@ -40,4 +37,4 @@
     </div>
     @endforeach
 
-@endsection
+</x-layout>

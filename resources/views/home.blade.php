@@ -1,6 +1,4 @@
-@extends('layouts/app')
-
-@section('content')
+<x-layout>
 
     @foreach($categories as $key => $category)
     <div class="category-container">
@@ -24,4 +22,4 @@
     </div>
     @endforeach
 
-@endsection
+</x-layout>
