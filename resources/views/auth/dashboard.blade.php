@@ -23,7 +23,7 @@
                 <input id="f_name" name="f_name" type="text"  value="{{ $user->username }}" autofocus />
                 @error('f_name')
                 <small class="error input-error">{{ $message }}</small>
-                @enderror   
+                @enderror
             </div>
 
             <div class="form-group">
@@ -33,7 +33,7 @@
                 <input id="f_name" name="f_name" type="text"  value="{{ $user->f_name }}" autofocus />
                 @error('f_name')
                 <small class="error input-error">{{ $message }}</small>
-                @enderror   
+                @enderror
             </div>
 
             <div class="form-group">
@@ -43,7 +43,7 @@
                 <input id="l_name" name="l_name" type="text"  value="{{ $user->l_name }}" autofocus />
                 @error('l_name')
                 <small class="error input-error">{{ $message }}</small>
-                @enderror   
+                @enderror
             </div>
 
             <div class="form-group">
@@ -53,19 +53,19 @@
                 <input id="email" name="email" type="email"  value="{{ $user->email }}" autofocus />
                 @error('email')
                 <small class="error input-error">{{ $message }}</small>
-                @enderror   
+                @enderror
             </div>
 
             <div class="form-group">
                 <input type="submit" value="Save Changes">
             </div>
-    
         </div>
+
         <div class="card-status-bar">
             <div class="message">First and Last name are used for shipping, and billing purposes in private transactions.</div>
         </div>
 
-        
+
         <div class="card collapsed">
 
             <h2 class="title">&#8962; Addresses <span class="click" onclick="toggle_form_groups(this);">&#x270E;</span></h2>
@@ -86,7 +86,7 @@
                 </select>
                 @error('country')
                 <small class="error input-error">{{ $message }}</small>
-                @enderror  
+                @enderror
             </div>
 
             <div class="form-group">
@@ -97,7 +97,7 @@
                 <input id="street_extended" name="street-extended" type="text"  value="{{ $user->address }}" autofocus />
                 @error('f_name')
                 <small class="error input-error">{{ $message }}</small>
-                @enderror   
+                @enderror
             </div>
 
             <div class="form-group">
@@ -107,7 +107,7 @@
                 <input id="city" name="city" type="text"  value="{{ $user->city }}" autofocus />
                 @error('city')
                 <small class="error input-error">{{ $message }}</small>
-                @enderror   
+                @enderror
             </div>
 
             <div class="form-group">
@@ -119,9 +119,9 @@
                 </select>
                 @error('state')
                 <small class="error input-error">{{ $message }}</small>
-                @enderror   
+                @enderror
             </div>
-            
+
             <div class="form-group">
                 <label for="phone">
                     Phone
@@ -129,7 +129,7 @@
                 <input id="" name="phone" type="text" value="{{ $user->phone }}" autofocus />
                 @error('phone')
                 <small class="error input-error">{{ $message }}</small>
-                @enderror                  
+                @enderror
             </div>
 
             <div class="form-group">
@@ -137,7 +137,7 @@
             </div>
 
         </div>
-    
+
         <div class="card-status-bar">
             <div class="message">Address is used for prefilling shipping and billing information.</div>
         </div>

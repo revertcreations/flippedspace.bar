@@ -7,8 +7,6 @@
     </div>
 
     <ul>
-        <li><a class="nav-link" href="/classifieds">classifieds</a></li>
-        <li><a class="nav-link" href="/sell">sell</a></li>
         @guest
         <li><a class="nav-link" href="/register">register</a></li>
         <li><a class="nav-link" href="/login">login</a></li>

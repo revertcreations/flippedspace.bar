@@ -11,6 +11,7 @@
     <body>
         <header>
             <x-main-nav></x-main-nav>
+            <x-sub-nav></x-sub-nav>
         </header>
 
         <div class="content">

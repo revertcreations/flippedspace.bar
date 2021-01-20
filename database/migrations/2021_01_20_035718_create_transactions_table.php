@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateArtisanSculptsTable extends Migration
+class CreateTransactionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateArtisanSculptsTable extends Migration
      */
     public function up()
     {
-        Schema::create('artisan_sculpts', function (Blueprint $table) {
+        Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('artisan_id')->constrained('artisans');
-            $table->string('name');
-            $table->string('keycap_archivist_id');
             $table->timestamps();
         });
     }
@@ -29,6 +26,6 @@ class CreateArtisanSculptsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('artisan_sculpts');
+        Schema::dropIfExists('transactions');
     }
 }
