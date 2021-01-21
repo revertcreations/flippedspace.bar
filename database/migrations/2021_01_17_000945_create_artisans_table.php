@@ -16,9 +16,10 @@ class CreateArtisansTable extends Migration
         Schema::create('artisans', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('instagram');
-            $table->string('discord');
-            $table->string('keycap_archivist_id');
+            $table->string('instagram')->nullable();
+            $table->string('website')->nullable();
+            $table->string('discord')->nullable();
+            $table->string('keycap_archivist_id')->unique();
             $table->string('keycap_archivist_src');
             $table->boolean('keycap_archivist_self_order');
             $table->timestamps();

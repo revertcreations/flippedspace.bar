@@ -15,12 +15,13 @@ class CreateArtisanColorwaysTable extends Migration
     {
         Schema::create('artisan_colorways', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('artisan_scuplt_id')->constrained('artisan_sculpts');
+            $table->foreignId('artisan_id')->constrained('artisans');
+            $table->foreignId('artisan_sculpt_id')->constrained('artisan_sculpts');
             $table->string('name');
-            $table->string('keycap_archivist_img');
+            $table->text('keycap_archivist_img');
             $table->string('keycap_archivist_id');
-            $table->string('keycap_archivist_isCover');
-            $table->string('keycap_archivist_note');
+            $table->string('keycap_archivist_is_cover');
+            $table->text('keycap_archivist_note')->nullable();
             $table->timestamps();
         });
     }
