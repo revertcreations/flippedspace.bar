@@ -15,10 +15,12 @@ class CreateCategoriesTable extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->timestamps();
         });
     }
 
+    // values('keyboard compeletes', 'keyboard cases', 'keyboard pcb', 'number pad complete', 'number pad case', 'keycaps', 'artisans', 'switches', 'tools & accessories', 'other')
     /**
      * Reverse the migrations.
      *
