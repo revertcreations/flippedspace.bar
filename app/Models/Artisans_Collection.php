@@ -5,12 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Listing extends Model
+class Artisans_Collection extends Model
 {
     use HasFactory;
 
-    public function artisans_collection()
+    protected $table = 'artisans_collection';
+
+    public function user()
     {
-        return $this->belongsTo(Artisans_Collection::class);
+        return $this->belongsTo(User::class);
     }
 }

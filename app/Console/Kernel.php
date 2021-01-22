@@ -2,12 +2,9 @@
 
 namespace App\Console;
 
-use App\Models\Artisan;
-use App\Models\Artisan_Colorway;
-use App\Models\Artisan_Sculpt;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use Illuminate\Support\Facades\Http;
+use App\Console\Commands\SyncArtisanTables;
 
 class Kernel extends ConsoleKernel
 {
@@ -17,7 +14,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        SyncArtisanTables::class
     ];
 
     /**
@@ -28,7 +25,12 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('sync:artisan-tables')->everyMinute()->sendOutputTo(storage_path('logs/cron.log'));
+        $sync_artisan_tables = storage_path('logs/cron.log');
+
+        $schedule->command('sync:artisan-tables')
+            ->timezone('America/Denver')
+            ->hourly()
+            ->appendOutputTo($sync_artisan_tables);
     }
 
     /**

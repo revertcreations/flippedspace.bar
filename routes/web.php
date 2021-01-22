@@ -23,40 +23,31 @@ Route::get('/', function () {
     // $all_artisans = $response->json();
     // // dd($all_artisans[11]['sculpts']);
 
-    // $home_categories = ['Watch List', 'Popular', 'Newest', 'Ending Soon'];
+    $home_categories = ['Watch List', 'Popular', 'Newest', 'Ending Soon'];
     // $artisans = array();
-
-    // for ($i=0; $i < count($home_categories); $i++) {
+    $artisan_colorways = Artisan_Colorway::all();
+    for ($i=0; $i < count($home_categories); $i++)
+    {
     //     $picked = 0;
     //     foreach($all_artisans as $artisan) {
 
     //         // dd($artisan);
 
-    //         if(!isset($artisans[$home_categories[$i]]))
-    //             $artisans[$home_categories[$i]] = array();
+            if(!isset($artisans[$home_categories[$i]]))
+                $artisans[$home_categories[$i]] = array();
 
-    //         $randomly_chosen_maker_id = rand(0, (count($all_artisans) - 1));
-    //         $randomly_chosen_sculpt_id = rand(0, (count($all_artisans[$randomly_chosen_maker_id]['sculpts']) - 1));
-    //         $randomly_chosen_colorway_id = rand(0, (count($all_artisans[$randomly_chosen_maker_id]['sculpts'][$randomly_chosen_sculpt_id]['colorways']) -1 ));
-
-    //         array_push($artisans[$home_categories[$i]], (object) array(
-    //             'maker_name' => $all_artisans[$randomly_chosen_maker_id]['name'],
-    //             'image_src' => $all_artisans[$randomly_chosen_maker_id]['sculpts'][$randomly_chosen_sculpt_id]['colorways'][$randomly_chosen_colorway_id]['img'],
-    //             'sculpt_name' => $all_artisans[$randomly_chosen_maker_id]['sculpts'][$randomly_chosen_sculpt_id]['name'],
-    //             'colorway_name' => $all_artisans[$randomly_chosen_maker_id]['sculpts'][$randomly_chosen_sculpt_id]['colorways'][$randomly_chosen_colorway_id]['name']
-    //         ));
+            array_push($artisans[$home_categories[$i]], (object) array(
+    //          $artisan_colorways->random(10);
+            ));
     //         $picked++;
 
     //         if($picked == 5)
     //             break;
     //     }
-    // }
-    $artisan_colorways = Artisan_Colorway::all()->random(10)->artisan_sculpt()->artisan();
-    $artisans = array();
-
+    }
     dd($artisan_colorways);
 
-        // $home_categories = ['Watch List', 'Popular', 'Newest', 'Ending Soon'];
+    // $home_categories = ['Watch List', 'Popular', 'Newest', 'Ending Soon'];
     // $artisans = array();
 
     // for ($i=0; $i < count($home_categories); $i++) {

@@ -18,6 +18,6 @@ class Artisan extends Model
 
     public function artisan_colorways()
     {
-        return $this->hasMany(Artisan_Colorway::class);
+        return $this->hasManyThrough(Artisan_Colorway::class, Artisan_Sculpt::class);
     }
 }

@@ -15,6 +15,7 @@ class CreateArtisansTable extends Migration
     {
         Schema::create('artisans', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users')->nullable();
             $table->string('name');
             $table->string('instagram')->nullable();
             $table->string('website')->nullable();
