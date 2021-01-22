@@ -15,7 +15,7 @@ class CreateArtisanColorwaysTable extends Migration
     {
         Schema::create('artisan_colorways', function (Blueprint $table) {
             $table->id();
-            // $table->foreignId('artisan_id')->constrained('artisans');
+            $table->foreignId('artisan_id')->constrained('artisans');
             $table->foreignId('artisan_sculpt_id')->constrained('artisan_sculpts');
             $table->string('name');
             $table->text('keycap_archivist_img');
