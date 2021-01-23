@@ -19,41 +19,18 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
 
-    // $response = Http::get('https://raw.githubusercontent.com/keycap-archivist/database/master/db/catalog.json');
-    // $all_artisans = $response->json();
-    // // dd($all_artisans[11]['sculpts']);
+    $artisans = ArtisanColorway::all();
 
-    $home_categories = ['Watch List', 'Popular', 'Newest', 'Ending Soon'];
-    // $artisans = array();
-    $artisan_colorways = ArtisanColorway::all();
-    for ($i=0; $i < count($home_categories); $i++)
-    {
-    //     $picked = 0;
-    //     foreach($all_artisans as $artisan) {
+    $home_categories = [
+        'Watch List' => $artisans->random(10),
+        'Popular' => $artisans->random(10),
+        'Newest'=> $artisans->random(10),
+        'Ending Soon' => $artisans->random(10),
+    ];
 
-    //         // dd($artisan);
+    // dd($home_categories);
 
-            if(!isset($artisans[$home_categories[$i]]))
-                $artisans[$home_categories[$i]] = array();
-
-            array_push($artisans[$home_categories[$i]], (object) array(
-    //          $artisan_colorways->random(10);
-            ));
-    //         $picked++;
-
-    //         if($picked == 5)
-    //             break;
-    //     }
-    }
-    dd($artisan_colorways);
-
-
-    // $home_categories = ['Watch List', 'Popular', 'Newest', 'Ending Soon'];
-    // $artisans = array();
-
-    // for ($i=0; $i < count($home_categories); $i++) {
-
-    return view('home',['categories'=>$artisans]);
+    return view('home',['categories'=>$home_categories]);
 });
 
 require __DIR__.'/auth.php';

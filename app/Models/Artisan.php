@@ -11,13 +11,13 @@ class Artisan extends Model
 
     protected $guarded = [];
 
-    public function artisan_sculpts()
+    public function sculpts()
     {
-        return $this->hasMany(Artisan_Sculpt::class);
+        return $this->hasMany(ArtisanSculpt::class);
     }
 
-    public function artisan_colorways()
+    public function colorways()
     {
-        return $this->hasManyThrough(Artisan_Colorway::class, Artisan_Sculpt::class);
+        return $this->hasManyThrough(ArtisanColorway::class, ArtisanSculpt::class);
     }
 }

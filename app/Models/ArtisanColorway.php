@@ -12,9 +12,9 @@ class ArtisanColorway extends Model
     protected $table = 'artisan_colorways';
     protected $guarded = [];
 
-    public function artisan_sculpt()
+    public function sculpt()
     {
-        return $this->belongsTo(ArtisanSculpt::class);
+        return $this->belongsTo(ArtisanSculpt::class, 'artisan_sculpt_id');
     }
 
     public function artisan()

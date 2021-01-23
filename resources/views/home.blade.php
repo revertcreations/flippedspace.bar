@@ -8,10 +8,10 @@
         @foreach($category as $artisan)
         <div class="card-wrap">
             <div class="card">
-                <img src="{{ $artisan->image_src }}" alt="{{ $artisan->maker_name }} : {{ $artisan->sculpt_name }} - {{ $artisan->colorway_name }}"></img>
+                <img src="{{ $artisan->keycap_archivist_img }}" alt="{{ $artisan->artisan->name }} : {{ $artisan->sculpt->name }} - {{ $artisan->name }}"></img>
                 <div class="info">
-                    <h2 class="title">{{ $artisan->maker_name }}</h2>
-                    <h4 class="detail">{{ $artisan->sculpt_name }} {{ (!empty($artisan->colorway_name) ? "(".$artisan->colorway_name.")" : "" ) }}</h4>
+                    <h2 class="title">{{ $artisan->artisan->name }}</h2>
+                    <h4 class="detail">{{ $artisan->sculpt->name }} {{ (!empty($artisan->name) ? "(".$artisan->name.")" : "" ) }}</h4>
                     <div class="price">$ {{ number_format(rand(25, 190), 2) }} {!! (rand(0,1000) > 777 ? '<small class="offers">[offers]</small>' : '' ) !!}</div>
                     <small class="user"></span>Sale by</span> revertcreations</small>
                 </div>

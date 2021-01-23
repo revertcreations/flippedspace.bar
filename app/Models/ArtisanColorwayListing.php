@@ -13,8 +13,10 @@ class ArtisanColorwayListing extends Model
     {
         return $this->hasOneThrough(ArtisanColorway::class, UserArtisanColorways::class);
     }
+
     public function listing()
     {
         return $this->hasOne(ListingDetail::class);
     }
+
 }

@@ -161,10 +161,11 @@ header {
     display: flex;
     flex-wrap: wrap;
     padding: 20px;
-    align-content: space-around;
+    justify-content: space-evenly;
 }
 .card-wrap {
-    flex: 1;
+    /* flex: 1; */
+    flex-grow: 0;
     margin: 10px 5px;
     align-self: baseline;
 }

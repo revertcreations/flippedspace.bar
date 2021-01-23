@@ -14,6 +14,11 @@ class ArtisanSculpt extends Model
 
     public function artisan()
     {
-        $this->belongsTo(Artisan::class);
+        return $this->belongsTo(Artisan::class);
+    }
+
+    public function colorways()
+    {
+        return $this->hasMany(ArtisanColorway::class);
     }
 }
