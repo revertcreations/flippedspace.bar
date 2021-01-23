@@ -45,14 +45,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function listings()
+    public function artisan_collection()
     {
-        return $this->hasManyThrough(Artisans_Collection::class, Listing::class);
+        return $this->hasManyThrough(ArtisanColorway::class, UsersArtisanColorway::class);
     }
 
-    public function collections()
+    public function artisan_listings()
     {
-        return $this->hasMany(Artisans_Collection::class);
+        return $this->hasManyThrough(ArtisanColorwayListing::class, UsersArtisanColorway::class);
     }
 
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 }

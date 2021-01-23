@@ -9,8 +9,8 @@ class Listing extends Model
 {
     use HasFactory;
 
-    public function artisans_collection()
+    public function listing_images()
     {
-        return $this->belongsTo(Artisans_Collection::class);
+        return $this->hasMany(ListingImage::class);
     }
 }

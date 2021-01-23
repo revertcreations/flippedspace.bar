@@ -3,8 +3,8 @@
 namespace App\Console\Commands;
 
 use App\Models\Artisan;
-use App\Models\Artisan_Colorway;
-use App\Models\Artisan_Sculpt;
+use App\Models\ArtisanColorway;
+use App\Models\ArtisanSculpt;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 
@@ -74,7 +74,7 @@ class SyncArtisanTables extends Command
 
             foreach ($artisan["sculpts"] as $sculpt)
             {
-                $update_or_inserted_artisan_sclupt = Artisan_Sculpt::updateOrCreate([
+                $update_or_inserted_artisan_sclupt = ArtisanSculpt::updateOrCreate([
                     "artisan_id" => $update_or_inserted_artisan->id,
                     "name" => $sculpt["name"],
                     "keycap_archivist_id" => $sculpt["id"]
@@ -88,7 +88,7 @@ class SyncArtisanTables extends Command
 
                 foreach ($sculpt["colorways"] as $colorway)
                 {
-                    $update_or_inserted_artisan_colorway = Artisan_Colorway::updateOrCreate([
+                    $update_or_inserted_artisan_colorway = ArtisanColorway::updateOrCreate([
                         "artisan_id" => $update_or_inserted_artisan->id,
                         "artisan_sculpt_id" => $update_or_inserted_artisan_sclupt->id,
                         "name" => $colorway["name"],

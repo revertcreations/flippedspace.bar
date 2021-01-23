@@ -1,8 +1,8 @@
 <?php
 
 use App\Models\Artisan;
-use App\Models\Artisan_Sculpt;
-use App\Models\Artisan_Colorway;
+use App\Models\ArtisanSculpt;
+use App\Models\ArtisanColorway;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
@@ -25,7 +25,7 @@ Route::get('/', function () {
 
     $home_categories = ['Watch List', 'Popular', 'Newest', 'Ending Soon'];
     // $artisans = array();
-    $artisan_colorways = Artisan_Colorway::all();
+    $artisan_colorways = ArtisanColorway::all();
     for ($i=0; $i < count($home_categories); $i++)
     {
     //     $picked = 0;
@@ -46,6 +46,7 @@ Route::get('/', function () {
     //     }
     }
     dd($artisan_colorways);
+
 
     // $home_categories = ['Watch List', 'Popular', 'Newest', 'Ending Soon'];
     // $artisans = array();

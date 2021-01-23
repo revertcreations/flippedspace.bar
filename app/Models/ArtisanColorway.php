@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Artisan_Colorway extends Model
+class ArtisanColorway extends Model
 {
     use HasFactory;
 
@@ -14,7 +14,7 @@ class Artisan_Colorway extends Model
 
     public function artisan_sculpt()
     {
-        return $this->belongsTo(Artisan_Sculpt::class);
+        return $this->belongsTo(ArtisanSculpt::class);
     }
 
     public function artisan()

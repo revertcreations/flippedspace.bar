@@ -16,9 +16,9 @@ class Transaction extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function listings()
+    public function sold_listings()
     {
-        return $this->hasManyThrough(Listing::class);
+        return $this->hasManyThrough(Listing::class, Listing_Sold::class);
     }
 
 }
