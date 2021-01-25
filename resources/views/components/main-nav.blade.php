@@ -19,7 +19,7 @@
         </form>
         <li class="user-menu">
             <div class="img-wrap">
-                <a href="{{ route('dashboard') }}">
+                <a href="/my/dashboard">
                     @if (empty($user->avatar))
                     &#9787;
                     @else
