@@ -12,11 +12,16 @@
             <h3 class="detail">{{ $artisan->sculpt_name }}</h3>
             <h3 class="detial">{{ $artisan->name }}</h3>
 
-            <form action="{{ route('myArtisans.add') }}" method="POST">
+            <form action="{{ route('myArtisans.store') }}" method="POST">
                 @csrf
                 <input type="hidden" name="artisan_colorway_id" value="{{ $artisan->id }}">
                 <input type="submit" value="&#43; Add To My Collection">
             </form>
         </div>
     </div>
+    @if (session('status') && session('status')->artisan_colorway_id == $artisan->id)
+    <div class="card-status-bar success">
+        <div class="message">Successfully added to your collection!</div>
+    </div>
+    @endif
 </div>

@@ -53,6 +53,25 @@ input[type="submit"] {
     margin-top: 40px;
     font-size: large;
 }
+input.no-m-top {
+    margin-top: 0;
+    padding-left: revert;
+}
+input.xx-large {
+    font-size: xx-large;
+}
+/* input[type="submit"].destroy {
+    background-color: #ffffff;
+    color: #ff6e6e;
+} */
+/* input[type="submit"].add-images {
+    background-color: #ffffff;
+    color: #ff6e6e;
+} */
+input[type="submit"].destroy:hover {
+    background-color: #dfdfdf;
+    color: #ff0000;
+}
 input[type="submit"]:hover, input[type="button"]:hover {
     cursor: pointer;
 }
@@ -173,10 +192,9 @@ header {
 /***** ITEM CARD *****/
 .items-container {
     display: flex;
-    /* flex-wrap: wrap; */
-    overflow-x: auto;
+    flex-wrap: wrap;
     padding: 20px;
-    /* justify-content: space-evenly; */
+    justify-content: space-evenly;
 }
 .card-wrap {
     /* flex: 1; */
@@ -193,6 +211,16 @@ header {
     padding: 20px;
     background: white;
     border-bottom: 5px solid #212121;
+}
+.card .top-right-btn {
+    width: 40px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.card .img-edit {
+    width: 40px;
+    position: absolute;
 }
 .card .img-wrap{
     width: 180px;

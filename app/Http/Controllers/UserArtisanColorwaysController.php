@@ -14,11 +14,23 @@ class UserArtisanColorwaysController extends Controller
             'artisan_colorway_id' => 'required|integer',
         ]);
 
-        UsersArtisanColorway::create([
+        $status = UsersArtisanColorway::create([
             'user_id' => $request->user()->id,
             'artisan_colorway_id' => $request->artisan_colorway_id
         ]);
 
-        return redirect('/my/collections');
+        return back()
+            ->with('status', $status);
+    }
+
+    public function destroy(Request $request)
+    {
+        $request->validate([
+            'my_artisan_id' => 'required|integer',
+        ]);
+
+        $status = UsersArtisanColorway::destroy($request->my_artisan_id);
+
+        return back()->with('status', $status);
     }
 }

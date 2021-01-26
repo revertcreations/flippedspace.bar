@@ -42,13 +42,12 @@ class ArtisanColorwaysController extends Controller
             // }
             // $search_results = $search_query->dd();
 
-
             $colorway_query = ArtisanColorway::query()
                 ->select('artisans.name as artisan_name',
                         'artisans.website as website',
                         'artisan_sculpts.name as sculpt_name',
                         'artisan_colorways.*',
-                        DB::raw("'colorway' AS type"))
+                        DB::raw("'a' AS type"))
                 ->leftJoin('artisan_sculpts', 'artisan_colorways.artisan_sculpt_id', '=', 'artisan_sculpts.id')
                 ->leftJoin('artisans', 'artisan_sculpts.artisan_id', '=', 'artisans.id')
                 ->where('artisan_colorways.name', 'LIKE', "%$full_search%");
@@ -58,7 +57,7 @@ class ArtisanColorwaysController extends Controller
                     'artisans.website as website',
                     'artisan_sculpts.name as sculpt_name',
                     'artisan_colorways.*',
-                    DB::raw("'sculpt' AS type"))
+                    DB::raw("'c' AS type"))
             ->leftJoin('artisan_colorways', 'artisan_colorways.artisan_sculpt_id', '=', 'artisan_sculpts.id')
             ->leftJoin('artisans', 'artisan_sculpts.artisan_id', '=', 'artisans.id')
             ->where('artisan_sculpts.name', 'LIKE', "%$full_search%");
@@ -68,7 +67,7 @@ class ArtisanColorwaysController extends Controller
                     'artisans.website as website',
                     'artisan_sculpts.name as sculpt_name',
                     'artisan_colorways.*',
-                    DB::raw("'sculpt' AS type"))
+                    DB::raw("'d' AS type"))
             ->leftJoin('artisan_sculpts', 'artisan_sculpts.artisan_id', '=', 'artisans.id')
             ->leftJoin('artisan_colorways', 'artisan_colorways.artisan_sculpt_id', '=', 'artisan_sculpts.id')
             ->where('artisans.name', 'LIKE', "%$full_search%");
@@ -86,7 +85,7 @@ class ArtisanColorwaysController extends Controller
                                     ->unionAll($artisan_query)->get();
 
             $duplicate_results = $all_search_results->duplicates();
-            $unique_results = $all_search_results->unique();
+            $unique_results = $all_search_results->unique()->sortBy('type');
 
             $search_results = $duplicate_results->merge($unique_results);
 

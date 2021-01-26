@@ -14,7 +14,7 @@ class CollectionsController extends Controller
         $my_artisans = ArtisanColorway::query()
             ->leftJoin('users_artisan_colorways', 'users_artisan_colorways.artisan_colorway_id', '=', 'artisan_colorways.id')
             ->where('users_artisan_colorways.user_id', Auth::user()->id)
-            ->select('artisan_colorways.*')
+            ->select('users_artisan_colorways.id as my_artisan_id', 'artisan_colorways.*')
             ->get();
 
         return view('my.collections.index', ['my_artisans' => $my_artisans]);

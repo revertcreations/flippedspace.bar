@@ -13,4 +13,5 @@ Route::get('/my/dashboard', [DashboardController::class, 'index'])
 
 Route::get('/my/collections', [CollectionsController::class, 'index'])->middleware('auth');
 Route::get('/my/collections/artisans', [ArtisanColorwaysController::class, 'show']);
-Route::post('/my/collections/artisans', [UserArtisanColorwaysController::class, 'store'])->name('myArtisans.add');
+Route::post('/my/collections/artisans/store', [UserArtisanColorwaysController::class, 'store'])->name('myArtisans.store');
+Route::post('/my/collections/artisans/destroy', [UserArtisanColorwaysController::class, 'destroy'])->name('myArtisans.destroy');

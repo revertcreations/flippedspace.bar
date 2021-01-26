@@ -16,12 +16,27 @@
         {{-- <x-item-card /> --}}
         <div class="card-wrap">
             <div class="card">
+
+                <div class="img-edit">
+                    <input class="no-m-top xx-large" type="button" value="&#9998;">
+                </div>
+
+                <div class="top-right-btn">
+                    <form action="{{ route('myArtisans.destroy') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="my_artisan_id" value="{{ $artisan->my_artisan_id }}">
+                        <input class="no-m-top xx-large destroy" type="submit" value="&times;">
+                    </form>
+                </div>
+
                 <img src="{{ $artisan->keycap_archivist_img }}" alt="{{ $artisan->artisan->name }} : {{ $artisan->name }} - {{ $artisan->name }}"></img>
+
                 <div class="info">
                     <h2 class="title">{{ $artisan->artisan->name }}</h2>
                     <h4 class="detail">{{ $artisan->sculpt->name }} {{ (!empty($artisan->name) ? "(".$artisan->name.")" : "" ) }}</h4>
                     <input type="button" value="List For Sale" onclick="window.location='{{ url('my/listing/artisans') }}'" />
                 </div>
+
             </div>
 
             {{-- <div class="card-status-bar">
