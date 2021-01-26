@@ -1,15 +1,12 @@
-<div class="flex-form">
-    <div class="card">
-        <div class="info">
-            <div class="title">Search artisan names, sculpt names, or colorway names...</div>
+<form action="/search/artisans" method="GET">
+    <div class="card-wrap">
+        <div class="card search-container">
+            <div class="info max-width">
+                <h2 class="title">Search</h2>
+                <label for="search">artisan, sculpt, or colorway names... (i.e. "keypora")</label>
+                <input name="search" type="text" value="{{ old('search') }}" placeholder="search for artisans...">
+                <input type="submit" value="Find"/>
+            </div>
         </div>
     </div>
-</div>
-<div class="card-status-bar">
-    <div class="search-bar">
-        <form action="/search/artisans" method="GET">
-            <input name="search" type="text" value="{{ old('search') }}" placeholder="search for artisans...">
-            <button type="submit">Find</button>
-        </form>
-    </div>
-</div>
+</form>

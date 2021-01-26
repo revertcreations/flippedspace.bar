@@ -11,13 +11,12 @@
             </h2>
             <h3 class="detail">{{ $artisan->sculpt_name }}</h3>
             <h3 class="detial">{{ $artisan->name }}</h3>
+
+            <form action="{{ route('myArtisans.add') }}" method="POST">
+                @csrf
+                <input type="hidden" name="artisan_colorway_id" value="{{ $artisan->id }}">
+                <input type="submit" value="&#43; Add To My Collection">
+            </form>
         </div>
-    </div>
-    <div class="card-status-bar">
-        <form action="{{ route('myArtisans.add') }}" method="POST">
-            @csrf
-            <input type="hidden" name="artisan_colorway_id" value="{{ $artisan->id }}">
-            <button type="submit">Add To My Collection</button>
-        </form>
     </div>
 </div>

@@ -3,7 +3,6 @@
     @foreach($categories as $key => $category)
     <div class="category-container">
         <h1>{{ $key }}</h1>
-        <hr>
         <div class="items-container">
         @foreach($category as $artisan)
         <div class="card-wrap">

@@ -22,8 +22,7 @@ Route::get('/', function () {
     $home_categories = [
         'Watch List' => $artisans->random(10),
         'Popular' => $artisans->random(10),
-        'Newest'=> $artisans->random(10),
-        'Ending Soon' => $artisans->random(10),
+        'Newest'=> $artisans->random(10)
     ];
 
     // dd($home_categories);
