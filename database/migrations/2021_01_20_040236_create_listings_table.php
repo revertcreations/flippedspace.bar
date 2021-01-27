@@ -16,10 +16,11 @@ class CreateListingsTable extends Migration
         Schema::create('listings', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->text('description');
             $table->enum('condition', ['Brand New', 'Mint', 'Excellent', 'Very Good', 'Good', 'Fair', 'Poor', 'For Parts/Repair Only']);
             $table->decimal('price', 9,2);
-            $table->text('description');
-            $table->decimal('shipping_amount', 9,2);
+            $table->decimal('shipping_cost', 9,2);
+            $table->boolean('published')->default(false);
             $table->boolean('allow_offers')->default(false);
             $table->timestamps();
         });

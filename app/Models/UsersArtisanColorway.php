@@ -11,9 +11,10 @@ class UsersArtisanColorway extends Model
 
     protected $guarded = [];
 
-    public function listing_detail()
+    public function listing()
     {
-        return $this->hasOneThrough(ListingDetail::class, ArtisanColorwayListing::class);
+        return $this->hasOneThrough(Listing::class, ArtisanColorwayListing::class, 'users_artisan_colorway_id','id','id','listing_id');
+
     }
 
     public function colorway()

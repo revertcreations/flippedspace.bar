@@ -207,6 +207,7 @@ header {
     flex-direction: row;
     overflow-x: auto;
     flex-wrap: unset;
+    justify-content: unset;
 }
 .card-wrap {
     /* flex: 1; */

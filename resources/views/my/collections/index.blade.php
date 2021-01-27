@@ -48,7 +48,7 @@
                         <input class="no-m-top" value="Add Photos" type="submit" />
                     </form>
 
-                    <input class="large" type="button" value="List For Sale" onclick="window.location='{{ url('my/listing/artisans') }}'" />
+                    <input class="large" type="button" value="List For Sale" onclick="window.location='{{ url('my/listings/artisans/'.$artisan->id) }}'" />
                 </div>
 
             </div>
