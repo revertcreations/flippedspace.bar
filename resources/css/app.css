@@ -60,6 +60,9 @@ input.no-m-top {
 input.xx-large {
     font-size: xx-large;
 }
+input.large {
+    font-size: large;
+}
 /* input[type="submit"].destroy {
     background-color: #ffffff;
     color: #ff6e6e;
@@ -196,6 +199,11 @@ header {
     padding: 20px;
     justify-content: space-evenly;
 }
+.items-container.row-scroll {
+    flex-direction: row;
+    overflow-x: auto;
+    flex-wrap: unset;
+}
 .card-wrap {
     /* flex: 1; */
     flex-grow: 0;
@@ -212,11 +220,17 @@ header {
     background: white;
     border-bottom: 5px solid #212121;
 }
+.card .top-left-btn {
+    width: 40px;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
 .card .top-right-btn {
     width: 40px;
     position: absolute;
-    right: 0;
-    top: 0;
+    right: 8px;
+    top: 8px;
 }
 .card .img-edit {
     width: 40px;

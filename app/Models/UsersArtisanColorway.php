@@ -16,13 +16,18 @@ class UsersArtisanColorway extends Model
         return $this->hasOneThrough(ListingDetail::class, ArtisanColorwayListing::class);
     }
 
-    public function artisan_colorways()
+    public function colorway()
     {
-        return $this->hasMany(ArtisanColorway::class);
+        return $this->belongsTo(ArtisanColorway::class, 'artisan_colorway_id');
     }
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function images()
+    {
+        return $this->hasMany(UserArtisanColorwayImage::class);
     }
 }

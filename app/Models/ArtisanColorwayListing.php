@@ -16,7 +16,7 @@ class ArtisanColorwayListing extends Model
 
     public function listing()
     {
-        return $this->hasOne(ListingDetail::class);
+        return $this->hasOne(Listing::class);
     }
 
 }

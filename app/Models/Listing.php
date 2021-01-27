@@ -8,9 +8,4 @@ use Illuminate\Database\Eloquent\Model;
 class Listing extends Model
 {
     use HasFactory;
-
-    public function listing_images()
-    {
-        return $this->hasMany(ListingImage::class);
-    }
 }
