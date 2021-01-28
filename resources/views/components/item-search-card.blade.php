@@ -1,4 +1,4 @@
-<form action="/search/artisans" method="GET">
+<form action="{{ route('products.artisans.index') }}" method="GET">
     <div class="card-wrap">
         <div class="card search-container">
             <div class="info max-width">

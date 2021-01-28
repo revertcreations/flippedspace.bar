@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Users\Collections\Artisans;
 
+use App\Http\Controllers\Controller;
 use App\Models\UserArtisanColorwayImage;
 // use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
 
-class UsersArtisanColorwayImagesController extends Controller
+class ArtisanColorwayImageController extends Controller
 {
     public function store(Request $request)
     {

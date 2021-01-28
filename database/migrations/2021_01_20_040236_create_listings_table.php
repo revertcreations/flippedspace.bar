@@ -15,7 +15,7 @@ class CreateListingsTable extends Migration
     {
         Schema::create('listings', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('title')->nullable();
             $table->text('description');
             $table->enum('condition', ['Brand New', 'Mint', 'Excellent', 'Very Good', 'Good', 'Fair', 'Poor', 'For Parts/Repair Only']);
             $table->decimal('price', 9,2);

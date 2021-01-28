@@ -1,30 +1,35 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Users\Listings;
+
+use App\Http\Controllers\Controller;
 
 use App\Models\ArtisanColorwayListing;
 use App\Models\Listing;
-use App\Models\UserArtisanColorwayImage;
 use App\Models\UserArtisanColorway;
-use Illuminate\Http\Request;
 
-class UsersArtisanColorwayListingController extends Controller
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+class ArtisanColorwayListingController extends Controller
 {
     public function index()
     {
-        $all_artisan_listings = ArtisanColorwayListing::all();
+        $artisan_listings = ArtisanColorwayListing::query()
+            ->join('users_artisan_colorways', 'users_artisan_colorways.id', '=', 'artisan_colorway_listings.users_artisan_colorway_id')
+            ->where('users_artisan_colorways.user_id', Auth::user()->id)->get();
 
-        // dd($all_artisan_listings[0]->listing);
-
-        return view('my.listings.artisans.index', ['listings' => $all_artisan_listings]);
+        return view('users.listings.artisans.index', ['listings' => $artisan_listings]);
     }
 
-    public function show($user_artisan_colorway_id)
+    public function create(UserArtisanColorway $artisan)
     {
-        $user_artisan_colorway = UserArtisanColorway::where('id', $user_artisan_colorway_id)->first();
+        return view('users.listings.artisans.create', ['artisan' => $artisan]);
+    }
 
-        // dd($user_artisan_colorway->listing());
-        return view('my/listings/artisans/show', ['artisan' => $user_artisan_colorway]);
+    public function edit(ArtisanColorwayListing $artisan_listing_id)
+    {
+        return view('users.listings.artisans.edit', ['artisan' => $artisan_listing_id]);
     }
 
     public function store(Request $request)
@@ -45,7 +50,18 @@ class UsersArtisanColorwayListingController extends Controller
             'listing_id' => $listing->id,
         ]);
 
-        return view('my.listings.artisans.index');
+        return view('users.listings.artisans.index');
+
+    }
+
+    public function update()
+    {
+        # code...
+    }
+
+    public function destroy()
+    {
+        # code...
     }
 
     public function publish(ArtisanColorwayListing $listing)

@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\My;
+namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
+
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -12,7 +13,7 @@ class DashboardController extends Controller
     public function index(User $user)
     {
         $user = Auth::user();
-        return view('my.dashboard.index', ['user' => $user]);
+        return view('users.dashboard.index', ['user' => $user]);
     }
 
     // public function store(User $user)

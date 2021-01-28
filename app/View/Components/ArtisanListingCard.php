@@ -21,6 +21,6 @@ class ArtisanListingCard extends Component
      */
     public function render()
     {
-        return view('components.listings.aritsan-listing-card');
+        return view('components.listings.artisan-listing-card');
     }
 }

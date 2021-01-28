@@ -1,16 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Products\Artisans;
 
+use App\Http\Controllers\Controller;
 use App\Models\ArtisanColorway;
 use App\Models\ArtisanSculpt;
 use App\Models\Artisan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class ArtisanColorwaysController extends Controller
+class ArtisanColorwayController extends Controller
 {
-    public function show(Request $request)
+    public function index(Request $request)
     {
 
         // NEED TO VALIDE THIS YO!!!

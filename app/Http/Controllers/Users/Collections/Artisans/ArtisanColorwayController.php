@@ -1,15 +1,27 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Users\Collections\Artisans;
 
-use App\Models\User;
+use App\Http\Controllers\Controller;
 use App\Models\UserArtisanColorway;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class UsersArtisanColorwaysController extends Controller
+class ArtisanColorwayController extends Controller
 {
+
+    public function index()
+    {
+        $artisans = UserArtisanColorway::where('user_id', Auth::user()->id)->get();
+
+        // dd($artisans);
+
+        return view('users.collections.index', ['artisans' => $artisans]);
+    }
+
     public function store(Request $request)
     {
+
         $request->validate([
             'artisan_colorway_id' => 'required|integer',
         ]);

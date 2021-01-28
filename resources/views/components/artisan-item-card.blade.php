@@ -12,7 +12,7 @@
             <h3 class="detail">{{ $artisan->sculpt_name }}</h3>
             <h3 class="detial">{{ $artisan->name }}</h3>
 
-            <form action="{{ route('myArtisans.store') }}" method="POST">
+            <form action="{{ route('collections.artisans.store') }}" method="POST">
                 @csrf
                 <input type="hidden" name="artisan_colorway_id" value="{{ $artisan->id }}">
                 <input type="submit" value="&#43; Add To My Collection">
