@@ -20,7 +20,6 @@ ul, ol {
     list-style: none;
 }
 a {
-    text-decoration: unset;
     color: #212121;
 }
 a:hover, button:hover {
@@ -224,8 +223,8 @@ header {
 .card .top-left-btn {
     width: 40px;
     position: absolute;
-    left: 0;
-    top: 0;
+    left: 8px;
+    top: 8px;
 }
 .card .top-right-btn {
     width: 40px;
@@ -238,8 +237,8 @@ header {
     position: absolute;
 }
 .card .img-wrap{
-    width: 180px;
-    height: 180px;
+    width: 300px;
+    height: 300px;
 }
 .card.collapsed, .card .title .click {
     cursor:pointer;
@@ -261,6 +260,54 @@ header {
     top: 20px;
     font-size: 50px;
 }
+.card .info .condition-wrap .condition span{
+    display: inline-block;
+    padding: 0;
+    width: 15px;
+    height: 5px;
+    margin: 0;
+    border-bottom: 2px solid black;
+    background: rgb(239 239 239);
+}
+
+.card .info .condition-wrap .condition span:nth-child(1)
+{background: #909090;}
+.card .info .condition-wrap .condition.brand-new span:nth-child(2),
+.card .info .condition-wrap .condition.mint span:nth-child(2),
+.card .info .condition-wrap .condition.excellent span:nth-child(2),
+.card .info .condition-wrap .condition.very-good span:nth-child(2),
+.card .info .condition-wrap .condition.good span:nth-child(2),
+.card .info .condition-wrap .condition.fair span:nth-child(2),
+.card .info .condition-wrap .condition.poor span:nth-child(2)
+{background: #909090;}
+.card .info .condition-wrap .condition.brand-new span:nth-child(3),
+.card .info .condition-wrap .condition.mint span:nth-child(3),
+.card .info .condition-wrap .condition.excellent span:nth-child(3),
+.card .info .condition-wrap .condition.very-good span:nth-child(3),
+.card .info .condition-wrap .condition.good span:nth-child(3),
+.card .info .condition-wrap .condition.fair span:nth-child(3)
+{background: #909090;}
+.card .info .condition-wrap .condition.brand-new span:nth-child(4),
+.card .info .condition-wrap .condition.mint span:nth-child(4),
+.card .info .condition-wrap .condition.excellent span:nth-child(4),
+.card .info .condition-wrap .condition.very-good span:nth-child(4),
+.card .info .condition-wrap .condition.good span:nth-child(4)
+{background: #909090;}
+.card .info .condition-wrap .condition.brand-new span:nth-child(5),
+.card .info .condition-wrap .condition.mint span:nth-child(5),
+.card .info .condition-wrap .condition.excellent span:nth-child(5),
+.card .info .condition-wrap .condition.very-good span:nth-child(5)
+{background: #909090;}
+.card .info .condition-wrap .condition.brand-new span:nth-child(6),
+.card .info .condition-wrap .condition.mint span:nth-child(6),
+.card .info .condition-wrap .condition.excellent span:nth-child(6)
+{background: #909090;}
+.card .info .condition-wrap .condition.brand-new span:nth-child(7),
+.card .info .condition-wrap .condition.mint span:nth-child(7)
+{background: #909090;}
+.card .info .condition-wrap .condition.brand-new span:nth-child(8)
+{background: #909090;}
+
 .card .offers {
     color: #4d4d4d;
 }

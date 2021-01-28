@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\UsersArtisanColorway;
+use App\Models\UserArtisanColorway;
 use Illuminate\Http\Request;
 
-class UserArtisanColorwaysController extends Controller
+class UsersArtisanColorwaysController extends Controller
 {
     public function store(Request $request)
     {
@@ -14,7 +14,7 @@ class UserArtisanColorwaysController extends Controller
             'artisan_colorway_id' => 'required|integer',
         ]);
 
-        $status = UsersArtisanColorway::create([
+        $status = UserArtisanColorway::create([
             'user_id' => $request->user()->id,
             'artisan_colorway_id' => $request->artisan_colorway_id
         ]);
@@ -29,7 +29,7 @@ class UserArtisanColorwaysController extends Controller
             'my_artisan_id' => 'required|integer',
         ]);
 
-        $status = UsersArtisanColorway::destroy($request->my_artisan_id);
+        $status = UserArtisanColorway::destroy($request->my_artisan_id);
 
         return back()->with('status', $status);
     }

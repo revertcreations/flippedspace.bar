@@ -13,12 +13,13 @@ class CreateUserArtisanColorwayImagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_artisan_colorway_images', function (Blueprint $table) {
+        Schema::create('users_artisan_colorway_images', function (Blueprint $table) {
             $table->id();
             $table->foreignId('users_artisan_colorway_id')->constrained('users_artisan_colorways');
             $table->foreignId('artisan_colorway_id')->constrained('artisan_colorways');
             $table->string('cloudinary_secure_path');
             $table->string('cloudinary_public_id');
+            $table->boolean('is_cover')->default(false);
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ class CreateUserArtisanColorwayImagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_artisan_colorway_images');
+        Schema::dropIfExists('users_artisan_colorway_images');
     }
 }

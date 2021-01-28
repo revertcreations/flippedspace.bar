@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class ArtisanItemCard extends Component
+class ArtisanListingCard extends Component
 {
 
     public $artisan;
@@ -21,6 +21,6 @@ class ArtisanItemCard extends Component
      */
     public function render()
     {
-        return view('components.artisan-item-card');
+        return view('components.listings.aritsan-listing-card');
     }
 }

@@ -47,12 +47,12 @@ class User extends Authenticatable
 
     public function artisan_collection()
     {
-        return $this->hasManyThrough(ArtisanColorway::class, UsersArtisanColorway::class);
+        return $this->hasManyThrough(ArtisanColorway::class, UserArtisanColorway::class);
     }
 
     public function artisan_listings()
     {
-        return $this->hasManyThrough(ArtisanColorwayListing::class, UsersArtisanColorway::class);
+        return $this->hasManyThrough(ArtisanColorwayListing::class, UserArtisanColorway::class);
     }
 
     public function transactions()

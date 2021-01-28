@@ -24,6 +24,6 @@ class ArtisanColorway extends Model
 
     public function users_artisan_colorway()
     {
-        return $this->hasMany(UsersArtisanColorway::class, 'users_artisan_colorway_id');
+        return $this->hasMany(UserArtisanColorway::class, 'users_artisan_colorway_id');
     }
 }

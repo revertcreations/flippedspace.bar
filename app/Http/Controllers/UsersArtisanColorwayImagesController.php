@@ -6,7 +6,7 @@ use App\Models\UserArtisanColorwayImage;
 // use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
 
-class UserArtisanColorwayImagesController extends Controller
+class UsersArtisanColorwayImagesController extends Controller
 {
     public function store(Request $request)
     {

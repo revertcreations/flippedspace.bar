@@ -5,25 +5,30 @@
 
             <h2 class="title">{{ $artisan->colorway->artisan->name }} - {{ $artisan->colorway->sculpt->name }} ({{ $artisan->colorway->name }})</h2>
 
-            <img src="{{
-                    !empty($artisan->images[0]) && !empty($artisan->images[0]->cloudinary_public_id)
-                    ? 'https://res.cloudinary.com/flippedspace-bar/image/upload/t_thumbnail/v1611702681/'.$artisan->images[0]->cloudinary_public_id
-                    : $artisan->colorway->keycap_archivist_img
-                }}"
-                alt="{{ $artisan->colorway->artisan->name }} : {{ $artisan->colorway->sculpt->name }} - {{ $artisan->colorway->name }}">
-            </img>
+            <div class="img-wrap">
+                <img src="{{
+                        !empty($artisan->images[0]) && !empty($artisan->images[0]->cloudinary_public_id)
+                        ? 'https://res.cloudinary.com/flippedspace-bar/image/upload/t_thumbnail/v1611702681/'.$artisan->images[0]->cloudinary_public_id
+                        : $artisan->colorway->keycap_archivist_img
+                    }}"
+                    alt="{{ $artisan->colorway->artisan->name }} - {{ $artisan->colorway->sculpt->name }} ({{ $artisan->colorway->name }})">
+                </img>
+            </div>
 
             <form action="{{ route('myArtisanImages.add') }}" method="POST" enctype="multipart/form-data">
+
                 @csrf
                 <input type="hidden" name="artisan_colorway_id" value="{{ $artisan->id }}">
                 <input type="hidden" name="my_artisan_id" value="{{ $artisan->id }}">
                 <input class="no-m-top" name="artisan_images[]" type="file" multiple accept="image/*">
+
                 <input class="no-m-top" value="Add Photos" type="submit" />
+
             </form>
 
-
-            <form action="{{ route('my.listings.artisans.store', ['user_artisan_colorway_id', $artisan->id]) }}" method="POST">
-
+            <form action="{{ route('my.listings.artisans.store', ['users_artisan_colorway_id', $artisan->id]) }}" method="POST">
+                @csrf
+                <input type="hidden" name="users_artisan_colorway_id" value="{{ $artisan->id }}">
                 <div class="form-group">
                     <label for="title">
                         Title
@@ -48,7 +53,7 @@
                     <label for="condition">
                         Condition
                     </label>
-                    <select id="l_name" name="l_name" type="text"  value="{{ !empty($artisan->listing->condition)?:'' }}">
+                    <select id="condition" name="condition" type="text"  value="{{ !empty($artisan->listing->condition)?:'' }}">
                         <option value="Brand New">Brand New</option>
                         <option value="Mint">Mint</option>
                         <option value="Excellent">Excellent</option>
@@ -77,14 +82,14 @@
                     <label for="price">
                         Shipping Cost
                     </label>
-                    $ <input id="price" name="shipping_amount" type="number" min="1" step="any" value="{{ !empty($artisan->listing->shipping_amount)?:'' }}" />
-                    @error('shipping_amount')
+                    $ <input id="price" name="shipping_cost" type="number" min="1" step="any" value="{{ !empty($artisan->listing->shipping_cost)?:'' }}" />
+                    @error('shipping_cost')
                     <small class="error input-error">{{ $message }}</small>
                     @enderror
                 </div>
 
                 <div class="form-group">
-                    <input type="checkbox" name="accepts_offers" id="allow_offers">
+                    <input type="checkbox" name="allow_offers" id="allow_offers">
                     <label for="allow_offers">Allow Offers?</label>
                 </div>
 

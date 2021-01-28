@@ -10,11 +10,11 @@ class UserArtisanColorwayImage extends Model
     use HasFactory;
 
     protected $guarded = [];
-    protected $table = 'user_artisan_colorway_images';
+    protected $table = 'users_artisan_colorway_images';
 
     public function user_artisan_colorway()
     {
-        return $this->belongsTo(UsersArtisanColorway::class);
+        return $this->belongsTo(UserArtisanColorway::class);
     }
 
     public function artisan_colorway()
