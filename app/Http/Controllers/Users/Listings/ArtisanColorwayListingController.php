@@ -85,7 +85,7 @@ class ArtisanColorwayListingController extends Controller
 
     public function publish(ArtisanColorwayListing $artisan_colorway_listing)
     {
-        dd($artisan_colorway_listing->listing);
+
         $artisan_colorway_listing->listing->published = true;
 
         $artisan_colorway_listing->listing->save();
