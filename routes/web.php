@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ArtisanColorwaysController;
+// use App\Http\Controllers\ArtisanColorwaysController;
 use App\Models\ArtisanColorway;
 use Illuminate\Support\Facades\Route;
 
@@ -30,7 +30,7 @@ Route::get('/', function () {
     return view('home',['categories'=>$home_categories]);
 });
 
-Route::get('/search/artisans', [ArtisanColorwaysController::class, 'show']);
+// Route::get('/search/artisans', [ArtisanColorwaysController::class, 'show']);
 
 require __DIR__.'/auth.php';
 require __DIR__.'/users.php';

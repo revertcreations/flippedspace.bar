@@ -3,7 +3,7 @@
     <div class="card">
 
         <div class="top-left-btn">
-            <form action="{{ route('listings.artisans.edit', ['artisan_listing_id' => $artisan->listing->id]) }}" method="GET">
+            <form action="{{ route('listings.artisans.edit', ['artisan_colorway_listing' => $artisan->id]) }}" method="GET">
                 {{-- @csrf --}}
                 {{-- <input type="hidden" name="user_artisan_colorway_id" value="{{ $artisan->id }}"> --}}
                 <input class="no-m-top xx-large" type="submit" value="&#9998;">
@@ -12,13 +12,15 @@
 
         <div class="top-right-btn">
             @if ($artisan->listing->published)
-            <form action="{{ route('listings.artisans.unpublish', ['artisan_listing_id', $artisan->listing->id]) }}" method="POST">
+            <form action="{{ route('listings.artisans.unpublish', ['artisan_colorway_listing' => $artisan->id]) }}" method="POST">
                 @csrf
+                @method('PUT')
                 <input class="no-m-top" type="submit" value="ON">
             </form>
             @else
-            <form action="{{ route('listings.artisans.publish', ['artisan_listing_id', $artisan->listing->id]) }}" method="POST">
+            <form action="{{ route('listings.artisans.publish', ['artisan_colorway_listing' => $artisan->id]) }}" method="POST">
                 @csrf
+                @method('PUT')
                 <input class="no-m-top" type="submit" value="OFF">
             </form>
             @endif

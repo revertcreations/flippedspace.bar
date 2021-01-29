@@ -26,10 +26,10 @@
 
             </form>
 
-            <form action="{{ route('listings.artisans.update', ['artisan_listing_id', $artisan->listing->id]) }}" method="POST">
+            <form action="{{ route('listings.artisans.update', $artisan->id) }}" method="POST">
                 @csrf
                 @method('PUT')
-                <input type="hidden" name="users_artisan_colorway_id" value="{{ $artisan->id }}">
+                {{-- <input type="hidden" name="users_artisan_colorway_id" value="{{ $artisan->id }}"> --}}
                 {{-- <div class="form-group">
                     <label for="title">
                         Title
@@ -55,14 +55,14 @@
                         Condition
                     </label>
                     <select id="condition" name="condition" type="text"  value="{{ $artisan->listing->condition?:'' }}">
-                        <option value="Brand New">Brand New</option>
-                        <option value="Mint">Mint</option>
-                        <option value="Excellent">Excellent</option>
-                        <option value="Very Good" selected>Very Good</option>
-                        <option value="Good">Good</option>
-                        <option value="Fair">Fair</option>
-                        <option value="Poor">Poor</option>
-                        <option value="For Parts/Repair Only">For Parts/Repair Only</option>
+                        <option value="Brand New" {{ $artisan->listing->condition == 'Brand New' ? 'selected' : ''}}>Brand New</option>
+                        <option value="Mint" {{ $artisan->listing->condition == 'Mint' ? 'selected' : ''}}>Mint</option>
+                        <option value="Excellent {{ $artisan->listing->condition == 'Excellent' ? 'selected' : ''}}">Excellent</option>
+                        <option value="Very Good" {{ $artisan->listing->condition == 'Very Good' ? 'selected' : ''}}>Very Good</option>
+                        <option value="Good" {{ $artisan->listing->condition == 'Good' ? 'selected' : ''}}>Good</option>
+                        <option value="Fair" {{ $artisan->listing->condition == 'Fair' ? 'selected' : ''}}>Fair</option>
+                        <option value="Poor" {{ $artisan->listing->condition == 'Poor' ? 'selected' : ''}}>Poor</option>
+                        <option value="For Parts/Repair Only" {{ $artisan->listing->condition == 'For Parts/Repair Only' ? 'selected' : ''}}>For Parts/Repair Only</option>
                     </select>
                     @error('condition')
                     <small class="error input-error">{{ $message }}</small>
@@ -90,12 +90,12 @@
                 </div>
 
                 <div class="form-group">
-                    <input type="checkbox" name="allow_offers" id="allow_offers">
+                    <input type="checkbox" name="allow_offers" id="allow_offers" {{ $artisan->listing->allow_offers ? 'checked' : ''}}>
                     <label for="allow_offers">Allow Offers?</label>
                 </div>
 
                 <div class="form-group">
-                    <input type="checkbox" name="publish" id="publish">
+                    <input type="checkbox" name="publish" id="publish" {{ $artisan->listing->published ? 'checked' : ''}}>
                     <label for="publish">Publish</label>
                 </div>
 

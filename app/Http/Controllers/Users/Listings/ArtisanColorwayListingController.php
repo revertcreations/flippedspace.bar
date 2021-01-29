@@ -19,17 +19,19 @@ class ArtisanColorwayListingController extends Controller
             ->join('users_artisan_colorways', 'users_artisan_colorways.id', '=', 'artisan_colorway_listings.users_artisan_colorway_id')
             ->where('users_artisan_colorways.user_id', Auth::user()->id)->get();
 
+            // dd($artisan_listings);
+
         return view('users.listings.artisans.index', ['listings' => $artisan_listings]);
     }
 
-    public function create(UserArtisanColorway $artisan)
+    public function create(UserArtisanColorway $users_artisan_colorway)
     {
-        return view('users.listings.artisans.create', ['artisan' => $artisan]);
+        return view('users.listings.artisans.create', ['artisan' => $users_artisan_colorway]);
     }
 
-    public function edit(ArtisanColorwayListing $artisan_listing_id)
+    public function edit(ArtisanColorwayListing $artisan_colorway_listing)
     {
-        return view('users.listings.artisans.edit', ['artisan' => $artisan_listing_id]);
+        return view('users.listings.artisans.edit', ['artisan' => $artisan_colorway_listing]);
     }
 
     public function store(Request $request)
@@ -50,13 +52,30 @@ class ArtisanColorwayListingController extends Controller
             'listing_id' => $listing->id,
         ]);
 
-        return view('users.listings.artisans.index');
+        return redirect()->route('listings.artisans');
 
     }
 
-    public function update()
+    public function show(ArtisanColorwayListing $artisan_colorway_listing)
     {
-        # code...
+        return view('users.listings.artisans.index');
+    }
+
+    public function update(ArtisanColorwayListing $artisan_colorway_listing, Request $request)
+    {
+        // dd($artisan_colorway_listing);
+        // dd($request->all());
+        $artisan_colorway_listing->listing->title = $request->title;
+        $artisan_colorway_listing->listing->price = $request->price;
+        $artisan_colorway_listing->listing->condition = $request->condition;
+        $artisan_colorway_listing->listing->description = $request->description;
+        $artisan_colorway_listing->listing->shipping_cost = $request->shipping_cost;
+        $artisan_colorway_listing->listing->allow_offers = ($request->allow_offers == 'on');
+        $artisan_colorway_listing->listing->published = ($request->published == 'on');
+
+        $artisan_colorway_listing->listing->save();
+
+        return back();
     }
 
     public function destroy()
@@ -64,15 +83,22 @@ class ArtisanColorwayListingController extends Controller
         # code...
     }
 
-    public function publish(ArtisanColorwayListing $listing)
+    public function publish(ArtisanColorwayListing $artisan_colorway_listing)
     {
-        dd($listing);
+        dd($artisan_colorway_listing->listing);
+        $artisan_colorway_listing->listing->published = true;
+
+        $artisan_colorway_listing->listing->save();
+
         return back();
     }
 
-    public function unpublish(ArtisanColorwayListing $listing)
+    public function unpublish(ArtisanColorwayListing $artisan_colorway_listing)
     {
-        dd($listing);
+        $artisan_colorway_listing->listing->published = false;
+
+        $artisan_colorway_listing->listing->save();
+
         return back();
     }
 

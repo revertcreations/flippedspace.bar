@@ -30,6 +30,6 @@ class UserArtisanColorway extends Model
 
     public function images()
     {
-        return $this->hasMany(UserArtisanColorwayImage::class, 'users_artisan_colorway_id', 'id');
+        return $this->hasMany(UserArtisanColorwayImage::class, 'users_artisan_colorway_id');
     }
 }

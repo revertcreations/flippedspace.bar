@@ -3,7 +3,7 @@
         @csrf
         <div class="card">
             <div class="img-wrap">
-                @if (!empty($artisan->images))
+                @if (!empty($artisan->images && !empty($artisan->images[0])))
                 <img src="{{ 'https://res.cloudinary.com/flippedspace-bar/image/upload/t_thumbnail/v1611702681/'.$artisan->images[0]->cloudinary_public_id }}"
                     alt="{{ $artisan->colorway->artisan->name }} - {{ $artisan->colorway->sculpt->name }} ({{ $artisan->colorway->name }})" />
                 @else

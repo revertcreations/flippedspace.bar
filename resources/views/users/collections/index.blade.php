@@ -34,8 +34,7 @@
                         ? 'https://res.cloudinary.com/flippedspace-bar/image/upload/t_thumbnail/v1611702681/'.$artisan->images[0]->cloudinary_public_id
                         : $artisan->colorway->keycap_archivist_img
                     }}"
-                    alt="{{ $artisan->colorway->artisan->name }} : {{ $artisan->colorway->sculpt->name }} - {{ $artisan->colorway->name }}">
-                </img>
+                    alt="{{ $artisan->colorway->artisan->name }} : {{ $artisan->colorway->sculpt->name }} - {{ $artisan->colorway->name }}" />
 
                 <div class="info">
                     <h2 class="title">{{ $artisan->colorway->artisan->name }}</h2>
@@ -49,9 +48,9 @@
                     </form>
 
                     @if (!empty($artisan->listing))
-                        <input class="large" type="button" value="Edit Listing" onclick="window.location='{{ route('listings.artisans.edit', ['artisan_listing_id' => $artisan->listing->id]) }}'" />
+                        <input class="large" type="button" value="Edit Listing" onclick="window.location='{{ route('listings.artisans.edit', ['artisan_colorway_listing' => $artisan->listing->id]) }}'" />
                     @else
-                        <input class="large" type="button" value="List For Sale" onclick="window.location='{{ route('listings.artisans.create', ['artisan' => $artisan->id]) }}'" />
+                        <input class="large" type="button" value="List For Sale" onclick="window.location='{{ route('listings.artisans.create', ['users_artisan_colorway' => $artisan->id]) }}'" />
                     @endif
                 </div>
 
