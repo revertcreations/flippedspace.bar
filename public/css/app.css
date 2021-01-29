@@ -80,6 +80,17 @@ input[type="submit"]:hover, input[type="button"]:hover {
 input[type="text"], input[type="password"], input[type="email"] {
     width: calc(100% - 14px);
 }
+input.img-arrow {
+    width: 30px;
+    position: absolute;
+    top: 270px;
+}
+input.img-arrow.right {
+    right: 20px;
+}
+input.img-arrow.left {
+    /* top: 160px; */
+}
 .disable-scrollbars {
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none;  /* IE 10+ */
@@ -253,10 +264,14 @@ header {
 .card.collapsed .form-group, .card.collapsed + .card-status-bar {
     display: none;
 }
+.card img.current-img{
+    display: block;
+}
 .card img {
     max-width: 100%;
     min-width: 180px;
     align-self: center;
+    display: none;
 }
 .card h3 {
     margin-top: 20px;

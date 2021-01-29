@@ -36,6 +36,60 @@ window.toggle_form_groups = function (el) {
   }
 };
 
+window.previous_listing_img = function (el) {
+  var listing_images = el.previousElementSibling.previousElementSibling.children;
+  var current_index = null;
+  var new_index = null;
+
+  for (var i = 0; i < listing_images.length; i++) {
+    if (listing_images[i].classList.contains('current-img')) current_index = i;
+
+    if (current_index != null) {
+      if (current_index <= listing_images.length - 1) {
+        if (current_index == 0) {
+          new_index = listing_images.length - 1;
+        } else {
+          new_index = current_index - 1;
+        }
+      } else {
+        new_index = current_index - 1;
+      }
+
+      break;
+    }
+  }
+
+  listing_images[current_index].classList.remove('current-img');
+  listing_images[new_index].classList.add('current-img');
+};
+
+window.next_listing_img = function (el) {
+  var listing_images = el.previousElementSibling.children;
+  var current_index = null;
+  var new_index = null;
+
+  for (var i = 0; i < listing_images.length; i++) {
+    if (listing_images[i].classList.contains('current-img')) current_index = i;
+
+    if (current_index != null) {
+      if (current_index <= listing_images.length - 1) {
+        if (current_index == listing_images.length - 1) {
+          new_index = 0;
+        } else {
+          new_index = current_index + 1;
+        }
+      } else {
+        new_index = current_index + 1;
+      }
+
+      break;
+    }
+  }
+
+  listing_images[current_index].classList.remove('current-img');
+  listing_images[new_index].classList.add('current-img');
+};
+
 /***/ }),
 
 /***/ "./resources/css/app.css":

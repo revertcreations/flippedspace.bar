@@ -8,10 +8,12 @@ class ArtisanListingCard extends Component
 {
 
     public $artisan;
+    public $type;
 
-    public function __construct($artisan)
+    public function __construct($artisan, $type)
     {
         $this->artisan = $artisan;
+        $this->type = $type;
     }
 
     /**

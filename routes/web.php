@@ -1,7 +1,7 @@
 <?php
 
 // use App\Http\Controllers\ArtisanColorwaysController;
-use App\Models\ArtisanColorway;
+use App\Models\ArtisanColorwayListing;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,17 +17,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
 
-    $artisans = ArtisanColorway::all();
-
-    $home_categories = [
-        'Watch List' => $artisans->random(10),
-        'Popular' => $artisans->random(10),
-        'Newest'=> $artisans->random(10)
-    ];
+    $artisans = ArtisanColorwayListing::all();
+    // $home_categories = [
+    //     'Watch List' => $artisans->random(10),
+    //     'Popular' => $artisans->random(10),
+    //     'Newest'=> $artisans->random(10)
+    // ];
 
     // dd($home_categories);
 
-    return view('home',['categories'=>$home_categories]);
+    return view('home',['artisans'=>$artisans]);
 });
 
 // Route::get('/search/artisans', [ArtisanColorwaysController::class, 'show']);
