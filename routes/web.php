@@ -2,6 +2,7 @@
 
 // use App\Http\Controllers\ArtisanColorwaysController;
 use App\Models\ArtisanColorwayListing;
+use App\Models\Listing;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +18,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
 
-    $artisans = ArtisanColorwayListing::all();
+    $artisans = ArtisanColorwayListing::query()
+        ->join('listings', 'listings.id', 'artisan_colorway_listings.listing_id')
+        ->where('listings.published', true)
+        ->get();
+
     // $home_categories = [
     //     'Watch List' => $artisans->random(10),
     //     'Popular' => $artisans->random(10),

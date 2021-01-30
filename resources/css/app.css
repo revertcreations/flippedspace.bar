@@ -21,6 +21,7 @@ ul, ol {
 }
 a {
     color: #212121;
+    text-decoration: underline;
 }
 a:hover, button:hover {
     border-bottom: 2px solid #212121;
@@ -59,8 +60,19 @@ input.no-m-top {
 input.xx-large {
     font-size: xx-large;
 }
+input.x-large {
+    font-size: x-large;
+}
 input.large {
     font-size: large;
+}
+input.off {
+    color: #f1f1f1;
+    background: #212121;
+}
+input.on {
+    color: #212121;
+    background: #f1f1f1;
 }
 /* input[type="submit"].destroy {
     background-color: #ffffff;
@@ -72,7 +84,6 @@ input.large {
 } */
 input[type="submit"].destroy:hover {
     background-color: #dfdfdf;
-    color: #ff0000;
 }
 input[type="submit"]:hover, input[type="button"]:hover {
     cursor: pointer;
@@ -158,22 +169,6 @@ header {
 .main-nav ul li {
     padding: 12px;
 }
-.main-nav ul .user-menu{
-    width: 36px;
-    height: 36px;
-    border: 2px solid black;
-    padding: 0;
-}
-.main-nav ul .user-menu .img-wrap {
-    text-align: center;
-    font-size: 30px;
-    width: 100%;
-    height: 100%;
-}
-/* .main-nav ul li:nth-child(n+2) {
-    border-left: 2px solid black;
-} */
-
 .main-nav .search-nav-wrap {
     display: flex;
     flex-direction: row;
@@ -191,7 +186,7 @@ header {
     margin: 0;
     padding: 0;
 }
-.sub-nav ul li {
+.sub-nav ul li, .user-nav ul li {
     flex: 1;
     text-align: center;
     margin: 18px;
@@ -203,31 +198,16 @@ header {
     border-bottom: 2px solid white;
 }
 
-.user-nav {
-    display: none;
-    width: 95%;
-    height: 95%;
-    position: fixed;
-    z-index: 3;
-    background-color: #f5f5f5eb;
-    top: 2.5%;
-    left: 2.5%;
+.user-nav ul {
+    background: #f1f1f1;;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    align-items: center;
 }
-.user-nav.opened {
-    display: block;
-}
-.user-nav .user-nav-close {
-    width: 40px;
-    margin-right: 10px;
-    right: 0;
-    position: absolute;
-}
-.user-nav ul li {
-    padding: 30px;
-    text-align: center;
-}
-.user-nav ul li a {
-    font-size: 30px;
+
+.user-nav .logout, .user-nav .logout a {
+    /* background: #c8c8c8; */
 }
 
 /***** CONTENT *****/
@@ -462,7 +442,7 @@ form.dashboard .card img {
     /* .main-nav ul {
         display: none;
     } */
-    .main-nav .logo-link, .sub-nav {
+    .main-nav .logo-link, .sub-nav, .user-nav {
         overflow-x: scroll;
     }
 }

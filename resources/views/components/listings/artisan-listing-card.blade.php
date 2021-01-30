@@ -17,13 +17,13 @@
             <form action="{{ route('listings.artisans.unpublish', ['artisan_colorway_listing' => $artisan->id]) }}" method="POST">
                 @csrf
                 @method('PUT')
-                <input class="no-m-top" type="submit" value="ON">
+                <input class="no-m-top on" type="submit" value="ON">
             </form>
         @else
             <form action="{{ route('listings.artisans.publish', ['artisan_colorway_listing' => $artisan->id]) }}" method="POST">
                 @csrf
                 @method('PUT')
-                <input class="no-m-top" type="submit" value="OFF">
+                <input class="no-m-top auto off" type="submit" value="OFF">
             </form>
         @endif
 
@@ -33,21 +33,6 @@
         <x-listing-img-wrap
             :images="$artisan->user_colorway->images"
             :alt="$artisan->colorway->artisan->name.' - '.$artisan->colorway->sculpt->name.' ('.$artisan->colorway->name.')'"/>
-        {{-- <div class="img-wrap">
-            @foreach ($artisan->user_colorway->images as $i => $image)
-                <img class="{{ ($i == 0 ? "current-img" : "") }}"
-                    data-img-position="{{ $i+1 }}"
-                    src="{{'https://res.cloudinary.com/flippedspace-bar/image/upload/t_thumbnail/v1611702681/'.$image->cloudinary_public_id}}"
-                    alt="{{ $artisan->colorway->artisan->name }} - {{ $artisan->colorway->sculpt->name }} ({{ $artisan->colorway->name }})"
-
-                />
-            @endforeach
-        </div>
-
-        @if (count($artisan->user_colorway->images) > 1)
-            <input onclick="next_listing_img(this)" class="img-arrow right" type="button" value="&rarr;">
-            <input onclick="previous_listing_img(this)" class="img-arrow left" type="button" value="&larr;">
-        @endif --}}
 
         <div class="info">
 

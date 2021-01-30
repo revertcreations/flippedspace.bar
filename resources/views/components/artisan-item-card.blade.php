@@ -1,6 +1,6 @@
 <div class="card-wrap">
     <div class="card">
-        <img src="{{ $artisan->keycap_archivist_img }}" alt="{{ $artisan->artisan->name }} : {{ $artisan->sculpt->name }} - {{ $artisan->name }}"></img>
+        <img class="current-img" src="{{ $artisan->keycap_archivist_img }}" alt="{{ $artisan->artisan->name }} : {{ $artisan->sculpt->name }} - {{ $artisan->name }}"></img>
         <div class="info">
             <h2 class="title">
                 @if (!empty($artisan->website))
@@ -10,7 +10,7 @@
                 @endif
             </h2>
             <h3 class="detail">{{ $artisan->sculpt_name }}</h3>
-            <h3 class="detial">{{ $artisan->name }}</h3>
+            <h3 class="detail">{{ $artisan->name }}</h3>
 
             <form action="{{ route('collections.artisans.store') }}" method="POST">
                 @csrf

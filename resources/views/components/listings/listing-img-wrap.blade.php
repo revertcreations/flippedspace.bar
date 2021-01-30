@@ -1,12 +1,14 @@
 <div class="img-wrap">
-    @foreach ($images as $i => $image)
+
+    @forelse ($images as $i => $image)
         <img class="{{ ($i == 0 ? "current-img" : "") }}"
             data-img-position="{{ $i+1 }}"
             src="{{'https://res.cloudinary.com/flippedspace-bar/image/upload/t_thumbnail/v1611702681/'.$image->cloudinary_public_id}}"
             alt="{{ $alt }})"
-
         />
-    @endforeach
+    @empty
+        <h2>Add Photos</h2>
+    @endforelse
 </div>
 
 @if (count($images) > 1)

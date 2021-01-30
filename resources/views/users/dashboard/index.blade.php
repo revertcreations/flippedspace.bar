@@ -1,5 +1,5 @@
 <x-layout>
-    <form class="dashboard" method="POST" action="{{ route('dashboard') }}">
+    <form class="settings" method="POST" action="{{ route('settings') }}">
         @csrf
         <div class="card">
 
