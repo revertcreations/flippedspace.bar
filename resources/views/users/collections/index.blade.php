@@ -29,12 +29,7 @@
                     </form>
                 </div>
 
-                <img src="{{
-                        !empty($artisan->images[0]) && !empty($artisan->images[0]->cloudinary_public_id)
-                        ? 'https://res.cloudinary.com/flippedspace-bar/image/upload/t_thumbnail/v1611702681/'.$artisan->images[0]->cloudinary_public_id
-                        : $artisan->colorway->keycap_archivist_img
-                    }}"
-                    alt="{{ $artisan->colorway->artisan->name }} : {{ $artisan->colorway->sculpt->name }} - {{ $artisan->colorway->name }}" />
+                <x-listing-img-wrap :images="$artisan->images" :alt="$artisan->colorway->artisan->name" />
 
                 <div class="info">
                     <h2 class="title">{{ $artisan->colorway->artisan->name }}</h2>

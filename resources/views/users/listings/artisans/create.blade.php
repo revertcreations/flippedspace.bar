@@ -2,15 +2,11 @@
     <div class="flex-form">
         @csrf
         <div class="card">
-            <div class="img-wrap">
-                @if (!empty($artisan->images && !empty($artisan->images[0])))
-                <img src="{{ 'https://res.cloudinary.com/flippedspace-bar/image/upload/t_thumbnail/v1611702681/'.$artisan->images[0]->cloudinary_public_id }}"
-                    alt="{{ $artisan->colorway->artisan->name }} - {{ $artisan->colorway->sculpt->name }} ({{ $artisan->colorway->name }})" />
-                @else
-                    <h3>Add Images</h3>
-                @endif
 
-            </div>
+            <x-listing-img-wrap
+                :images="$artisan->images"
+                :alt="$artisan->colorway->artisan->name.' - '.$artisan->colorway->sculpt->name.' ('.$artisan->colorway->name.')'"
+            />
 
             <form action="{{ route('collections.artisans.images.store', ['users_artisan_colorway_id' => $artisan->id]) }}" method="POST" enctype="multipart/form-data">
 

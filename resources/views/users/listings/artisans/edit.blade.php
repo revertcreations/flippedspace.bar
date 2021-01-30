@@ -5,7 +5,7 @@
 
             <h2 class="title">{{ $artisan->colorway->artisan->name }} - {{ $artisan->colorway->sculpt->name }} ({{ $artisan->colorway->name }})</h2>
 
-            <div class="img-wrap">
+            {{-- <div class="img-wrap">
                 <img src="{{
                     !empty($artisan->user_colorway->images[0]) && !empty($artisan->user_colorway->images[0]->cloudinary_public_id)
                     ? 'https://res.cloudinary.com/flippedspace-bar/image/upload/t_thumbnail/v1611702681/'.$artisan->user_colorway->images[0]->cloudinary_public_id
@@ -13,7 +13,12 @@
                 }}"
                 alt="{{ $artisan->colorway->artisan->name }} - {{ $artisan->colorway->sculpt->name }} ({{ $artisan->colorway->name }})">
                 </img>
-            </div>
+            </div> --}}
+
+            <x-listing-img-wrap
+                :images="$artisan->user_colorway->images"
+                :alt="$artisan->colorway->artisan->name.' - '.$artisan->colorway->sculpt->name.' ('.$artisan->colorway->name.')'"
+            />
 
             <form action="{{ route('collections.artisans.images.store', ['users_artisan_colorway_id' => $artisan->id]) }}" method="POST" enctype="multipart/form-data">
 

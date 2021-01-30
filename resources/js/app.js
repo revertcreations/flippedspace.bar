@@ -1,7 +1,7 @@
 (function () {
 
     document.querySelectorAll(".card-status-bar.error")
-        .forEach(function(el){
+        .forEach(function(el) {
             setTimeout(function(){
                 console.log('Doing the things')
                 el.style.backgroundColor = "rgb(191, 66, 66)";
@@ -10,7 +10,7 @@
         });
 
     document.querySelectorAll(".card-status-bar.success")
-        .forEach(function(el){
+        .forEach(function(el) {
             setTimeout(function(){
                 el.style.backgroundColor = "rgb(66, 191, 66)";
                 el.style.color = "#000000";
@@ -18,7 +18,7 @@
         });
 })();
 
-window.toggle_form_groups = function (el){
+window.toggle_form_groups = function (el) {
     var form_card = el.parentElement.parentElement
     console.log('clicking it, yo', form_card)
     // console.log(el)
@@ -31,7 +31,7 @@ window.toggle_form_groups = function (el){
     }
 }
 
-window.previous_listing_img = function (el){
+window.previous_listing_img = function (el) {
 
     var listing_images = el.previousElementSibling.previousElementSibling.children;
     var current_index = null
@@ -61,7 +61,7 @@ window.previous_listing_img = function (el){
 
 }
 
-window.next_listing_img = function (el){
+window.next_listing_img = function (el) {
 
     var listing_images = el.previousElementSibling.children;
     var current_index = null
@@ -89,4 +89,13 @@ window.next_listing_img = function (el){
     listing_images[current_index].classList.remove('current-img')
     listing_images[new_index].classList.add('current-img')
 
+}
+
+window.toggle_user_nav = function (el) {
+    var user_nav = document.getElementById('user_nav')
+
+    if (user_nav.classList.contains('opened'))
+        user_nav.classList.remove('opened')
+    else
+        user_nav.classList.add('opened')
 }

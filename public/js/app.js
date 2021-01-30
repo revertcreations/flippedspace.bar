@@ -90,6 +90,11 @@ window.next_listing_img = function (el) {
   listing_images[new_index].classList.add('current-img');
 };
 
+window.toggle_user_nav = function (el) {
+  var user_nav = document.getElementById('user_nav');
+  if (user_nav.classList.contains('opened')) user_nav.classList.remove('opened');else user_nav.classList.add('opened');
+};
+
 /***/ }),
 
 /***/ "./resources/css/app.css":

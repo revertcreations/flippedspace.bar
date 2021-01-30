@@ -1,9 +1,9 @@
 <x-layout>
+    <h1 class="title">Register</h1>
 
     <form class="flex-form collasped" method="POST" action="{{ route('register') }}">
         <div class="card">
-            <h2 class="title">Register</h2>
-            
+
             @csrf
 
             <div class="form-group">
@@ -13,9 +13,9 @@
                 <input id="email" name="email" type="email"  value="{{ old('email') }}" autofocus />
                 @error('email')
                 <small class="error input-error">{{ $message }}</small>
-                @enderror   
+                @enderror
             </div>
-            
+
             <div class="form-group">
                 <label for="username">
                     Username
@@ -23,12 +23,12 @@
                 <input id="" name="username" type="text" value="{{ old('username') }}" autofocus />
                 @error('username')
                 <small class="error input-error">{{ $message }}</small>
-                @enderror                  
+                @enderror
             </div>
 
             <div class="form-group">
                 <label for="password">
-                    Password                      
+                    Password
                 </label>
                 <input id="password"
                         type="password"
@@ -37,7 +37,7 @@
                         />
                 @error('password')
                 <small class="error input-error">{{ $message }}</small>
-                @enderror      
+                @enderror
             </div>
 
             <div class="form-group">
@@ -45,7 +45,7 @@
             </div>
 
             <small>Already have an account? <a href="{{ route('login') }}">Login</a></small>
-        
+
         </div>
     </form>
 

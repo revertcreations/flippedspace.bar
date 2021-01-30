@@ -1,8 +1,9 @@
 <x-layout>
+
+    <h1 class="title">Login</h1>
+
     <form class="flex-form" method="POST" action="{{ route('login') }}">
         <div class="card">
-            <h2 class="title">Login</h2>
-
             @csrf
 
             <div class="form-group">
@@ -32,7 +33,7 @@
     </form>
 
     @foreach($errors->all() as $message)
-    <div class="card-status-bar error">
+    <div class="card-status-bar form error">
         <div class="message">{{ $message }}</div>
     </div>
     @endforeach

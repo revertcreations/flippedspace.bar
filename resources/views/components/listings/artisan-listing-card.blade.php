@@ -30,7 +30,10 @@
         </div>
     @endif
 
-        <div class="img-wrap">
+        <x-listing-img-wrap
+            :images="$artisan->user_colorway->images"
+            :alt="$artisan->colorway->artisan->name.' - '.$artisan->colorway->sculpt->name.' ('.$artisan->colorway->name.')'"/>
+        {{-- <div class="img-wrap">
             @foreach ($artisan->user_colorway->images as $i => $image)
                 <img class="{{ ($i == 0 ? "current-img" : "") }}"
                     data-img-position="{{ $i+1 }}"
@@ -44,13 +47,17 @@
         @if (count($artisan->user_colorway->images) > 1)
             <input onclick="next_listing_img(this)" class="img-arrow right" type="button" value="&rarr;">
             <input onclick="previous_listing_img(this)" class="img-arrow left" type="button" value="&larr;">
-        @endif
+        @endif --}}
 
         <div class="info">
 
-            <h3 class="title">{{ $artisan->colorway->artisan->name }} - {{ $artisan->colorway->sculpt->name }} ({{ $artisan->colorway->name }})</h3>
+            <div class="title">
+                <h2>{{ $artisan->colorway->artisan->name }}</h2>
+                <h3>{{ $artisan->colorway->sculpt->name }}</h3>
+                <h3>{{ $artisan->colorway->name }}</h3>
+            </div>
 
-            <h4 class="seller">for sale by <a href="/users/{{ $artisan->user_colorway->user->id }}">{{ $artisan->user_colorway->user->username }}</a></h4>
+            <h4 class="seller">sold by <a href="/users/{{ $artisan->user_colorway->user->id }}">{{ $artisan->user_colorway->user->username }}</a></h4>
 
             <div class="condition-wrap">
                 <div>{{ $artisan->listing->condition }}</div>

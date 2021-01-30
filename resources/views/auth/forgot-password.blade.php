@@ -1,14 +1,15 @@
 <x-layout>
 
+    <h1 class="title">Forgot Password?</h1>
+
     <form class="flex-form" method="POST" action="{{ route('password.email') }}">
         <div class="card">
             @csrf
             <div class="fields">
-                <h2 class="title">Forgot Password?</h2>
 
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input id="email" type="email" name="email" type="email"  value="{{ old('email') }}" required autofocus />   
+                    <input id="email" type="email" name="email" type="email"  value="{{ old('email') }}" required autofocus />
                 </div>
 
                 <div class="form-group">
@@ -30,7 +31,7 @@
     <div class="card-status-bar error">
         <div class="message">{{ $message }}</div>
     </div>
-    @enderror    
+    @enderror
 
 </x-layout>
 
