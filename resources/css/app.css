@@ -74,6 +74,9 @@ input.on {
     color: #212121;
     background: #f1f1f1;
 }
+input.auto {
+    width: auto;
+}
 /* input[type="submit"].destroy {
     background-color: #ffffff;
     color: #ff6e6e;
@@ -282,6 +285,11 @@ header {
 }
 .card img.current-img{
     display: block;
+}
+
+.card .edit-img-wrap {
+    margin-bottom: 20px;
+    position: relative;
 }
 .card img {
     max-width: 100%;
