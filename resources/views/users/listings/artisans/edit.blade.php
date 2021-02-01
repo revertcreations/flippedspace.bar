@@ -3,36 +3,14 @@
 
         <x-images-edit-card :artisan="$artisan"/>
 
-        @csrf
-
+        <div class="card-wrap">
         <div class="card">
 
             <h2 class="title">{{ $artisan->colorway->artisan->name }} - {{ $artisan->colorway->sculpt->name }} ({{ $artisan->colorway->name }})</h2>
 
-            {{-- <div class="img-wrap">
-                <img src="{{
-                    !empty($artisan->user_colorway->images[0]) && !empty($artisan->user_colorway->images[0]->cloudinary_public_id)
-                    ? 'https://res.cloudinary.com/flippedspace-bar/image/upload/t_thumbnail/v1611702681/'.$artisan->user_colorway->images[0]->cloudinary_public_id
-                    : $artisan->colorway->keycap_archivist_img
-                }}"
-                alt="{{ $artisan->colorway->artisan->name }} - {{ $artisan->colorway->sculpt->name }} ({{ $artisan->colorway->name }})">
-                </img>
-            </div> --}}
-
-
             <form action="{{ route('listings.artisans.update', ['artisan_colorway_listing' => $artisan->listing->id]) }}" method="POST">
                 @csrf
                 @method('PUT')
-                {{-- <input type="hidden" name="users_artisan_colorway_id" value="{{ $artisan->id }}"> --}}
-                {{-- <div class="form-group">
-                    <label for="title">
-                        Title
-                    </label>
-                    <input id="title" name="title" type="text"  value="{{ $artisan->listing->title?:'' }}" autofocus />
-                    @error('title')
-                    <small class="error input-error">{{ $message }}</small>
-                    @enderror
-                </div> --}}
 
                 <div class="form-group">
                     <label for="description">
@@ -74,27 +52,34 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="price">
+                    <label for="shipping_cost">
                         Shipping Cost
                     </label>
-                    $ <input id="price" name="shipping_cost" type="number" min="1" step="any" value="{{ $artisan->listing->shipping_cost?:'' }}" />
+                    $ <input id="shipping_cost" name="shipping_cost" type="number" min="1" step="any" value="{{ $artisan->listing->shipping_cost?:'' }}" />
                     @error('shipping_cost')
                     <small class="error input-error">{{ $message }}</small>
                     @enderror
                 </div>
 
                 <div class="form-group">
-                    <input type="checkbox" name="allow_offers" id="allow_offers" {{ $artisan->listing->allow_offers ? 'checked' : ''}}>
+                    <input type="checkbox" name="allow_offers" id="allow_offers" value="1" {{ $artisan->listing->allow_offers ? 'checked' : ''}}>
                     <label for="allow_offers">Allow Offers?</label>
                 </div>
 
                 <div class="form-group">
-                    <input type="checkbox" name="published" id="published" {{ $artisan->listing->published ? 'checked' : ''}}>
+                    <input type="checkbox" name="published" id="published" value="1" {{ $artisan->listing->published ? 'checked' : ''}}>
                     <label for="published">Publish</label>
                 </div>
 
                 <input type="submit" value="Save">
             </form>
         </div>
+        @foreach($errors->all() as $message)
+        <div class="card-status-bar error">
+            <div class="message">{{ $message }}</div>
+        </div>
+        @endforeach
+        </div>
+
     </div>
 </x-layout>

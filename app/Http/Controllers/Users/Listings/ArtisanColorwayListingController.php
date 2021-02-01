@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ArtisanColorwayListing;
 use App\Models\Listing;
 use App\Models\UserArtisanColorway;
-
+use App\Models\UserArtisanColorwayImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -37,17 +37,17 @@ class ArtisanColorwayListingController extends Controller
     public function store(Request $request)
     {
 
-        $listing = Listing::create([
-            'title' => $request->title,
-            'price' => $request->price,
-            'condition' => $request->condition,
-            'description' => $request->description,
-            'shipping_cost' => $request->shipping_cost,
-            'allow_offers' => ($request->allow_offers == 'on'),
-            'published' => ($request->published == 'on')
-        ]);
+        $listing = Listing::create(request()->validate([
+            'price' => 'required|numeric',
+            'condition' => 'required',
+            'description' => 'required|string',
+            'shipping_cost' => 'numeric',
+            'allow_offers' => 'accecpted',
+            'published' => 'accepted'
+        ]));
 
-        $user_artisan_listing = ArtisanColorwayListing::create([
+
+        ArtisanColorwayListing::create([
             'users_artisan_colorway_id' => $request->users_artisan_colorway_id,
             'listing_id' => $listing->id,
         ]);
@@ -63,17 +63,23 @@ class ArtisanColorwayListingController extends Controller
 
     public function update(ArtisanColorwayListing $artisan_colorway_listing, Request $request)
     {
-        // dd($artisan_colorway_listing);
-        // dd($request->all());
-        $artisan_colorway_listing->listing->title = $request->title;
-        $artisan_colorway_listing->listing->price = $request->price;
-        $artisan_colorway_listing->listing->condition = $request->condition;
-        $artisan_colorway_listing->listing->description = $request->description;
-        $artisan_colorway_listing->listing->shipping_cost = $request->shipping_cost;
-        $artisan_colorway_listing->listing->allow_offers = ($request->allow_offers == 'on');
-        $artisan_colorway_listing->listing->published = ($request->published == 'on' ? true : false);
 
-        $artisan_colorway_listing->listing->save();
+        $images = null;
+        if(request('published'))
+            $images = UserArtisanColorwayImage::where('users_artisan_colorway_id', $artisan_colorway_listing->users_artisan_colorway_id)->first();
+
+        if(empty($images))
+            return back()->withErrors('Before publishing your listing live, it must have images attached.');
+
+        $artisan_colorway_listing->listing->update(request()->validate([
+            'condition' => 'required',
+            'description' => 'required|string',
+            'price' => 'required|numeric',
+            'shipping_cost' => 'numeric',
+            'allow_offers' => 'accepted',
+            'published' =>  'accepted'
+        ]));
+        // $artisan_colorway_listing->listing->save();
 
         return back();
     }

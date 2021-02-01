@@ -246,7 +246,7 @@ header {
     /* flex: 1; */
     flex-grow: 0;
     margin: 10px 5px;
-    align-self: flex-end;
+    /* align-self: flex-end; */
 }
 .card {
     display: flex;

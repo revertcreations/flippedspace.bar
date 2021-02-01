@@ -3,13 +3,6 @@
     <div class="card">
 
     @if ($type == "users")
-        <div class="top-left-btn">
-            <form action="{{ route('listings.artisans.edit', ['artisan_colorway_listing' => $artisan->id]) }}" method="GET">
-                {{-- @csrf --}}
-                {{-- <input type="hidden" name="user_artisan_colorway_id" value="{{ $artisan->id }}"> --}}
-                <input class="no-m-top xx-large" type="submit" value="&#9998;">
-            </form>
-        </div>
 
         <div class="top-right-btn">
 
@@ -62,7 +55,16 @@
                 ${{ $artisan->listing->price }} + ${{ $artisan->listing->shipping_cost }} <small>shipping</small>
             </div>
 
-            <input type="submit" value="Add To Cart" {{ $type == "users" ? 'disabled' : '' }} />
+            @if ($type == "users")
+            <input
+                class="large"
+                type="submit"
+                value="Edit Listing"
+                onclick="window.location='{{ route('listings.artisans.edit', ['artisan_colorway_listing' => $artisan->listing->id]) }}'"
+            />
+            @else
+                <input type="submit" value="Add To Cart" />
+            @endif
 
         </div>
 

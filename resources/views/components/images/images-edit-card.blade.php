@@ -1,5 +1,6 @@
+<div class="card-wrap">
 <div class="card">
-
+    <h2 class="title">Add Images</h2>
     @foreach ($artisan->user_colorway->images as $image)
 
     <div class="edit-img-wrap">
@@ -50,4 +51,5 @@
 
     </form>
 
+</div>
 </div>
