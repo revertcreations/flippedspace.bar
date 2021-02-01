@@ -20,7 +20,7 @@
             </div> --}}
 
 
-            <form action="{{ route('listings.artisans.update', $artisan->id) }}" method="POST">
+            <form action="{{ route('listings.artisans.update', ['artisan_colorway_listing' => $artisan->listing->id]) }}" method="POST">
                 @csrf
                 @method('PUT')
                 {{-- <input type="hidden" name="users_artisan_colorway_id" value="{{ $artisan->id }}"> --}}
@@ -89,8 +89,8 @@
                 </div>
 
                 <div class="form-group">
-                    <input type="checkbox" name="publish" id="publish" {{ $artisan->listing->published ? 'checked' : ''}}>
-                    <label for="publish">Publish</label>
+                    <input type="checkbox" name="published" id="published" {{ $artisan->listing->published ? 'checked' : ''}}>
+                    <label for="published">Publish</label>
                 </div>
 
                 <input type="submit" value="Save">

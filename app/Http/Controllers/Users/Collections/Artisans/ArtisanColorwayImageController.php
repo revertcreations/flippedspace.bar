@@ -30,10 +30,9 @@ class ArtisanColorwayImageController extends Controller
 
     public function destroy(UserArtisanColorwayImage $image)
     {
+        $cloudinary_image = Cloudinary::destroy($image->cloudinary_public_id);
 
-        Cloudinary::destroy($image->id);
-
-        $image->destroy($image->id);
+        UserArtisanColorwayImage::where('id', $image->id)->delete();
 
         return back();
     }

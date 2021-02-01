@@ -71,7 +71,7 @@ class ArtisanColorwayListingController extends Controller
         $artisan_colorway_listing->listing->description = $request->description;
         $artisan_colorway_listing->listing->shipping_cost = $request->shipping_cost;
         $artisan_colorway_listing->listing->allow_offers = ($request->allow_offers == 'on');
-        $artisan_colorway_listing->listing->published = ($request->published == 'on');
+        $artisan_colorway_listing->listing->published = ($request->published == 'on' ? true : false);
 
         $artisan_colorway_listing->listing->save();
 
