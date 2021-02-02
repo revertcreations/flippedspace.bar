@@ -60,7 +60,7 @@
                             class="large"
                             type="button"
                             value="Edit Listing"
-                            onclick="window.location='{{ route('listings.artisans.edit', ['artisan_colorway_listing' => $artisan->listing->id]) }}'"
+                            onclick="window.location='{{ route('listings.artisans.edit', ['artisan_colorway_listing' => $artisan->artisan_colorway_listing->id]) }}'"
                         />
                     @else
                         <input

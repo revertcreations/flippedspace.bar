@@ -18,6 +18,11 @@ class UserArtisanColorway extends Model
 
     }
 
+    public function artisan_colorway_listing()
+    {
+        return $this->hasOne(ArtisanColorwayListing::class, 'users_artisan_colorway_id');
+    }
+
     public function colorway()
     {
         return $this->belongsTo(ArtisanColorway::class, 'artisan_colorway_id');

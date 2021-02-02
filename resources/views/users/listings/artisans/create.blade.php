@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="flex-form">
+    {{-- <div class="flex-form">
         @csrf
         <div class="card">
 
@@ -24,15 +24,6 @@
             <form action="{{ route('listings.artisans.store', ['users_artisan_colorway_id', $artisan->id]) }}" method="POST">
                 @csrf
                 <input type="hidden" name="users_artisan_colorway_id" value="{{ $artisan->id }}">
-                {{-- <div class="form-group">
-                    <label for="title">
-                        Title
-                    </label>
-                    <input id="title" name="title" type="text" autofocus />
-                    @error('title')
-                    <small class="error input-error">{{ $message }}</small>
-                    @enderror
-                </div> --}}
 
                 <div class="form-group">
                     <label for="description">
@@ -96,5 +87,7 @@
                 <input type="submit" value="Save">
             </form>
         </div>
-    </div>
+    </div> --}}
+
+    <x-artisan-listing-form :artisan="$artisan" type="create" />
 </x-layout>

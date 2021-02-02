@@ -11,7 +11,7 @@ class CollectionController extends Controller
     public function index()
     {
         $artisans = UserArtisanColorway::where('user_id', Auth::user()->id)->get();
-
+        // dd($artisans[0]->artisan_colorway_listing);
         return view('users.collections.index', ['artisans' => $artisans]);
     }
 }

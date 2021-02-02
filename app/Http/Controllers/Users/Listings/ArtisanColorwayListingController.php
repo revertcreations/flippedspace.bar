@@ -34,21 +34,26 @@ class ArtisanColorwayListingController extends Controller
         return view('users.listings.artisans.edit', ['artisan' => $artisan_colorway_listing]);
     }
 
-    public function store(Request $request)
+    public function store()
     {
 
-        $listing = Listing::create(request()->validate([
+        if(request('published') && empty(UserArtisanColorwayImage::where('users_artisan_colorway_id', $artisan_colorway_listing->users_artisan_colorway_id)->first()))
+            return back()->withErrors(['images_required', 'Before publishing your listing live, it must have images attached.']);
+
+        $validated_attributes = request()->validate([
             'price' => 'required|numeric',
             'condition' => 'required',
             'description' => 'required|string',
             'shipping_cost' => 'numeric',
-            'allow_offers' => 'accecpted',
-            'published' => 'accepted'
-        ]));
+        ]);
 
+        $validated_attributes['allow_offers'] = request('allow_offers') == "on";
+        $validated_attributes['published'] = request('published') == "on";
+
+        $listing = Listing::create($validated_attributes);
 
         ArtisanColorwayListing::create([
-            'users_artisan_colorway_id' => $request->users_artisan_colorway_id,
+            'users_artisan_colorway_id' => request('users_artisan_colorway_id'),
             'listing_id' => $listing->id,
         ]);
 
@@ -61,23 +66,19 @@ class ArtisanColorwayListingController extends Controller
         return view('users.listings.artisans.index');
     }
 
-    public function update(ArtisanColorwayListing $artisan_colorway_listing, Request $request)
+    public function update(ArtisanColorwayListing $artisan_colorway_listing)
     {
 
-        $images = null;
-        if(request('published'))
-            $images = UserArtisanColorwayImage::where('users_artisan_colorway_id', $artisan_colorway_listing->users_artisan_colorway_id)->first();
-
-        if(empty($images))
-            return back()->withErrors('Before publishing your listing live, it must have images attached.');
+        if(request('published') && empty(UserArtisanColorwayImage::where('users_artisan_colorway_id', $artisan_colorway_listing->users_artisan_colorway_id)->first()))
+            return back()->withErrors(['images_required', 'Before publishing your listing live, it must have images attached.']);
 
         $artisan_colorway_listing->listing->update(request()->validate([
             'condition' => 'required',
             'description' => 'required|string',
             'price' => 'required|numeric',
             'shipping_cost' => 'numeric',
-            'allow_offers' => 'accepted',
-            'published' =>  'accepted'
+            'allow_offers' => 'boolean',
+            'published' =>  'boolean'
         ]));
         // $artisan_colorway_listing->listing->save();
 

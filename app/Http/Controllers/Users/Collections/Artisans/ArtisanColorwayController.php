@@ -14,7 +14,7 @@ class ArtisanColorwayController extends Controller
     {
         $artisans = UserArtisanColorway::where('user_id', Auth::user()->id)->get();
 
-        // dd($artisans);
+        // dd($artisans[0]->artisan_colorway_listing());
 
         return view('users.collections.index', ['artisans' => $artisans]);
     }
