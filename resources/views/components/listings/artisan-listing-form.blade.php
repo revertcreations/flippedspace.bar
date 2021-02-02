@@ -9,7 +9,7 @@
             <h2 class="title">{{ $artisan->colorway->artisan->name }} - {{ $artisan->colorway->sculpt->name }} ({{ $artisan->colorway->name }})</h2>
 
         @if($type == 'update')
-            <form action="{{ route('listings.artisans.update', ['artisan_colorway_listing' => $artisan->listing->id]) }}" method="POST">
+            <form action="{{ route('listings.artisans.update', ['artisan_colorway_listing' => $artisan->id]) }}" method="POST">
                 @method('PUT')
         @else
             <form action="{{ route('listings.artisans.store') }}" method="POST">
@@ -101,13 +101,19 @@
 
         </div>
 
-    @foreach($errors->all() as $key => $message)
+    {{-- @foreach($errors->all() as $key => $message)
         @if($key != 'images_required')
         <div class="card-status-bar error">
-            <div class="message">{{ $message }}</div>
+            <div class="message">{{ dd($errors->all()) }}</div>
         </div>
         @endif
-    @endforeach
+    @endforeach --}}
+
+    @if (session('status'))
+    <div class="card-status-bar success">
+        <div class="message">{{ session('status') }}</div>
+    </div>
+    @endif
 
     </div>
 

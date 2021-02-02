@@ -31,8 +31,7 @@ class ArtisanColorwayController extends Controller
             'artisan_colorway_id' => $request->artisan_colorway_id
         ]);
 
-        return back()
-            ->with('status', $status);
+        return back()->with('status', $status);
     }
 
     public function destroy(Request $request)

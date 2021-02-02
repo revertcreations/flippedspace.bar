@@ -37,8 +37,8 @@ class ArtisanColorwayListingController extends Controller
     public function store()
     {
 
-        if(request('published') && empty(UserArtisanColorwayImage::where('users_artisan_colorway_id', $artisan_colorway_listing->users_artisan_colorway_id)->first()))
-            return back()->withErrors(['images_required', 'Before publishing your listing live, it must have images attached.']);
+        // if(request('published') && empty(UserArtisanColorwayImage::where('users_artisan_colorway_id', $artisan_colorway_listing->users_artisan_colorway_id)->first()))
+        //     return back()->withErrors(['images_required', 'Before publishing your listing live, it must have images attached.']);
 
         $validated_attributes = request()->validate([
             'price' => 'required|numeric',
@@ -63,26 +63,34 @@ class ArtisanColorwayListingController extends Controller
 
     public function show(ArtisanColorwayListing $artisan_colorway_listing)
     {
-        return view('users.listings.artisans.index');
+        return view('users.listings.artisans.index', ['artisan', $artisan_colorway_listing]);
     }
 
     public function update(ArtisanColorwayListing $artisan_colorway_listing)
     {
 
         if(request('published') && empty(UserArtisanColorwayImage::where('users_artisan_colorway_id', $artisan_colorway_listing->users_artisan_colorway_id)->first()))
-            return back()->withErrors(['images_required', 'Before publishing your listing live, it must have images attached.']);
+            return back()->withErrors(['images_required' => 'Before publishing your listing live, it must have images attached.']);
 
-        $artisan_colorway_listing->listing->update(request()->validate([
+
+        $validated_attributes = request()->validate([
             'condition' => 'required',
             'description' => 'required|string',
             'price' => 'required|numeric',
-            'shipping_cost' => 'numeric',
-            'allow_offers' => 'boolean',
-            'published' =>  'boolean'
-        ]));
-        // $artisan_colorway_listing->listing->save();
+            'shipping_cost' => 'numeric'
+        ]);
+
+        $validated_attributes['allow_offers'] = request('allow_offers') == "on" ? 1 : 0;
+        $validated_attributes['published'] = request('published') == "on" ? 1 : 0;
+
+        $artisan_colorway_listing->listing->update($validated_attributes);
+
+        // dd($artisan_colorway_listing->listing->wasChanged());
+        if($artisan_colorway_listing->listing->wasChanged())
+            return back()->with('status', 'Saved!');
 
         return back();
+
     }
 
     public function destroy()

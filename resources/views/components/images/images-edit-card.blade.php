@@ -55,9 +55,9 @@
         </form>
 
     </div>
-    @foreach($errors->all() as $message)
+    @error('images_required')
     <div class="card-status-bar error">
         <div class="message">{{ $message }}</div>
     </div>
-    @endforeach
+    @enderror
 </div>
