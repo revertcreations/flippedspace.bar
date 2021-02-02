@@ -18,7 +18,7 @@
         <div class="card-wrap">
             <div class="card">
 
-            @if (empty($artisan->listing))
+            {{-- @if (empty($artisan->listing)) --}}
                 <div class="top-right-btn">
                     <form action="{{ route('collections.artisans.destroy', ['users_artisan_colorway_id' => $artisan->id]) }}" method="POST">
                         @csrf
@@ -33,7 +33,7 @@
 
                     </form>
                 </div>
-            @endif
+            {{-- @endif --}}
 
                 <x-listing-img-wrap :images="$artisan->images" :alt="$artisan->colorway->artisan->name" />
 
