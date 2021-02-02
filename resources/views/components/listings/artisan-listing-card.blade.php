@@ -60,7 +60,7 @@
                 class="large"
                 type="submit"
                 value="Edit Listing"
-                onclick="window.location='{{ route('listings.artisans.edit', ['artisan_colorway_listing' => $artisan->listing->id]) }}'"
+                onclick="window.location='{{ route('listings.artisans.edit', ['artisan_colorway_listing' => $artisan->id]) }}'"
             />
             @else
                 <input type="submit" value="Add To Cart" />

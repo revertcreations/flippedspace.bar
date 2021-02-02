@@ -17,9 +17,9 @@ class ArtisanColorwayListingController extends Controller
     {
         $artisan_listings = ArtisanColorwayListing::query()
             ->join('users_artisan_colorways', 'users_artisan_colorways.id', '=', 'artisan_colorway_listings.users_artisan_colorway_id')
-            ->where('users_artisan_colorways.user_id', Auth::user()->id)->get();
-
-            // dd($artisan_listings);
+            ->where('users_artisan_colorways.user_id', Auth::user()->id)
+            ->select('artisan_colorway_listings.*')
+            ->get();
 
         return view('users.listings.artisans.index', ['listings' => $artisan_listings]);
     }
