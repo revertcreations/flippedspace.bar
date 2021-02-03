@@ -13,4 +13,3 @@ Route::get('/listings/artisans/{artisan_colorway_listing}/edit', [ArtisanColorwa
 Route::get('/listings/artisans/create/{users_artisan_colorway}', [ArtisanColorwayListingController::class, 'create'])->name('listings.artisans.create')->middleware('auth');
 Route::put('/listings/artisans/{artisan_colorway_listing}/publish', [ArtisanColorwayListingController::class, 'publish'])->name('listings.artisans.publish')->middleware('auth');
 Route::put('/listings/artisans/{artisan_colorway_listing}/unpublish', [ArtisanColorwayListingController::class, 'unpublish'])->name('listings.artisans.unpublish')->middleware('auth');
-

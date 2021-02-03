@@ -1,6 +1,10 @@
 <div class="flex-form">
-
-    <x-images-edit-card :artisan="$artisan"/>
+{{-- {{ dd($artisan->user_colorway->images )}} --}}
+@if ($type == 'update')
+    <x-images-edit-card :images="$artisan->user_colorway->images" :usersArtisanColorwayId="$artisan->colorway->id" :artisanColorwayId="$artisan->user_colorway->id" />
+@else
+    <x-images-edit-card :images="$artisan->images" :usersArtisanColorwayId="$artisan->colorway->id" :artisanColorwayId="$artisan->id" />
+@endif
 
     <div class="card-wrap">
 
@@ -8,7 +12,7 @@
 
             <h2 class="title">{{ $artisan->colorway->artisan->name }} - {{ $artisan->colorway->sculpt->name }} ({{ $artisan->colorway->name }})</h2>
 
-        @if($type == 'update')
+        @if ($type == 'update')
             <form action="{{ route('listings.artisans.update', ['artisan_colorway_listing' => $artisan->id]) }}" method="POST">
                 @method('PUT')
         @else

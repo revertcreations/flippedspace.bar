@@ -5,7 +5,7 @@
                 <h2 class="title">Search</h2>
                 <label for="search">artisan, sculpt, or colorway names... (i.e. "keypora")</label>
                 <input name="search" type="text" value="{{ old('search') }}" placeholder="search for artisans...">
-                <input type="submit" value="Find"/>
+                <input type="submit" value="&#9906; Find"/>
             </div>
         </div>
     </div>

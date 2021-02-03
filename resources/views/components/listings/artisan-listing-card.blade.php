@@ -25,7 +25,11 @@
 
         <x-listing-img-wrap
             :images="$artisan->user_colorway->images"
-            :alt="$artisan->colorway->artisan->name.' - '.$artisan->colorway->sculpt->name.' ('.$artisan->colorway->name.')'"/>
+            :usersArtisanColorwayId="$artisan->user_colorway->id"
+            :artisanColorwayId="$artisan->colorway->id"
+            :alt="$artisan->colorway->artisan->name.' - '.$artisan->colorway->sculpt->name.' ('.$artisan->colorway->name.')'"
+            :type="$type"
+        />
 
         <div class="info">
 
@@ -63,7 +67,10 @@
                 onclick="window.location='{{ route('listings.artisans.edit', ['artisan_colorway_listing' => $artisan->id]) }}'"
             />
             @else
-                <input type="submit" value="Add To Cart" />
+                <form action="{{ route('cart.add', ['listing' => $artisan->listing->id]) }}" method="POST">
+                    @csrf
+                    <input type="submit" value="Add To Cart" {{ (Auth::check() && Auth::user()->id == $artisan->user_colorway->user->id ? 'disabled' : '') }}/>
+                </form>
             @endif
 
         </div>

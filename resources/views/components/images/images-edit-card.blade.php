@@ -2,8 +2,8 @@
     <div class="card">
         <h2 class="title">Images</h2>
 
-    @if (!empty($artisan->user_colorway->images))
-        @foreach ($artisan->user_colorway->images as $image)
+    @if (!empty($images))
+        @foreach ($images as $image)
 
         <div class="edit-img-wrap">
 
@@ -36,6 +36,7 @@
             </div>
 
             <img class="current-img"
+                width="500px"
                 src="{{'https://res.cloudinary.com/flippedspace-bar/image/upload/w_500,c_fit/v1611958305/'.$image->cloudinary_public_id.'.jpg'}}"
             />
         </div>
@@ -43,11 +44,11 @@
         @endforeach
     @endif
         <br>
-        <form action="{{ route('collections.artisans.images.store', ['users_artisan_colorway_id' => $artisan->id]) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('collections.artisans.images.store', ['users_artisan_colorway_id' => $usersArtisanColorwayId]) }}" method="POST" enctype="multipart/form-data">
 
             @csrf
-            <input type="hidden" name="artisan_colorway_id" value="{{ $artisan->id }}">
-            <input type="hidden" name="my_artisan_id" value="{{ $artisan->id }}">
+            <input type="hidden" name="artisan_colorway_id" value="{{ $artisanColorwayId }}">
+            <input type="hidden" name="my_artisan_id" value="{{ $usersArtisanColorwayId }}">
             <input class="no-m-top" name="artisan_images[]" type="file" multiple accept="image/*">
 
             <input class="no-m-top" value="Add Photos" type="submit" />

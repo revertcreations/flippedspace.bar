@@ -6,11 +6,15 @@ use Illuminate\View\Component;
 
 class ImagesEditCard extends Component
 {
-    public $artisan;
+    public $images;
+    public $usersArtisanColorwayId;
+    public $artisanColorwayId;
 
-    public function __construct($artisan)
+    public function __construct($images, $usersArtisanColorwayId, $artisanColorwayId)
     {
-        $this->artisan = $artisan;
+        $this->images = $images;
+        $this->usersArtisanColorwayId = $usersArtisanColorwayId;
+        $this->artisanColorwayId = $artisanColorwayId;
     }
 
     /**

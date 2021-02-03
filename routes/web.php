@@ -2,7 +2,6 @@
 
 // use App\Http\Controllers\ArtisanColorwaysController;
 use App\Models\ArtisanColorwayListing;
-use App\Models\Listing;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,3 +40,4 @@ require __DIR__.'/users.php';
 require __DIR__.'/listings.php';
 require __DIR__.'/products.php';
 require __DIR__.'/collections.php';
+require __DIR__.'/cart.php';

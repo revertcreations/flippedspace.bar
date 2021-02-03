@@ -13,12 +13,15 @@ class ArtisanColorwayImageController extends Controller
     public function store(Request $request)
     {
 
+        if(empty($request->file()))
+            return back()->withErrors(['empty_file' => 'No images were attached.']);
+
         foreach($request->file('artisan_images') as $image)
         {
             $cloudinary_result = $image->storeOnCloudinary('artisans');
 
             UserArtisanColorwayImage::create([
-                'users_artisan_colorway_id' => $request->my_artisan_id,
+                'users_artisan_colorway_id' => $request->users_artisan_colorway_id,
                 'artisan_colorway_id' => $request->artisan_colorway_id,
                 'cloudinary_secure_path' => $cloudinary_result->getSecurePath(),
                 'cloudinary_public_id' => $cloudinary_result->getPublicId()

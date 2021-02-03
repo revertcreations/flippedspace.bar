@@ -6,7 +6,7 @@ html * {
 }
 body {
     margin: unset;
-    background: #F5F5F5;
+    /* background: #F5F5F5; */
     background: #C8C8C8;
 }
 h1,h2,h3,h4,h5,h6,b {
@@ -116,6 +116,13 @@ input.img-arrow.right {
 .bold {
     font-weight: 900;
 }
+.search-icon {
+    transform-origin: 0 0;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
 /***** NAVIGATION *****/
 header {
     /* border-bottom: 5px solid #212121; */
@@ -130,6 +137,14 @@ header {
     width: 100%;
     background: #FFF;
 }
+.main-nav ul {
+    display: flex;
+    align-self: flex-end;
+    margin-right: 20px;
+}
+.main-nav ul li {
+    padding: 12px;
+}
 .main-nav .logo-link {
     margin-left: 20px;
     font-weight: 800;
@@ -140,50 +155,46 @@ header {
     font-size: 11px;
     margin: 10px 0;
 }
-.main-nav .search-bar {
-    align-self: center;
-    position: relative;
-    min-width: 270px;
-    margin-left: 40px;
-}
-.main-nav .search-bar .search-icon {
-    transform-origin: 0 0;
-    -webkit-transform: rotate(45deg);
-    -moz-transform: rotate(45deg);
-    -o-transform: rotate(45deg);
-    transform: rotate(45deg);
-    font-size: 30px;
-    position: absolute;
-    top: 10px;
-    left: 0;
-}
-.main-nav .search-bar input {
-    margin-bottom: 10px;
-    margin-left: 5px;
-}
-.main-nav .search-bar input::placeholder {
-    color: rgb(128, 128, 128);
-}
-.main-nav ul {
-    display: flex;
-    align-self: flex-end;
-    margin-right: 20px;
-}
-.main-nav ul li {
-    padding: 12px;
-}
-.main-nav .search-nav-wrap {
+.main-nav .search-cart-wrap {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
 }
+.main-nav .search-cart-wrap .search-bar {
+    align-self: center;
+    position: relative;
+    min-width: 270px;
+    margin-left: 40px;
+}
+.main-nav .search-cart-wrap .search-bar .search-icon {
+    font-size: 30px;
+    position: absolute;
+    top: 10px;
+    left: 0;
+}
+.main-nav .search-cart-wrap .search-bar input {
+    margin-bottom: 10px;
+    margin-left: 5px;
+}
+.main-nav .search-cart-wrap .search-bar input::placeholder {
+    color: rgb(128, 128, 128);
+}
+
+
+.main-nav .search-cart-wrap .cart-wrap {
+    margin-left: 20px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .sub-nav {
     background: #212121;
 }
-.sub-nav ul {
+.sub-nav ul, .user-nav ul {
     display: flex;
     align-items: center;
     margin: 0;
@@ -192,7 +203,7 @@ header {
 .sub-nav ul li, .user-nav ul li {
     flex: 1;
     text-align: center;
-    margin: 18px;
+    padding: 18px;
 }
 .sub-nav ul li a {
     color: #ffffff;
@@ -201,17 +212,10 @@ header {
     border-bottom: 2px solid white;
 }
 
-.user-nav ul {
+.user-nav {
     background: #f1f1f1;;
-    display: flex;
-    margin: 0;
-    padding: 0;
-    align-items: center;
 }
 
-.user-nav .logout, .user-nav .logout a {
-    /* background: #c8c8c8; */
-}
 
 /***** CONTENT *****/
 .content {
@@ -222,7 +226,7 @@ header {
 }
 
 .content > .title {
-    margin-left: 20%;
+    margin-left: 10%;
 }
 
 /***** ITEM CARD *****/
@@ -253,6 +257,9 @@ header {
     padding: 20px;
     background: white;
     border-bottom: 5px solid #212121;
+    -webkit-box-shadow: 0px 10px 13px 0px rgba(33,33,33,0.26);
+    -moz-box-shadow: 0px 10px 13px 0px rgba(33,33,33,0.26);
+    box-shadow: 0px 10px 13px 0px rgba(33,33,33,0.26);
 }
 .card .top-left-btn {
     width: 40px;
@@ -270,20 +277,22 @@ header {
     width: 40px;
     position: absolute;
 }
-.card .img-wrap{
+.card .img-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 300px;
     height: 300px;
-    background-color: #C8C8C8;
-    margin: 0 auto;
-    text-align: center;
+    color: #212121;
+    background-color: #c8c8c8;
 }
 .card.collapsed, .card .title .click {
-    cursor:pointer;
+    cursor: pointer;
 }
 .card.collapsed .form-group, .card.collapsed + .card-status-bar {
     display: none;
 }
-.card img.current-img{
+.card .img-wrap img.current-img, .card .img-wrap .img.current-img {
     display: block;
 }
 
@@ -291,11 +300,14 @@ header {
     margin-bottom: 20px;
     position: relative;
 }
-.card img {
+.card .img-wrap img, .card .img-wrap .img {
     max-width: 100%;
     min-width: 180px;
     align-self: center;
     display: none;
+}
+.card .img-wrap .img {
+    padding: 20px;
 }
 .card .title h2 {
     margin-bottom: 5px;
@@ -320,7 +332,7 @@ header {
     font-size: 16px;
     font-weight: 600;
 }
-.card .info .condition-wrap .condition span{
+.card .info .condition-wrap .condition span {
     display: inline-block;
     padding: 0;
     width: 15px;

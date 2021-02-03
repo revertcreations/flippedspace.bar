@@ -1,6 +1,6 @@
 <x-layout>
 
-    <h1 class="title">Your Artisan Listings</h1>
+    <h1 class="title">Artisan Listings</h1>
 
     <div class="items-container">
 

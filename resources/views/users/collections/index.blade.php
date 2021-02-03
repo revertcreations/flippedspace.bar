@@ -7,7 +7,7 @@
             <div class="info">
                 <h2 class="title">Artisans</h2>
                 <h3 class="title">Add artisans to your collection. Once added you are able to list for sale, and more...</h3>
-                <input type="button" onclick="window.location=('/products/artisans')" value="&#43; Add Artisans" />
+                <input type="submit" onclick="window.location=('/products/artisans')" value="&#43; Add Artisans" />
             </div>
         </div>
     </div>
@@ -35,25 +35,20 @@
                 </div>
             {{-- @endif --}}
 
-                <x-listing-img-wrap :images="$artisan->images" :alt="$artisan->colorway->artisan->name" />
+                <x-listing-img-wrap
+                    :images="$artisan->images"
+                    :users-artisan-colorway-id="$artisan->id"
+                    :artisan-colorway-id="$artisan->artisan_colorway_id"
+                    type="users"
+                    :alt="$artisan->colorway->artisan->name"
+                />
 
                 <div class="info">
 
                     <h2 class="title">{{ $artisan->colorway->artisan->name }}</h2>
                     <h4 class="detail">{{ $artisan->colorway->sculpt->name }} {{ (!empty($artisan->colorway->name) ? "(".$artisan->colorway->name.")" : "" ) }}</h4>
 
-                    <form action="{{ route('collections.artisans.images.store', ['users_artisan_colorway_id', $artisan->id]) }}"
-                        method="POST"
-                        enctype="multipart/form-data">
 
-                        @csrf
-
-                        <input type="hidden" name="artisan_colorway_id" value="{{ $artisan->id }}">
-                        <input type="hidden" name="my_artisan_id" value="{{ $artisan->id }}">
-                        <input class="no-m-top" name="artisan_images[]" type="file" multiple accept="image/*">
-                        <input class="no-m-top" value="Add Photos" type="submit" />
-
-                    </form>
 
                     @if (!empty($artisan->listing))
                         <input
@@ -73,6 +68,9 @@
                 </div>
 
             </div>
+            @error('empty_file')
+                <div class="card-status-bar">{{ $message }}</div>
+            @enderror
         </div>
 
         @empty

@@ -34,12 +34,13 @@
             <li><a href="/wish-lists">wish lists</a></li>
             <li><a href="/settings">settings</a></li>
 
-            <form class="logout" method="POST" action="{{ route('logout') }}">
-                @csrf
-                <li>
-                    <a class="nav-link" onclick="event.preventDefault();this.closest('form').submit();"></a>
-                </li>
-            </form>
+
+            <li>
+                <form class="logout" method="POST" action="{{ route('logout') }}">
+                    @csrf
+                <a class="nav-link" onclick="event.preventDefault();this.closest('form').submit();">logout</a>
+                </form>
+            </li>
 
         @endguest
         </ul>
