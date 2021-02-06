@@ -8,6 +8,7 @@ use App\Models\ArtisanSculpt;
 use App\Models\Artisan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redis;
 
 class ArtisanColorwayController extends Controller
 {
@@ -17,6 +18,11 @@ class ArtisanColorwayController extends Controller
         // NEED TO VALIDE THIS YO!!!
         // $search_terms = explode(" ", request('search'));
         $full_search = request('search');
+        $it = 0;
+        dd(Redis::hScan('catalog:artisans:search', $it, '*meet*', 10));
+
+        dd('done');
+
         $search_terms = preg_split('/\s+/', request('search'), -1, PREG_SPLIT_NO_EMPTY);
         // dd($search_terms[0]);
 

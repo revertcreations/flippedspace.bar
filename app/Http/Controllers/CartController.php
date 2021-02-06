@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Listing;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
@@ -16,12 +17,13 @@ class CartController extends Controller
 
     public function store(Listing $listing)
     {
-        // return $listing;
-        if(!empty(session('cart')->get('cart'))
-            session('cart')->push($listing);
 
 
-        session(['cart' => $listing]);
+        dd($listing);
+        // $listings = DB::table('listings')
+        //     ->leftJoin('users_artisan_colorways', 'artisan_colorways_listings.category_id', 'listings.category_id')
+        //     ->get();
+
 
         return back()->with(['status' => 'Added to Cart']);
     }

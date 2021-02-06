@@ -7,6 +7,7 @@ use App\Models\ArtisanColorway;
 use App\Models\ArtisanSculpt;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Redis;
 
 class SyncArtisanTables extends Command
 {
@@ -46,85 +47,40 @@ class SyncArtisanTables extends Command
         $response = Http::get($this->keycap_archvist_url);
         $all_artisans = $response->json();
 
-        $changed_artisans_count = 0;
-        $new_artisans_count = 0;
-
         $this->info(date("F j, Y, g:i a"));
         $this->info('(.....)0000o(=._.=)o0000(.....)');
         $this->info(' Syncing Artisan Tables...');
         $this->info('                 ');
 
+        $artisan_id = 1;
         foreach ($all_artisans as $artisan)
         {
-            $update_or_inserted_artisan = Artisan::updateOrCreate([
-                "name" => $artisan["name"],
-                "instagram" => $artisan["instagram"],
-                "website" => $artisan["website"],
-                "discord" => $artisan["discord"],
-                "keycap_archivist_id" => $artisan["id"],
-                "keycap_archivist_src" => $artisan["src"],
-                "keycap_archivist_self_order" => (isset($artisan["selfOrder"]) ? $artisan["selfOrder"] : false)
-            ]);
-
-            if($update_or_inserted_artisan->wasRecentlyCreated)
-                $new_artisans_count++;
-
-            if($update_or_inserted_artisan->wasChanged())
-                $changed_artisans_count++;
-
             foreach ($artisan["sculpts"] as $sculpt)
             {
-                $update_or_inserted_artisan_sclupt = ArtisanSculpt::updateOrCreate([
-                    "artisan_id" => $update_or_inserted_artisan->id,
-                    "name" => $sculpt["name"],
-                    "keycap_archivist_id" => $sculpt["id"]
-                ]);
-
-                if($update_or_inserted_artisan_sclupt->wasRecentlyCreated)
-                    $new_artisans_count++;
-
-                if($update_or_inserted_artisan_sclupt->wasChanged())
-                    $changed_artisans_count++;
-
                 foreach ($sculpt["colorways"] as $colorway)
                 {
-                    $update_or_inserted_artisan_colorway = ArtisanColorway::updateOrCreate([
-                        "artisan_id" => $update_or_inserted_artisan->id,
-                        "artisan_sculpt_id" => $update_or_inserted_artisan_sclupt->id,
-                        "name" => $colorway["name"],
-                        "keycap_archivist_id" => $colorway["id"],
-                        "keycap_archivist_img" => $colorway["img"],
-                        "keycap_archivist_is_cover" => (isset($colorway["isCover"]) ? $colorway["isCover"] : false),
-                        "keycap_archivist_note" => (isset($colorway["note"]) ? $colorway["note"] : false)
-                    ]);
+                    // Redis::hSet('catalog:artisans:'.$artisan_id, 'artisan_name', $artisan['name']);
+                    // Redis::hSet('catalog:artisans:'.$artisan_id, 'artisan_sculpt_name', $sculpt['name']);
+                    // Redis::hSet('catalog:artisans:'.$artisan_id, 'artisan_colorway_name', $colorway['name']);
+                    // Redis::hSet('catalog:artisans:'.$artisan_id, 'keycap_archivist_id', $colorway['id']);
+                    // Redis::hSet('catalog:artisans:'.$artisan_id, 'keycap_archivist_img', $colorway['img']);
+                    // Redis::hSet('catalog:artisans:'.$artisan_id, 'keycap_archivist_is_cover', (isset($colorway['isCover']) ? $colorway['isCover'] : false));
+                    // Redis::hSet('catalog:artisans:'.$artisan_id, 'artisan_instagram', $artisan['instagram']);
+                    // Redis::hSet('catalog:artisans:'.$artisan_id, 'artisan_name', $artisan['name']);
+                    // Redis::hSet('catalog:artisans:'.$artisan_id, 'instagram', $artisan['instagram']);
+                    // Redis::hSet('catalog:artisans:'.$artisan_id, 'website', $artisan['website']);
+                    // Redis::hSet('catalog:artisans:'.$artisan_id, 'discord', $artisan['discord']);
 
-                    if($update_or_inserted_artisan_colorway->wasRecentlyCreated)
-                        $new_artisans_count++;
-
-                        if($update_or_inserted_artisan_colorway->wasChanged())
-                        $changed_artisans_count++;
+                    Redis::hSet('catalog:artisans:search', $artisan['name'].' '.$sculpt['name'].' '.$colorway['name'], $artisan_id);
+                    Redis::hSet('catalog:search', $artisan['name'].' '.$sculpt['name'].' '.$colorway['name'], 'artisans:'.$artisan_id);
+                    $artisan_id++;
                 }
             }
         }
 
-        $this->info('Changed Artisans: '.$changed_artisans_count);
-        $this->info('New Artisans: '. $new_artisans_count);
-        $this->info('                 ');
-
-        if($changed_artisans_count == 0 && $new_artisans_count == 0)
-        {
             $this->info('^^^^^^^^^^^^^^^');
             $this->info('((xx)) x ((xx))');
             $this->info('     (----)     ');
-        }
-        else
-        {
-            $this->info('$$$$$$$$$$$$$$$');
-            $this->info('(($$)) x (($$))');
-            $this->info('     (!!!!)     ');
-        }
-
-        $this->info('                 ');
 
     }
 

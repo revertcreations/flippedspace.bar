@@ -13,6 +13,11 @@ class Listing extends Model
 
     public function artisan_colorway_listings()
     {
-        return $this->hasMany(ArtisanColorwayListing::class, 'listing_id');
+        return $this->hasOne(ArtisanColorwayListing::class, 'listing_id');
+    }
+
+    public function FunctionName(Type $var = null)
+    {
+        # code...
     }
 }
