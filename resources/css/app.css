@@ -257,9 +257,12 @@ header {
     padding: 20px;
     background: white;
     border-bottom: 5px solid #212121;
+}
+.card:hover {
     -webkit-box-shadow: 0px 10px 13px 0px rgba(33,33,33,0.26);
     -moz-box-shadow: 0px 10px 13px 0px rgba(33,33,33,0.26);
     box-shadow: 0px 10px 13px 0px rgba(33,33,33,0.26);
+    cursor: pointer;
 }
 .card .top-left-btn {
     width: 40px;

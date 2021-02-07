@@ -20,9 +20,9 @@
 
             {{-- @if (empty($artisan->listing)) --}}
                 <div class="top-right-btn">
-                    <form action="{{ route('collections.artisans.destroy', ['users_artisan_colorway_id' => $artisan->id]) }}" method="POST">
+                    <form action="{{ route('collections.artisans.destroy', ['users_artisan_colorway_id' => $artisan['id']]) }}" method="POST">
                         @csrf
-                        <input type="hidden" name="my_artisan_id" value="{{ $artisan->id }}">
+                        <input type="hidden" name="my_artisan_id" value="{{ $artisan['id'] }}">
                         <input
                             class="no-m-top xx-large destroy"
                             type="submit"
@@ -36,18 +36,18 @@
             {{-- @endif --}}
 
                 <x-listing-img-wrap
-                    :images="$artisan->images"
-                    :users-artisan-colorway-id="$artisan->id"
-                    :artisan-colorway-id="$artisan->artisan_colorway_id"
+                    :images="[]"
+                    :users-artisan-colorway-id="$artisan['id']"
+                    :artisan-colorway-id="$artisan['id']"
                     type="users"
-                    :alt="$artisan->colorway->artisan->name"
+                    :alt="$artisan['colorway_name']"
                 />
 
                 <div class="info">
 
-                    <h2 class="title">{{ $artisan->colorway->artisan->name }}</h2>
-                    <h4 class="detail">{{ $artisan->colorway->sculpt->name }} {{ (!empty($artisan->colorway->name) ? "(".$artisan->colorway->name.")" : "" ) }}</h4>
-
+                    <h2 class="title">{{ $artisan['artisan_name'] }}</h2>
+                    <h3 class="detail">{{ $artisan['sculpt_name'] }}</h3>
+                    {!! (!empty($artisan['colorway_name']) ? "<h4 class='detail'>".$artisan['colorway_name']."</h4>" : "" ) !!}
 
 
                     @if (!empty($artisan->listing))
@@ -62,7 +62,7 @@
                             class="large"
                             type="button"
                             value="List For Sale"
-                            onclick="window.location='{{ route('listings.artisans.create', ['users_artisan_colorway' => $artisan->id]) }}'"
+                            onclick="window.location='{{ route('listings.artisans.create', ['users_artisan_colorway' => $artisan['id']]) }}'"
                         />
                     @endif
                 </div>
