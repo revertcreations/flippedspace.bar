@@ -1,6 +1,6 @@
 <x-layout>
 
-    <h1 class="title">Collections</h1>
+    <h1 class="title">Collection</h1>
 
     <div class="card-wrap">
         <div class="card search-container">
@@ -18,26 +18,8 @@
         <div class="card-wrap">
             <div class="card">
 
-            {{-- @if (empty($artisan->listing)) --}}
-                <div class="top-right-btn">
-                    <form action="{{ route('collections.artisans.destroy', ['users_artisan_colorway_id' => $artisan['id']]) }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="my_artisan_id" value="{{ $artisan['id'] }}">
-                        <input
-                            class="no-m-top xx-large destroy"
-                            type="submit"
-                            onclick="event.preventDefault();
-                                        if(confirm('Are you sure you want to delete this from your artisans collection?'))
-                                            this.closest('form').submit();"
-                            value="&times;" />
-
-                    </form>
-                </div>
-            {{-- @endif --}}
-
                 <x-listing-img-wrap
-                    :images="[]"
-                    :users-artisan-colorway-id="$artisan['id']"
+                    :images="$artisan['images']"
                     :artisan-colorway-id="$artisan['id']"
                     type="users"
                     :alt="$artisan['colorway_name']"
@@ -64,6 +46,20 @@
                             value="List For Sale"
                             onclick="window.location='{{ route('listings.artisans.create', ['users_artisan_colorway' => $artisan['id']]) }}'"
                         />
+
+                        <form action="{{ route('collections.artisans.destroy', ['users_artisan_colorway_id' => $artisan['id']]) }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="my_artisan_id" value="{{ $artisan['id'] }}">
+                            <input
+                                class="no-m-top large destroy"
+                                type="submit"
+                                value="Remove From Collection"
+                                onclick="event.preventDefault();
+                                            if(confirm('Are you sure you want to delete this from your artisans collection?'))
+                                                this.closest('form').submit();"
+                                value="&times;" />
+
+                        </form>
                     @endif
                 </div>
 

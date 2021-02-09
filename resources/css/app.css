@@ -226,7 +226,12 @@ header {
 }
 
 .content > .title {
-    margin-left: 10%;
+    margin-bottom: 40px;
+    padding: 20px;
+    background-color: #fff;
+    -webkit-box-shadow: 0px 10px 13px 0px rgba(33,33,33,0.26);
+    -moz-box-shadow: 0px 10px 13px 0px rgba(33,33,33,0.26);
+    box-shadow: 0px 10px 13px 0px rgba(33,33,33,0.26);
 }
 
 /***** ITEM CARD *****/
@@ -295,9 +300,12 @@ header {
 .card.collapsed .form-group, .card.collapsed + .card-status-bar {
     display: none;
 }
-.card .img-wrap img.current-img, .card .img-wrap .img.current-img {
+.card .img-wrap img.current-img,
+.card .img-wrap .img.current-img,
+.card .img-delete-wrap .img-delete.current-img-delete {
     display: block;
 }
+.card .img-delete
 
 .card .edit-img-wrap {
     margin-bottom: 20px;
@@ -309,9 +317,15 @@ header {
     align-self: center;
     display: none;
 }
+.card .top-left-btn.img-delete {
+    display: none;
+    top: 20px;
+    left: 20px;
+}
 .card .img-wrap .img {
     padding: 20px;
 }
+
 .card .title h2 {
     margin-bottom: 5px;
 }
