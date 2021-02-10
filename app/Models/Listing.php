@@ -11,13 +11,8 @@ class Listing extends Model
 
     protected $guarded = [];
 
-    public function artisan_colorway_listings()
+    public function user()
     {
-        return $this->hasOne(ArtisanColorwayListing::class, 'listing_id');
-    }
-
-    public function FunctionName(Type $var = null)
-    {
-        # code...
+        return $this->belongsTo(User::class);
     }
 }

@@ -13,7 +13,7 @@
         @empty
             <div class="card-wrap">
                 <div class="card">
-                    <div class="img-wrap xx-large"><pre>(X ౪ X )</pre></div>
+                    <div class="img-wrap white xx-large"><pre>(╬ ಠ益ಠ)</pre></div>
 
                     <h3 class="title">Huh, nothing for sale? Bummmmer.</h3>
 
@@ -24,7 +24,9 @@
                             and very small selling fee, and payment processing fee will be deducted from the final selling price.
 
                         </p>
-                        <input type="button" value="Start Selling Now" onclick="window.location='{{route('collections.artisans.index')}}'">
+
+                        <input type="button" value="Create Listing" onclick="window.location='{{route('collections.artisans.index')}}'">
+
                     </div>
 
                 </div>

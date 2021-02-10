@@ -1,15 +1,15 @@
 <?php
 
-use App\Http\Controllers\Users\Listings\ArtisanColorwayListingController;
+use App\Http\Controllers\Users\Listing;
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/listings/artisans', [ArtisanColorwayListingController::class, 'index'])->name('listings.artisans')->middleware('auth');
-Route::post('/listings/artisans', [ArtisanColorwayListingController::class, 'store'])->name('listings.artisans.store')->middleware('auth');
-Route::put('/listings/artisans/{artisan_colorway_listing}', [ArtisanColorwayListingController::class, 'update'])->name('listings.artisans.update')->middleware('auth');
-Route::post('/listings/artisans/{artisan_colorway_listing}', [ArtisanColorwayListingController::class, 'destroy'])->name('listings.artisans.destroy')->middleware('auth');
-Route::get('/listings/artisans/{artisan_colorway_listing}', [ArtisanColorwayListingController::class, 'show'])->name('listings.artisans.show')->middleware('auth');
-Route::get('/listings/artisans/{artisan_colorway_listing}/edit', [ArtisanColorwayListingController::class, 'edit'])->name('listings.artisans.edit')->middleware('auth');
-Route::get('/listings/artisans/create/{users_artisan_colorway}', [ArtisanColorwayListingController::class, 'create'])->name('listings.artisans.create')->middleware('auth');
-Route::put('/listings/artisans/{artisan_colorway_listing}/publish', [ArtisanColorwayListingController::class, 'publish'])->name('listings.artisans.publish')->middleware('auth');
-Route::put('/listings/artisans/{artisan_colorway_listing}/unpublish', [ArtisanColorwayListingController::class, 'unpublish'])->name('listings.artisans.unpublish')->middleware('auth');
+Route::get('/listings', [Listing::class, 'index'])->name('listings')->middleware('auth');
+Route::post('/listings', [Listing::class, 'store'])->name('listings.store')->middleware('auth');
+Route::put('/listings/{listing}', [Listing::class, 'update'])->name('listings.update')->middleware('auth');
+Route::post('/listings/{listing}', [Listing::class, 'destroy'])->name('listings.destroy')->middleware('auth');
+Route::get('/listings/{listing}', [Listing::class, 'show'])->name('listings.show')->middleware('auth');
+Route::get('/listings/{listing}/edit', [Listing::class, 'edit'])->name('listings.edit')->middleware('auth');
+Route::get('/listings/create', [Listing::class, 'create'])->name('listings.create')->middleware('auth');
+Route::put('/listings/{listing}/publish', [Listing::class, 'publish'])->name('listings.publish')->middleware('auth');
+Route::put('/listings/{listing}/unpublish', [Listing::class, 'unpublish'])->name('listings.unpublish')->middleware('auth');

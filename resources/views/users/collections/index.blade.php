@@ -37,14 +37,14 @@
                             class="large"
                             type="button"
                             value="Edit Listing"
-                            onclick="window.location='{{ route('listings.artisans.edit', ['artisan_colorway_listing' => $artisan->artisan_colorway_listing->id]) }}'"
+                            onclick="window.location='{{ route('listings.edit', ['artisan_colorway_listing' => $artisan->artisan_colorway_listing->id]) }}'"
                         />
                     @else
                         <input
                             class="large"
                             type="button"
                             value="List For Sale"
-                            onclick="window.location='{{ route('listings.artisans.create', ['users_artisan_colorway' => $artisan['id']]) }}'"
+                            onclick="window.location='{{ route('listings.create', ['users_artisan_colorway' => $artisan['id']]) }}'"
                         />
 
                         <form action="{{ route('collections.artisans.destroy', ['users_artisan_colorway_id' => $artisan['id']]) }}" method="POST">

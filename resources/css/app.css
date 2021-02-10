@@ -259,7 +259,7 @@ header {
     max-width: 300px;
     margin: 0 auto;
     padding: 20px;
-    background: white;
+    background: #fff;
     border-bottom: 5px solid #212121;
 }
 .card:hover {
@@ -291,7 +291,17 @@ header {
     width: 300px;
     height: 300px;
     color: #212121;
-    background-color: #c8c8c8;
+    background-color: #f1f1f1;
+}
+.card .img-wrap.dark {
+    background-color: #212121;
+    color: #f1f1f1;
+}
+.card .img-wrap.white {
+    background-color: #fff;
+}
+.card .img-wrap.xx-large {
+    font-size: 30px;
 }
 .card.collapsed, .card .title .click {
     cursor: pointer;
