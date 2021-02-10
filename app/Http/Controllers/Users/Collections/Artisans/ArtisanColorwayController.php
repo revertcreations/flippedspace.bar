@@ -47,11 +47,9 @@ class ArtisanColorwayController extends Controller
         //     'artisan_colorway_id' => $request->artisan_colorway_id
         // ]);
 
-        $status = Redis::sAdd('users:'.Auth::user()->id.':collection:artisans', 'catalog:artisans:'.$request->artisan_colorway_id);
+        Redis::sAdd('users:'.Auth::user()->id.':collection:artisans', 'catalog:artisans:'.$request->artisan_colorway_id);
 
-        // dd($status);
-
-        return back()->with('status', $status);
+        return redirect(url()->previous().'#artisan_card_'.$request->artisan_colorway_id)->with('id', $request->artisan_colorway_id);
     }
 
     public function destroy(Request $request)

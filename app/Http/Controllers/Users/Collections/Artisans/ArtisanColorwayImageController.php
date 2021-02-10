@@ -20,25 +20,25 @@ class ArtisanColorwayImageController extends Controller
         foreach($request->file('artisan_images') as $image)
         {
             $cloudinary_result = $image->storeOnCloudinary('artisans');
-            $redis_key = 'users:'.Auth::user()->id.':collection:artisans:'.$request->artisan_colorway_id.':images:'.$cloudinary_result->getFileName();
-            Redis::sAdd('users:'.Auth::user()->id.':collection:artisans:'.$request->artisan_colorway_id.':images', $redis_key);
+            $redis_key = 'users:'.Auth::user()->id.':collection:artisans:'.$request->artisan_colorway_id.':images';
+            Redis::sAdd($redis_key, $redis_key.':'.$cloudinary_result->getFileName());
 
-            Redis::hMSet($redis_key, [
+            Redis::hMSet($redis_key.':'.$cloudinary_result->getPublicId(), [
                 'cloudinary_secure_path' => $cloudinary_result->getSecurePath(),
                 'cloudinary_public_id' => $cloudinary_result->getPublicId(),
-                'file_extension' => $cloudinary_result->getExtension(),
-                'file_name' => $cloudinary_result->getFileName()
+                'file_extension' => $cloudinary_result->getExtension()
             ]);
         }
 
         return back()->with('status', $cloudinary_result);
     }
 
-    public function destroy(UserArtisanColorwayImage $image)
+    public function destroy(Request $request)
     {
-        $cloudinary_image = Cloudinary::destroy($image->cloudinary_public_id);
+        $cloudinary_image = Cloudinary::destroy($request->cloudinary_public_id);
 
-        UserArtisanColorwayImage::where('id', $image->id)->delete();
+        $redis_key = 'users:'.Auth::user()->id.':collection:artisans:'.$request->artisan_colorway_id.':images';
+        Redis::hDel($redis_key.':'.$request->cloudinary_public_id);
 
         return back();
     }

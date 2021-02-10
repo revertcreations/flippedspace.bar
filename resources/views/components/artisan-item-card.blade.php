@@ -1,5 +1,5 @@
 <div class="card-wrap">
-    <div class="card">
+    <div id="artisan_card_{{ $artisan["id"] }}" class="card">
         <img class="current-img" src="{{ $artisan['keycap_archivist_img'] }}" alt="{{ $artisan['artisan_name'] }} : {{ $artisan['sculpt_name'] }} - {{ $artisan['artisan_name'] }}"></img>
         <div class="info">
             <h2 class="title">
@@ -14,12 +14,13 @@
 
             <form action="{{ route('collections.artisans.store') }}" method="POST">
                 @csrf
+                <input type="hidden" name="card_id" value="artisan_card_{{ $artisan['id'] }}">
                 <input type="hidden" name="artisan_colorway_id" value="{{ $artisan['id'] }}">
                 <input type="submit" value="&#43; Add To My Collection">
             </form>
         </div>
     </div>
-    @if (session('status') && session('status')->artisan_colorway_id == $artisan['id'])
+    @if (session('id') && session('id') == $artisan['id'])
     <div class="card-status-bar success">
         <div class="message">Successfully added to your collection!</div>
     </div>

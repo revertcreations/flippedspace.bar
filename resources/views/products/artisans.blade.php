@@ -1,5 +1,5 @@
 <x-layout>
-    <h1>Artisans</h1>
+    <h1 class="title">Artisans</h1>
     <x-item-search-card :value="old('search')" />
     <div class="items-container">
     @forelse ($search_results as $artisan)

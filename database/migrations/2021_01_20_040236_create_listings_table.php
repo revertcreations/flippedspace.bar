@@ -15,9 +15,9 @@ class CreateListingsTable extends Migration
     {
         Schema::create('listings', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->nullable();
+            $table->string('product_key');
             $table->text('description');
-            $table->enum('condition', ['Brand New', 'Mint', 'Excellent', 'Very Good', 'Good', 'Fair', 'Poor', 'For Parts/Repair Only']);
+            $table->foreignId('condition_id')->constrained('conditions');
             $table->decimal('price', 9,2);
             $table->decimal('shipping_cost', 9,2);
             $table->boolean('published')->default(false);

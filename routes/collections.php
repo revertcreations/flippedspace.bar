@@ -16,6 +16,5 @@ Route::get('/collections/artisans/{users_artisan_colorway_id}', [ArtisanColorway
 Route::post('/collections/artisans/{users_artisan_colorway_id}', [ArtisanColorwayController::class, 'destroy'])->name('collections.artisans.destroy')->middleware('auth');
 
 Route::post('/collections/artisans/{users_artisan_colorway_id}/images', [ArtisanColorwayImageController::class, 'store'])->name('collections.artisans.images.store')->middleware('auth');
-Route::post('/collections/artisans/images/{image}', [ArtisanColorwayImageController::class, 'destroy'])->name('collections.artisans.images.destroy')->middleware('auth');
-Route::put('/collections/artisans/images/{image}', [ArtisanColorwayImageController::class, 'set_cover'])->name('collections.artisans.images.set_cover')->middleware('auth');
-
+Route::post('/collections/artisans/images/destroy', [ArtisanColorwayImageController::class, 'destroy'])->name('collections.artisans.images.destroy')->middleware('auth');
+Route::put('/collections/artisans/images/set_cover', [ArtisanColorwayImageController::class, 'set_cover'])->name('collections.artisans.images.set_cover')->middleware('auth');

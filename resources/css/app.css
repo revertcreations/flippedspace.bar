@@ -229,9 +229,6 @@ header {
     margin-bottom: 40px;
     padding: 20px;
     background-color: #fff;
-    -webkit-box-shadow: 0px 10px 13px 0px rgba(33,33,33,0.26);
-    -moz-box-shadow: 0px 10px 13px 0px rgba(33,33,33,0.26);
-    box-shadow: 0px 10px 13px 0px rgba(33,33,33,0.26);
 }
 
 /***** ITEM CARD *****/
@@ -240,6 +237,8 @@ header {
     flex-wrap: wrap;
     padding: 20px;
     justify-content: space-around;
+    max-width: 1440px;
+    margin: 0 auto;
 }
 .items-container.row-scroll {
     flex-direction: row;
