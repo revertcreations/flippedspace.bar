@@ -1,16 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Products\Artisans;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\ArtisanColorway;
-use App\Models\ArtisanSculpt;
-use App\Models\Artisan;
+
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redis;
 
-class ArtisanColorwayController extends Controller
+class CatalogController extends Controller
 {
     public function index(Request $request)
     {

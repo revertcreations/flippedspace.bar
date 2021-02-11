@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Users\Collections;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\UserArtisanColorway;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redis;
 
@@ -30,6 +30,6 @@ class CollectionController extends Controller
             $artisans->push($current_artisan);
         }
         // dd($artisans);
-        return view('users.collections.index', ['artisans' => $artisans]);
+        return view('users.collection.index', ['artisans' => $artisans]);
     }
 }

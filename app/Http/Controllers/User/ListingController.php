@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Users\Listings;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 
@@ -15,10 +15,20 @@ class ListingController extends Controller
     public function index()
     {
 
-        $listings = Listing::where('user_id', Auth::user()->id)->get();
+        $redis_base_key = 'users:'.Auth::user()->id.':listings';
+        $listings = collect([]);
+        $listing_set = Redis::sMembers($redis_base_key);
 
-        foreach ($listings as $index => $listing) {
-            $listings[$index] = Redis::hGetAll($listing->redis_key);
+        foreach ($listing_set as $index => $listing) {
+            $current_listing = Redis::hGetAll($listing->redis_key);
+
+            $listing_images_set = Redis::sMembers('users:'.Auth::user()->id.':collection:artisans:'.$matches[1].':images');
+            $current_listing['images'] = array();
+
+            foreach($listing_images_set as $image_set)
+                array_push($current_listing['images'], Redis::hGetAll($image_set));
+
+            $listings->push($current_listing);
         }
 
         return view('users.listings.index', ['listings' => $listings]);
@@ -26,10 +36,42 @@ class ListingController extends Controller
 
     public function create(Request $request)
     {
-        // check to see if they have it in their collection
-        // grab data from product catalog
+        // NEED TO VALIDE THIS YO!!!
+        $lower_search = strtolower(request('search'));
+        $search_terms = preg_split('/\s+/', $lower_search, -1, PREG_SPLIT_NO_EMPTY);
 
-        return view('users.listings.create');
+        $match_results = [];
+        $combined_results = [];
+        $search_results = collect([]);
+
+        if(!empty($search_terms)) {
+            foreach($search_terms as $term)
+                array_push($match_results, Redis::command('hscan', ['catalog:search', "0", '*'.$term.'*', "1000000"]));
+
+            for($i=0; $i <= (count($search_terms)-2);$i++)
+                $combined_results = array_intersect($match_results[$i], $match_results[$i+1]);
+        }
+
+        if(!empty($match_results) && empty($combined_results))
+            $combined_results = $match_results[0];
+
+        foreach($combined_results as $index){
+            $search_results->push(Redis::hGetAll('catalog:artisans:'.$index));
+        }
+
+        $search_results = $search_results->take(100);
+        // is there a product being passed through?
+        if(!empty($request->catalog_key))
+            // check to see if they have it in their collection
+            if(Redis::sIsMember('users:'.Auth::user()->id.':collection', $request->catalog_key))
+                // grab data from product catalog and push to item collection
+                $item = Redis::hGetAll($request->catalog_key);
+
+        if(empty($item))
+            return view('users.listings.create');
+
+        return view('users.listings.'.$item['category'].'create', [$item['category'], $item]);
+
     }
 
     public function edit(Listing $listing)

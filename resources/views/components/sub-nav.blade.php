@@ -7,6 +7,6 @@
         <li><a href="/switches"         class="nav-link">switches</a></li>
         <li><a href="/pcbs"             class="nav-link">pcbs</a></li>
         <li><a href="/other"            class="nav-link">other</a></li>
-        <li><a href="/collections"      class="nav-link bold">$(SELL)$</a></li>
+        <li><a href="/collection"      class="nav-link bold">$(SELL)$</a></li>
     </ul>
 </nav>

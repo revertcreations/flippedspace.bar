@@ -9,16 +9,15 @@
         <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
     </head>
     <body>
-        {{-- @if (Auth::user()->id)
-        <x-user-nav />
-        @endif --}}
         <header>
-            <x-main-nav></x-main-nav>
-            <x-sub-nav></x-sub-nav>
+            <x-main-nav />
+            <x-sub-nav />
             <x-user-nav />
         </header>
+
         <div class="content">
             {{ $slot }}
         </div>
+
     </body>
 </html>

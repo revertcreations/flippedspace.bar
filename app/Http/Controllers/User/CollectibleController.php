@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Users\Collections\Artisans;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\UserArtisanColorway;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redis;
 
-class ArtisanColorwayController extends Controller
+class CollectibleController extends Controller
 {
 
     public function index()
@@ -32,7 +32,7 @@ class ArtisanColorwayController extends Controller
             $artisans->push($current_artisan);
         }
         // dd($artisans);
-        return view('users.collections.index', ['artisans' => $artisans]);
+        return view('users.collection.index', ['artisans' => $artisans]);
     }
 
     public function store(Request $request)
@@ -46,7 +46,7 @@ class ArtisanColorwayController extends Controller
         //     'user_id' => $request->user()->id,
         //     'artisan_colorway_id' => $request->artisan_colorway_id
         // ]);
-
+        Redis::sAdd('users:'.Auth::user()->id.':collection:all', 'catalog:artisans:'.$request->artisan_colorway_id);
         Redis::sAdd('users:'.Auth::user()->id.':collection:artisans', 'catalog:artisans:'.$request->artisan_colorway_id);
 
         return redirect(url()->previous().'#artisan_card_'.$request->artisan_colorway_id)->with('id', $request->artisan_colorway_id);

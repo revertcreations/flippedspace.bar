@@ -1,5 +1,5 @@
 <x-layout>
-    {{-- <div class="flex-form">
+    <div class="flex-form">
         @csrf
         <div class="card">
 
@@ -11,6 +11,7 @@
             <form action="{{ route('collections.artisans.images.store', ['users_artisan_colorway_id' => $artisan->id]) }}" method="POST" enctype="multipart/form-data">
 
                 @csrf
+
                 <input type="hidden" name="artisan_colorway_id" value="{{ $artisan->id }}">
                 <input type="hidden" name="my_artisan_id" value="{{ $artisan->id }}">
                 <input class="no-m-top" name="artisan_images[]" type="file" multiple accept="image/*">
@@ -87,7 +88,7 @@
                 <input type="submit" value="Save">
             </form>
         </div>
-    </div> --}}
+    </div>
 
     <x-artisan-listing-form :artisan="$artisan" type="create" />
 </x-layout>

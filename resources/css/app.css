@@ -168,16 +168,6 @@ header {
     min-width: 270px;
     margin-left: 40px;
 }
-.main-nav .search-cart-wrap .search-bar .search-icon {
-    font-size: 30px;
-    position: absolute;
-    top: 10px;
-    left: 0;
-}
-.main-nav .search-cart-wrap .search-bar input {
-    margin-bottom: 10px;
-    margin-left: 5px;
-}
 .main-nav .search-cart-wrap .search-bar input::placeholder {
     color: rgb(128, 128, 128);
 }
@@ -194,13 +184,13 @@ header {
 .sub-nav {
     background: #212121;
 }
-.sub-nav ul, .user-nav ul {
+.sub-nav ul, .user-nav ul, .category-nav ul {
     display: flex;
     align-items: center;
     margin: 0;
     padding: 0;
 }
-.sub-nav ul li, .user-nav ul li {
+.sub-nav ul li, .user-nav ul li, .category-nav ul li {
     flex: 1;
     text-align: center;
     padding: 18px;
@@ -215,6 +205,9 @@ header {
 .user-nav {
     background: #f1f1f1;;
 }
+.category-nav {
+    background: #fff;
+}
 
 
 /***** CONTENT *****/
@@ -226,9 +219,13 @@ header {
 }
 
 .content > .title {
-    margin-bottom: 40px;
+    max-width: 500px;
+    margin: 50px auto 100px auto;
     padding: 20px;
-    background-color: #fff;
+    background-color: #ffffff;
+    color: #212121;
+    text-align: center;
+    border-bottom: 5px solid #212121;
 }
 
 /***** ITEM CARD *****/
@@ -262,7 +259,7 @@ header {
     background: #fff;
     border-bottom: 5px solid #212121;
 }
-.card:hover {
+.card.clickable:hover {
     -webkit-box-shadow: 0px 10px 13px 0px rgba(33,33,33,0.26);
     -moz-box-shadow: 0px 10px 13px 0px rgba(33,33,33,0.26);
     box-shadow: 0px 10px 13px 0px rgba(33,33,33,0.26);
@@ -419,6 +416,12 @@ header {
     color: #ffffff;
     transition: all .5s ease-in-out;
     padding: 8px 10px 12px 10px;
+}
+.card-status-bar.search-container {
+    padding: 8px 20px 12px 20px;
+}
+.card-status-bar.search-container p {
+    text-align: left;
 }
 .card-status-bar.search{
     padding: 8px 20px 12px 20px;
