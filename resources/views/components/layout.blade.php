@@ -13,6 +13,7 @@
             <x-main-nav />
             <x-sub-nav />
             <x-user-nav />
+            @yield('category_nav')
         </header>
 
         <div class="content">

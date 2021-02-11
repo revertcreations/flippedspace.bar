@@ -1,11 +1,11 @@
 <nav id="category_nav" class="nav-bar category-nav">
     <ul>
-        <li><a href="/collection">all</a></li>
-        <li><a href="/collection?filter=keyboards">keyboards</a></li>
-        <li><a href="/collection?filter=keycaps">keycaps</a></li>
-        <li><a href="/collection?filter=artisans">artisans</a></li>
-        <li><a href="/collection?filter=switches">switches</a></li>
-        <li><a href="/collection?filter=pcbs">pcbs</a></li>
-        <li><a href="/collection?filter=other">other</a></li>
+        <li class="{{ empty(app('request')->input('filter')) ? 'current' : '' }}"><a href="{{ route($route) }}">all</a></li>
+        <li class="{{ app('request')->input('filter') == 'keyboards' ? 'current' : '' }}"><a href="{{ route($route, ['filter' => 'keyboards']) }}">keyboards</a></li>
+        <li class="{{ app('request')->input('filter') == 'keycaps' ? 'current' : '' }}"><a href="{{ route($route, ['filter' => 'keycaps']) }}">keycaps</a></li>
+        <li class="{{ app('request')->input('filter') == 'artisans' ? 'current' : '' }}"><a href="{{ route($route, ['filter' => 'artisans']) }}">artisans</a></li>
+        <li class="{{ app('request')->input('filter') == 'switches' ? 'current' : '' }}"><a href="{{ route($route, ['filter' => 'switches']) }}">switches</a></li>
+        <li class="{{ app('request')->input('filter') == 'pcbs' ? 'current' : '' }}"><a href="{{ route($route, ['filter' => 'pcbs']) }}">pcbs</a></li>
+        <li class="{{ app('request')->input('filter') == 'other' ? 'current' : '' }}"><a href="{{ route($route, ['filter' => 'other']) }}">other</a></li>
     </ul>
 </nav>

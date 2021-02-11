@@ -10,7 +10,7 @@
         </div>
 
         <div class="cart-wrap">
-            <div class="icon">cart <span class="count">{{!empty(session('cart')) ? session('cart')->count() : 0 }}</span> $<span class="total">0.00</span></div>
+            <input type="button" value="cart 0 $0.00" />
         </div>
 
     </div>

@@ -1,4 +1,4 @@
-<form action="{{ route('products.artisans.index') }}" method="GET">
+<form action="{{ route('catalog.search', ['category', 'artisans']) }}" method="GET">
     <div class="card-wrap">
         <div class="card search-container">
             <div class="info max-width">

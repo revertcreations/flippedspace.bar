@@ -1,4 +1,6 @@
-<x-category-nav name="category_nav"/>
+@section('category_nav')
+<x-category-nav route="listings.create" />
+@endsection
 
 <x-layout>
 

@@ -6,7 +6,7 @@ use App\Http\Controllers\User\CollectionController;
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/collection', [CollectionController::class, 'index'])->middleware('auth');
+Route::get('/collection', [CollectionController::class, 'index'])->name('collection')->middleware('auth');
 
 Route::get('/collection/artisans', [CollectibleController::class, 'index'])->name('collections.artisans.index')->middleware('auth');
 Route::post('/collection/artisans', [CollectibleController::class, 'store'])->name('collections.artisans.store')->middleware('auth');

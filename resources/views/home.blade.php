@@ -17,7 +17,6 @@
                         <h3>Quick tip:</h3>
                         Sign in to set up item alerts. You can get notified when your endgame shows up!
                     </div>
-
                 </div>
 
                 @auth

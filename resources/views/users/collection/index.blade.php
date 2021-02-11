@@ -1,3 +1,7 @@
+@section('category_nav')
+<x-category-nav route="collection" />
+@endsection
+
 <x-layout>
 
     <h1 class="title">Collection</h1>
@@ -7,7 +11,7 @@
             <div class="info">
                 <h2 class="title">Artisans</h2>
                 <h3 class="title">Add artisans to your collection. Once added you are able to list for sale, and more...</h3>
-                <input type="submit" onclick="window.location=('/products/artisans')" value="&#43; Add Artisans" />
+                <input type="submit" onclick="window.location=('/catalog/artisans')" value="&#43; Add Artisans" />
             </div>
         </div>
     </div>

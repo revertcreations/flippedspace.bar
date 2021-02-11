@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Redis;
 
 class CatalogController extends Controller
 {
-    public function index(Request $request)
+    public function show(Request $request)
     {
 
         // NEED TO VALIDE THIS YO!!!
@@ -39,7 +39,7 @@ class CatalogController extends Controller
 
         session()->flashInput($request->input());
 
-        return view('products.artisans', ['search_results' => $search_results]);
+        return view('catalog.search', ['search_results' => $search_results]);
 
     }
 }
