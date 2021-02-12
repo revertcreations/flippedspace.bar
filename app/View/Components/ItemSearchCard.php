@@ -7,15 +7,15 @@ use Illuminate\View\Component;
 class ItemSearchCard extends Component
 {
 
-    public $value;
+    public $category;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($value)
+    public function __construct($category)
     {
-        $this->value = $value;
+        $this->category = $category;
     }
 
     /**

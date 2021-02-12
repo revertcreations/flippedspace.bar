@@ -3,12 +3,12 @@
         @csrf
         <div class="card">
 
-            <x-listing-img-wrap
+            <x-card-img-wrap
                 :images="$artisan->images"
                 :alt="$artisan->colorway->artisan->name.' - '.$artisan->colorway->sculpt->name.' ('.$artisan->colorway->name.')'"
             />
 
-            <form action="{{ route('collections.artisans.images.store', ['users_artisan_colorway_id' => $artisan->id]) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('collection.images.store', ['users_artisan_colorway_id' => $artisan->id]) }}" method="POST" enctype="multipart/form-data">
 
                 @csrf
 

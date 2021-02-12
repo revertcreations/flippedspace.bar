@@ -63,17 +63,22 @@ class SyncArtisanTables extends Command
 
                     // $sku = strtolower(substr($artisan['name'],0,1)).strtolower(substr($sculpt['name'],0,1)).strtolower(substr($colorway['name'],0,1)).'-'.$artisan_id;
 
-                    Redis::hSet('catalog:artisans:'.$artisan_id, 'id', $artisan_id);
-                    Redis::hSet('catalog:artisans:'.$artisan_id, 'artisan_name', $artisan['name']);
-                    Redis::hSet('catalog:artisans:'.$artisan_id, 'sculpt_name', $sculpt['name']);
-                    Redis::hSet('catalog:artisans:'.$artisan_id, 'colorway_name', $colorway['name']);
-                    Redis::hSet('catalog:artisans:'.$artisan_id, 'keycap_archivist_id', $colorway['id']);
-                    Redis::hSet('catalog:artisans:'.$artisan_id, 'keycap_archivist_img', $colorway['img']);
-                    Redis::hSet('catalog:artisans:'.$artisan_id, 'keycap_archivist_is_cover', (isset($colorway['isCover']) ? $colorway['isCover'] : false));
-                    Redis::hSet('catalog:artisans:'.$artisan_id, 'artisan_instagram', $artisan['instagram']);
-                    Redis::hSet('catalog:artisans:'.$artisan_id, 'instagram', $artisan['instagram']);
-                    Redis::hSet('catalog:artisans:'.$artisan_id, 'website', $artisan['website']);
-                    Redis::hSet('catalog:artisans:'.$artisan_id, 'discord', $artisan['discord']);
+                    $collectible = [
+                        'id' => $artisan_id,
+                        'category' => 'artisans',
+                        'artisan_name' => $artisan['name'],
+                        'sculpt_name' => $sculpt['name'],
+                        'colorway_name' => $colorway['name'],
+                        'keycap_archivist_id' => $colorway['id'],
+                        'keycap_archivist_img' => $colorway['img'],
+                        'keycap_archivist_is_cover' => (isset($colorway['isCover']) ? $colorway['isCover'] : false),
+                        'artisan_instagram' => $artisan['instagram'],
+                        'instagram' => $artisan['instagram'],
+                        'website' => $artisan['website'],
+                        'discord' => $artisan['discord']
+                    ];
+
+                    Redis::hMSet('catalog:artisans:'.$artisan_id, $collectible);
 
                     Redis::hSet('catalog:artisans:search', strtolower($artisan['name'].' '.$sculpt['name'].' '.$colorway['name']), $artisan_id);
                     Redis::hSet('catalog:search', strtolower($artisan['name'].' '.$sculpt['name'].' '.$colorway['name']), 'artisans:'.$artisan_id);

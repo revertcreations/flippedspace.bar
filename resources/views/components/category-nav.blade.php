@@ -1,6 +1,6 @@
 <nav id="category_nav" class="nav-bar category-nav">
     <ul>
-        <li class="{{ empty(app('request')->input('filter')) ? 'current' : '' }}"><a href="{{ route($route) }}">all</a></li>
+        <li class="{{ empty(app('request')->input('filter') || app('request')->input('filter') == 'all') ? 'current' : '' }}"><a href="{{ route($route) }}">all</a></li>
         <li class="{{ app('request')->input('filter') == 'keyboards' ? 'current' : '' }}"><a href="{{ route($route, ['filter' => 'keyboards']) }}">keyboards</a></li>
         <li class="{{ app('request')->input('filter') == 'keycaps' ? 'current' : '' }}"><a href="{{ route($route, ['filter' => 'keycaps']) }}">keycaps</a></li>
         <li class="{{ app('request')->input('filter') == 'artisans' ? 'current' : '' }}"><a href="{{ route($route, ['filter' => 'artisans']) }}">artisans</a></li>

@@ -4,18 +4,19 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class ListingImgWrap extends Component
+class CardImgWrap extends Component
 {
 
-    public $artisanColorwayId;
+    public $catalogKey;
+    public $category;
     public $images;
     public $alt;
     public $type;
 
-    public function __construct($images, $artisanColorwayId, $alt, $type)
+    public function __construct($images, $category, $catalogKey, $alt, $type)
     {
-
-        $this->artisanColorwayId = $artisanColorwayId;
+        $this->category = $category;
+        $this->catalogKey = $catalogKey;
         $this->images = $images;
         $this->alt = $alt;
         $this->type = $type;
@@ -28,6 +29,6 @@ class ListingImgWrap extends Component
      */
     public function render()
     {
-        return view('components.listings.listing-img-wrap');
+        return view('components.card.img-wrap');
     }
 }

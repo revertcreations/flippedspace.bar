@@ -6,27 +6,30 @@
 
     <h1 class="title">Collection</h1>
 
+    @if (app('request')->input('filter') == 'artisans')
     <div class="card-wrap">
         <div class="card search-container">
             <div class="info">
                 <h2 class="title">Artisans</h2>
                 <h3 class="title">Add artisans to your collection. Once added you are able to list for sale, and more...</h3>
-                <input type="submit" onclick="window.location=('/catalog/artisans')" value="&#43; Add Artisans" />
+                <input type="submit" onclick="window.location=('{{ route('catalog.index', ['filter' => 'artisans']) }}')" value="&#43; Add Artisans" />
             </div>
         </div>
     </div>
+    @endif
 
     <div class="items-container">
-        @forelse ($artisans as $artisan)
+        @forelse ($collectibles as $item)
 
         <div class="card-wrap">
             <div class="card">
 
-                <x-listing-img-wrap
-                    :images="$artisan['images']"
-                    :artisan-colorway-id="$artisan['id']"
+                <x-card-img-wrap
+                    :images="$item['images']"
+                    :category="$item['category']"
+                    :catalog_key="$item['id']"
                     type="users"
-                    :alt="$artisan['colorway_name']"
+                    :alt="$item['colorway_name']"
                 />
 
                 <div class="info">
@@ -51,9 +54,9 @@
                             onclick="window.location='{{ route('listings.create', ['users_artisan_colorway' => $artisan['id']]) }}'"
                         />
 
-                        <form action="{{ route('collections.artisans.destroy', ['users_artisan_colorway_id' => $artisan['id']]) }}" method="POST">
+                        <form action="{{ route('collection.destroy', ['catalog_key' => $artisan['id']]) }}" method="POST">
                             @csrf
-                            <input type="hidden" name="my_artisan_id" value="{{ $artisan['id'] }}">
+                            <input type="hidden" name="catalog_key" value="{{ $artisan['id'] }}">
                             <input
                                 class="no-m-top large destroy"
                                 type="submit"
@@ -76,9 +79,9 @@
         @empty
 
         <div class="card-wrap">
-            <div class="card">
+            <div class="card search-container">
                 <div class="info">
-                    <h2 style="text-align: center;">You don't have any artisans in your collection yet.</h2>
+                    <h2 style="text-align: center;">You don't have {{!empty($category) ? 'any '.$category : 'anything'}} in your collection yet.</h2>
                 </div>
             </div>
         </div>

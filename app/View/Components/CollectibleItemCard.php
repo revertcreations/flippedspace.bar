@@ -4,14 +4,14 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class ArtisanItemCard extends Component
+class CollectibleItemCard extends Component
 {
 
-    public $artisan;
+    public $collectible;
 
-    public function __construct($artisan)
+    public function __construct($collectible)
     {
-        $this->artisan = $artisan;
+        $this->collectible = $collectible;
     }
 
     /**
@@ -21,6 +21,6 @@ class ArtisanItemCard extends Component
      */
     public function render()
     {
-        return view('components.cards.artisan-item-card');
+        return view('components.cards.collectible');
     }
 }

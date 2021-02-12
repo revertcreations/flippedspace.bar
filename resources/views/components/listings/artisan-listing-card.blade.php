@@ -23,7 +23,7 @@
         </div>
     @endif
 
-        <x-listing-img-wrap
+        <x-card-img-wrap
             :images="$artisan->user_colorway->images"
             :usersArtisanColorwayId="$artisan->user_colorway->id"
             :artisanColorwayId="$artisan->colorway->id"

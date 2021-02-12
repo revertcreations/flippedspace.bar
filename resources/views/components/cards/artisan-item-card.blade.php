@@ -12,7 +12,7 @@
             <h3 class="detail">{{ $artisan['sculpt_name'] }}</h3>
             <h3 class="detail">{{ $artisan['colorway_name'] }}</h3>
 
-            <form action="{{ route('collections.artisans.store') }}" method="POST">
+            <form action="{{ route('collection.store') }}" method="POST">
                 @csrf
                 <input type="hidden" name="card_id" value="artisan_card_{{ $artisan['id'] }}">
                 <input type="hidden" name="artisan_colorway_id" value="{{ $artisan['id'] }}">

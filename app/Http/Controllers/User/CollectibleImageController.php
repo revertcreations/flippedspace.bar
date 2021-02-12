@@ -11,41 +11,51 @@ use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class CollectibleImageController extends Controller
 {
-    public function store(Request $request)
+
+    private $collection;
+
+    public function __construct()
+    {
+        $this->collection = 'users:'.Auth::user()->id.':collection';
+    }
+
+    public function store(Request $request, $category, $catalog_key)
     {
         if(empty($request->file()))
             return back()->withErrors(['empty_file' => 'No images were attached.']);
 
         foreach($request->file('artisan_images') as $image) {
 
-            $cloudinary_result = $image->storeOnCloudinary('artisans');
-            $redis_key = 'users:'.Auth::user()->id.':collection:artisans:'.$request->artisan_colorway_id.':images';
-            Redis::sAdd($redis_key, $redis_key.':'.$cloudinary_result->getFileName());
+            $cloudinary_result = $image->storeOnCloudinary($category);
+            $images_key = $this->collection.':'.$category.':'.$catalog_key.':images';
 
-            Redis::hMSet($redis_key.':'.$cloudinary_result->getPublicId(), [
+            Redis::hMSet($images_key.':'.$cloudinary_result->getPublicId(), [
                 'cloudinary_secure_path' => $cloudinary_result->getSecurePath(),
                 'cloudinary_public_id' => $cloudinary_result->getPublicId(),
                 'file_extension' => $cloudinary_result->getExtension()
             ]);
+
+            Redis::sAdd($images_key, $images_key.':'.$cloudinary_result->getPublicId());
 
         }
 
         return back()->with('status', $cloudinary_result);
     }
 
-    public function destroy(Request $request)
+    public function destroy($category, $catalog_key, $cloudinary_public_id)
     {
-        $cloudinary_image = Cloudinary::destroy($request->cloudinary_public_id);
+        $cloudinary_public_id = str_replace('_', '/', $cloudinary_public_id);
+        $cloudinary_image = Cloudinary::destroy($cloudinary_public_id);
 
-        if($cloudinary_image) {
+        // if($cloudinary_image) {
 
-            $redis_key = 'users:'.Auth::user()->id.':collection:artisans:'.$request->artisan_colorway_id.':images';
+            $redis_key = $this->collection.':'.$category.':'.$catalog_key.':images';
             // remove image member from the set
-            Redis::sRem($redis_key, $redis_key.':'.$request->cloudinary_public_id);
+            Redis::sRem($redis_key, $redis_key.':'.$cloudinary_public_id);
             // remove the hash since cloud is deleted
-            Redis::hDel($redis_key.':'.$request->cloudinary_public_id);
+            Redis::hDel($redis_key.':'.$cloudinary_public_id);
 
-        }
+        // }
 
         return back();
     }
