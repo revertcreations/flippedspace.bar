@@ -8,6 +8,6 @@ Route::get('/catalog/user-submission', function(){
 })->name('catalog.user.submission')->middleware('auth');
 
 
-Route::get('/catalog', [CatalogController::class, 'index'])->name('catalog.index')->middleware('auth');
-Route::post('/catalog', [CatalogController::class, 'search'])->name('catalog.search')->middleware('auth');
+Route::get('/catalog/{category?}', [CatalogController::class, 'index'])->name('catalog.index')->middleware('auth');
+Route::post('/catalog/{category?}', [CatalogController::class, 'search'])->name('catalog.search')->middleware('auth');
 

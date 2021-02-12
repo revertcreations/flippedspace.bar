@@ -1,4 +1,4 @@
-<form action="{{ route('catalog.search', ['filter' => $category]) }}" method="POST">
+<form action="{{ route('catalog.search', ['category' => $category]) }}" method="POST">
     @csrf
     <div class="card-wrap">
         <div class="card search-container">

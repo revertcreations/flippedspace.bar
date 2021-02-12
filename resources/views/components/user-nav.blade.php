@@ -16,12 +16,12 @@
         @else
             <img width="32" height="32" class="avatar" src="{{ asset('img/avatar.jpeg') }}" />
         @endif
-
-        <li class="{{ str_contains(Route::current()->uri,'collection') ? 'current' : '' }}"><a href="/collection">collection</a></li>
-        <li class="{{ str_contains(Route::current()->uri,'listings') ? 'current' : '' }}"><a href="/listings">listings</a></li>
-        <li class="{{ str_contains(Route::current()->uri,'watch-lists') ? 'current' : '' }}"><a href="/watch-lists">watch lists</a></li>
-        <li class="{{ str_contains(Route::current()->uri,'wish-lists') ? 'current' : '' }}"><a href="/wish-lists">wish lists</a></li>
-        <li class="{{ str_contains(Route::current()->uri,'settings') ? 'current' : '' }}"><a href="/settings">settings</a></li>
+        <li class="{{ str_contains(request()->route()->uri,'collection') ? 'current' : '' }}"><a href="/collection">collection</a></li>
+        <li class="{{ str_contains(request()->route()->uri,'listings') ? 'current' : '' }}"><a href="/listings">listings</a></li>
+        <li class="{{ str_contains(request()->route()->uri,'watch-lists') ? 'current' : '' }}"><a href="/watch-lists">watch lists</a></li>
+        <li class="{{ str_contains(request()->route()->uri,'wish-lists') ? 'current' : '' }}"><a href="/wish-lists">wish lists</a></li>
+        <li class="{{ str_contains(request()->route()->uri,'catalog') ? 'current' : '' }}"><a href="/catalog">catalog</a></li>
+        <li class="{{ str_contains(request()->route()->uri,'settings') ? 'current' : '' }}"><a href="/settings">settings</a></li>
 
 
         <li>

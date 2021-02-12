@@ -9,13 +9,13 @@ use Illuminate\Support\Facades\Redis;
 
 class CollectionController extends Controller
 {
-    public function index()
+    public function index($category = '')
     {
         $allowed_filters = array('keyboards', 'keycaps', 'artisans', 'switches', 'pcbs', 'other');
         $filter = null;
         $data = array();
-        if(!empty(request('filter') && in_array(request('filter'), $allowed_filters))) {
-            $filter = request('filter');
+        if(!empty($category && in_array($category, $allowed_filters))) {
+            $filter = $category;
             $data['category'] = $filter;
         }
 

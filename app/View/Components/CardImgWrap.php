@@ -29,6 +29,6 @@ class CardImgWrap extends Component
      */
     public function render()
     {
-        return view('components.card.img-wrap');
+        return view('components.cards.card-img-wrap');
     }
 }

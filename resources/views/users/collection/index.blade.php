@@ -6,7 +6,7 @@
 
     <h1 class="title">Collection</h1>
 
-    @if (app('request')->input('filter') == 'artisans')
+    @if (!empty(request()->category) && request()->category == 'artisans')
     <div class="card-wrap">
         <div class="card search-container">
             <div class="info">
@@ -24,39 +24,38 @@
         <div class="card-wrap">
             <div class="card">
 
-                <x-card-img-wrap
+            <x-card-img-wrap
                     :images="$item['images']"
                     :category="$item['category']"
                     :catalog_key="$item['id']"
-                    type="users"
                     :alt="$item['colorway_name']"
+                    type="users"
                 />
 
                 <div class="info">
 
-                    <h2 class="title">{{ $artisan['artisan_name'] }}</h2>
-                    <h3 class="detail">{{ $artisan['sculpt_name'] }}</h3>
-                    {!! (!empty($artisan['colorway_name']) ? "<h4 class='detail'>".$artisan['colorway_name']."</h4>" : "" ) !!}
+                    <h2 class="title">{{ $item['artisan_name'] }}</h2>
+                    <h3 class="detail">{{ $item['sculpt_name'] }}</h3>
+                    {!! (!empty($item['colorway_name']) ? "<h4 class='detail'>".$item['colorway_name']."</h4>" : "" ) !!}
 
-
-                    @if (!empty($artisan->listing))
+                    @if (!empty($item->listing))
                         <input
                             class="large"
                             type="button"
                             value="Edit Listing"
-                            onclick="window.location='{{ route('listings.edit', ['artisan_colorway_listing' => $artisan->artisan_colorway_listing->id]) }}'"
+                            onclick="window.location='{{ route('listings.edit', ['artisan_colorway_listing' => $item->artisan_colorway_listing->id]) }}'"
                         />
                     @else
                         <input
                             class="large"
                             type="button"
                             value="List For Sale"
-                            onclick="window.location='{{ route('listings.create', ['users_artisan_colorway' => $artisan['id']]) }}'"
+                            onclick="window.location='{{ route('listings.create', ['users_artisan_colorway' => $item['id']]) }}'"
                         />
 
-                        <form action="{{ route('collection.destroy', ['catalog_key' => $artisan['id']]) }}" method="POST">
+                        <form action="{{ route('collection.destroy', ['catalog_key' => $item['id']]) }}" method="POST">
                             @csrf
-                            <input type="hidden" name="catalog_key" value="{{ $artisan['id'] }}">
+                            <input type="hidden" name="catalog_key" value="{{ $item['id'] }}">
                             <input
                                 class="no-m-top large destroy"
                                 type="submit"

@@ -10,12 +10,6 @@ use Illuminate\Support\Facades\Redis;
 
 class CollectibleController extends Controller
 {
-    private $collection;
-
-    public function __construct()
-    {
-        $this->collection = 'users:'.Auth::user()->id.':collection';
-    }
     // public function index()
     // {
     //     $redis_base_key = 'users:'.Auth::user()->id.':collection';
@@ -40,32 +34,35 @@ class CollectibleController extends Controller
     //     return view('users.collection.index', ['collectibles' => $artisans]);
     // }
 
-    public function store($category, $catalog_key)
+    public function store(Request $request)
     {
-
+        // dd($request->all());
         // $request->validate([
         //     'artisan_colorway_id' => 'required|integer',
         // ]);
+        $collection_key = 'users:'.Auth::user()->id.':collection';
+        $item = 'catalog:'.$request->category.':'.$request->catalog_key;
 
-        $item = 'catalog:'.$category.':'.$catalog_key;
+        // Redis::sAdd($collection_key, $item);
+        // Redis::sAdd($collection_key.':'.$request->category, $item);
+        // dd(url()->previous().'#artisan_card_'.$request->catalog_key);
 
-        Redis::sAdd($this->collection, $item);
-        Redis::sAdd($this->collection.':'.$category, $item);
+        return back()->withInput(['id' => $request->catalog_key]);
 
-        return redirect(url()->previous().'#artisan_card_'.$catalog_key)->with('id', $catalog_key);
+        return redirect(url()->previous().'#artisan_card_'.$request->catalog_key)->with('id', $request->catalog_key);
     }
 
-    public function destroy($category, $catalog_key)
+    public function destroy(Request $request)
     {
 
         // $request->validate([
         //     'artisan_colorway_id' => 'required|integer',
         // ]);
-
+        $collection_key = 'users:'.Auth::user()->id.':collection';
         $item = 'catalog:'.$category.':'.$catalog_key;
 
-        Redis::sRem($this->collection, $item);
-        $status = Redis::sRem($this->collection.':'.$category,  $item);
+        Redis::sRem($collection_key, $item);
+        $status = Redis::sRem($collection_key.':'.$category,  $item);
 
         return back()->with('status', $status);
     }

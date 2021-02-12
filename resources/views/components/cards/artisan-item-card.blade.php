@@ -12,10 +12,10 @@
             <h3 class="detail">{{ $artisan['sculpt_name'] }}</h3>
             <h3 class="detail">{{ $artisan['colorway_name'] }}</h3>
 
-            <form action="{{ route('collection.store') }}" method="POST">
+            <form action="{{ route('collection.store', ['category' => $artisan['category'], 'catalog_key' => ['artisan_id']] ) }}" method="POST">
                 @csrf
-                <input type="hidden" name="card_id" value="artisan_card_{{ $artisan['id'] }}">
-                <input type="hidden" name="artisan_colorway_id" value="{{ $artisan['id'] }}">
+                <input type="hidden" name="category" value="{{ $artisan['category'] }}">
+                <input type="hidden" name="catalog_key" value="{{ $artisan['id'] }}">
                 <input type="submit" value="&#43; Add To My Collection">
             </form>
         </div>
