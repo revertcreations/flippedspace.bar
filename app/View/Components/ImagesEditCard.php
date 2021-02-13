@@ -7,14 +7,14 @@ use Illuminate\View\Component;
 class ImagesEditCard extends Component
 {
     public $images;
-    public $usersArtisanColorwayId;
-    public $artisanColorwayId;
+    public $category;
+    public $catalogKey;
 
-    public function __construct($images, $usersArtisanColorwayId, $artisanColorwayId)
+    public function __construct($images, $category, $catalogKey)
     {
         $this->images = $images;
-        $this->usersArtisanColorwayId = $usersArtisanColorwayId;
-        $this->artisanColorwayId = $artisanColorwayId;
+        $this->category = $category;
+        $this->catalogKey = $catalogKey;
     }
 
     /**
