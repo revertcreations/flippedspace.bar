@@ -15,4 +15,9 @@ class Listing extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function condition()
+    {
+        return $this->belongsTo(Condition::class);
+    }
 }

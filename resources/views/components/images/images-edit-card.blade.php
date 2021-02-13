@@ -8,10 +8,10 @@
         <div class="edit-img-wrap">
 
             <div class="top-left-btn">
-            @if ($image->is_cover)
+            @if ($image['is_cover'])
                 <input class="no-m-top auto" type="submit" value="cover photo" disabled>
             @else
-                <form action="{{ route('collection.images.set_cover', $image->id) }}" method="POST">
+                <form action="{{ route('collection.images.set_cover', ['category' => $category, 'catalog_key' => $catalogKey, 'cloudinary_public_id' => $image['cloudinary_public_id'] ]) }}" method="POST">
                     @csrf
                     @method('PUT')
                     <input
@@ -37,7 +37,7 @@
 
             <img class="current-img"
                 width="500px"
-                src="{{'https://res.cloudinary.com/flippedspace-bar/image/upload/w_500,c_fit/v1611958305/'.$image->cloudinary_public_id.'.jpg'}}"
+                src="{{'https://res.cloudinary.com/flippedspace-bar/image/upload/w_500,c_fit/v1611958305/'.$image['cloudinary_public_id'].'.jpg'}}"
             />
         </div>
 

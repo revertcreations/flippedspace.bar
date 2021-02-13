@@ -267,10 +267,11 @@ header {
     justify-content: unset;
 }
 .card-wrap {
-    /* flex: 1; */
     flex-grow: 0;
     margin: 10px 5px;
-    /* align-self: flex-end; */
+}
+.flex-form .card-wrap {
+    margin: 10px 25px;
 }
 .card {
     display: flex;
@@ -334,9 +335,9 @@ header {
 .card .img-delete-wrap .img-delete.current-img-delete {
     display: block;
 }
-.card .img-delete
 
-.card .edit-img-wrap {
+
+.edit-img-wrap {
     margin-bottom: 20px;
     position: relative;
 }

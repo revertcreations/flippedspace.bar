@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-
+use App\Models\Condition;
 use App\Models\Listing;
 
 use Illuminate\Http\Request;
@@ -14,21 +14,24 @@ class ListingController extends Controller
 {
     public function index()
     {
+        $collection = 'users:'.Auth::user()->id.':collection:';
+        $listings = Listing::where('user_id', Auth::user()->id)->get();
 
-        $redis_base_key = 'users:'.Auth::user()->id.':listings';
-        $listings = collect([]);
-        $listing_set = Redis::sMembers($redis_base_key);
 
-        foreach ($listing_set as $index => $listing) {
-            $current_listing = Redis::hGetAll($listing->redis_key);
+        //attach the details of the collectible for sale
+        foreach ($listings as $listing) {
+            // dd($collection.$listing->catalog_key);
+            $current_listing = Redis::hGetAll('catalog:'.$listing->catalog_key);
 
-            $listing_images_set = Redis::sMembers('users:'.Auth::user()->id.':collection:artisans:'.$matches[1].':images');
-            $current_listing['images'] = array();
+            $listing_images_set = Redis::sMembers($collection.$listing->catalog_key.':images');
+            $current_listing['images'] = collect([]);
 
             foreach($listing_images_set as $image_set)
-                array_push($current_listing['images'], Redis::hGetAll($image_set));
+                $current_listing['images']->push(Redis::hGetAll($image_set));
 
-            $listings->push($current_listing);
+            $listing['item'] = $current_listing;
+            // dd($listing);
+
         }
 
         return view('users.listings.index', ['listings' => $listings]);
@@ -37,6 +40,7 @@ class ListingController extends Controller
     public function create($category = '', $catalog_key = '')
     {
         // NEED TO VALIDE THIS YO!!!
+        $collection = 'users:'.Auth::user()->id.':collection';
         $lower_search = strtolower(request('search'));
         $search_terms = preg_split('/\s+/', $lower_search, -1, PREG_SPLIT_NO_EMPTY);
 
@@ -64,12 +68,18 @@ class ListingController extends Controller
         // is there a product being passed through?
         if(!empty($catalog_key))
             // check to see if they have it in their collection
-            if(Redis::sIsMember('users:'.Auth::user()->id.':collection', 'catalog:'.$category.':'.$catalog_key)) {
+            if(Redis::sIsMember($collection, 'catalog:'.$category.':'.$catalog_key)) {
                 // grab data from product catalog and push to item collection
                 $item = Redis::hGetAll('catalog:'.$category.':'.$catalog_key);
 
-                //get all images... TODO
-                $item['images'] = [];
+                $item['images'] = collect([]);
+                $collectible_image_set = Redis::sMembers($collection.':'.$category.':'.$catalog_key.':images');
+
+                foreach($collectible_image_set as $image_key)
+                    $item['images']->push(Redis::hGetAll($image_key));
+
+                // TODO attach all categories...
+                $item['conditions'] = Condition::all();
             }
 
         if(empty($item))
@@ -86,29 +96,30 @@ class ListingController extends Controller
 
     public function store(Request $request)
     {
-
+        // dd(request()->all());
         if(request('published') && Redis::sMembers($request->redis_key.':images'))
             return back()->withErrors(['images_required', 'Before publishing your listing live, it must have images attached.']);
 
         $validated_attributes = request()->validate([
-            'catalog_key' => $request->redis_key,
             'price' => 'required|numeric',
-            'condition' => 'required',
+            'condition_id' => 'required',
             'description' => 'required|string',
-            'shipping_cost' => 'numeric',
+            'shipping_cost' => 'numeric'
         ]);
 
         $validated_attributes['allow_offers'] = request('allow_offers') == "on";
         $validated_attributes['published'] = request('published') == "on";
+        $validated_attributes['catalog_key'] = $request->category.':'.$request->catalog_key;
+        $validated_attributes['user_id'] = Auth::user()->id;
 
         $listing = Listing::create($validated_attributes);
 
-        Listing::create([
-            'users_artisan_colorway_id' => request('users_artisan_colorway_id'),
-            'listing_id' => $listing->id,
-        ]);
+        // Listing::create([
+        //     'users_artisan_colorway_id' => request('users_artisan_colorway_id'),
+        //     'listing_id' => $listing->id,
+        // ]);
 
-        return redirect()->route('listings.artisans');
+        return redirect()->route('listings', ['category', $request->category]);
 
     }
 

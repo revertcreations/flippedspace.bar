@@ -15,7 +15,8 @@ class CreateListingsTable extends Migration
     {
         Schema::create('listings', function (Blueprint $table) {
             $table->id();
-            $table->string('product_key');
+            $table->foreignId('user_id')->constrained('users');
+            $table->string('catalog_key');
             $table->text('description');
             $table->foreignId('condition_id')->constrained('conditions');
             $table->decimal('price', 9,2);

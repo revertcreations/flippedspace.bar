@@ -2,9 +2,6 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Artisan;
-use App\Models\ArtisanColorway;
-use App\Models\ArtisanSculpt;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Redis;

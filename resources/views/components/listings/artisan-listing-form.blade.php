@@ -53,15 +53,11 @@
                     <label for="condition">
                         Condition
                     </label>
-                    <select id="condition" name="condition" type="text"  value="{{ $type == 'update' && $artisan['listing']->condition?:'' }}">
-                        <option value="Brand New" {{ $type == 'update' && $artisan['listing']->condition == 'Brand New' ? 'selected' : ''}}>Brand New</option>
-                        <option value="Mint" {{ $type == 'update' && $artisan['listing']->condition == 'Mint' ? 'selected' : ''}}>Mint</option>
-                        <option value="Excellent {{ $type == 'update' && $artisan['listing']->condition == 'Excellent' ? 'selected' : ''}}">Excellent</option>
-                        <option value="Very Good" {{ $type == 'update' && $artisan['listing']->condition == 'Very Good' ? 'selected' : 'selected'}}>Very Good</option>
-                        <option value="Good" {{ $type == 'update' && $artisan['listing']->condition == 'Good' ? 'selected' : ''}}>Good</option>
-                        <option value="Fair" {{ $type == 'update' && $artisan['listing']->condition == 'Fair' ? 'selected' : ''}}>Fair</option>
-                        <option value="Poor" {{ $type == 'update' && $artisan['listing']->condition == 'Poor' ? 'selected' : ''}}>Poor</option>
-                        <option value="For Parts/Repair Only" {{ $type == 'update' && $artisan['listing']->condition == 'For Parts/Repair Only' ? 'selected' : ''}}>For Parts/Repair Only</option>
+
+                    <select id="condition" name="condition" type="text"  value="{{ $type == 'update' && $artisan['listing']->condition ?: '' }}">
+                        @foreach($artisan['conditions'] as $condition)
+                        <option value="{{ $condition->id }}" {{ $type == 'update' && $artisan['listing']->condition == $condition->name ? 'selected' : ''}}>{{ $condition->name }}</option>
+                        @endforeach
                     </select>
                 @error('condition')
                     <small class="error input-error">{{ $message }}</small>
