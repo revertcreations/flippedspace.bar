@@ -34,7 +34,7 @@ class ListingController extends Controller
         return view('users.listings.index', ['listings' => $listings]);
     }
 
-    public function create(Request $request)
+    public function create($category = '', $catalog_key = '')
     {
         // NEED TO VALIDE THIS YO!!!
         $lower_search = strtolower(request('search'));
@@ -56,21 +56,26 @@ class ListingController extends Controller
             $combined_results = $match_results[0];
 
         foreach($combined_results as $index){
-            $search_results->push(Redis::hGetAll('catalog:artisans:'.$index));
+            $search_results->push(Redis::hGetAll('catalog:'.$category.':'.$index));
         }
 
+        $item = null;
         $search_results = $search_results->take(100);
         // is there a product being passed through?
-        if(!empty($request->catalog_key))
+        if(!empty($catalog_key))
             // check to see if they have it in their collection
-            if(Redis::sIsMember('users:'.Auth::user()->id.':collection', $request->catalog_key))
+            if(Redis::sIsMember('users:'.Auth::user()->id.':collection', 'catalog:'.$category.':'.$catalog_key)) {
                 // grab data from product catalog and push to item collection
-                $item = Redis::hGetAll($request->catalog_key);
+                $item = Redis::hGetAll('catalog:'.$category.':'.$catalog_key);
+
+                //get all images... TODO
+                $item['images'] = [];
+            }
 
         if(empty($item))
             return view('users.listings.create');
 
-        return view('users.listings.'.$item['category'].'create', [$item['category'], $item]);
+        return view('users.listings.'.$category.'.create', [substr($category, 0, -1) => $item ]);
 
     }
 

@@ -10,7 +10,7 @@
 
         <div class="card">
 
-            <h2 class="title">{{ $artisan->colorway->artisan->name }} - {{ $artisan->colorway->sculpt->name }} ({{ $artisan->colorway->name }})</h2>
+            <h2 class="title">{{ $artisan['artisan_name'] }} - {{ $artisan->colorway->sculpt->name }} ({{ $artisan->colorway->name }})</h2>
 
         @if ($type == 'update')
             <form action="{{ route('listings.artisans.update', ['artisan_colorway_listing' => $artisan->id]) }}" method="POST">

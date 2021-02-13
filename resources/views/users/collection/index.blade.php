@@ -50,7 +50,7 @@
                             class="large"
                             type="button"
                             value="List For Sale"
-                            onclick="window.location='{{ route('listings.create', ['catalog_key' => $item['id']]) }}'"
+                            onclick="window.location='{{ route('listings.create', ['category' => $item['category'], 'catalog_key' => $item['id']]) }}'"
                         />
 
 

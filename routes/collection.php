@@ -13,6 +13,6 @@ Route::post('/collection/{category}/{catalog_key}/delete', [CollectibleControlle
 Route::get('/collection/{category?}', [CollectionController::class, 'index'])->name('collection')->middleware('auth');
 
 
-Route::post('/collection/{category}/{catalog_key}/images}', [CollectibleImageController::class, 'store'])->name('collection.images.store')->middleware('auth');
+Route::post('/collection/{category}/{catalog_key}/images', [CollectibleImageController::class, 'store'])->name('collection.images.store')->middleware('auth');
 Route::post('/collection/{category}/{catalog_key}/images/{cloudinary_public_id}/destroy', [CollectibleImageController::class, 'destroy'])->name('collection.images.destroy')->middleware('auth');
 Route::put('/collection/{category}/{catalog_key}/images/{cloudinary_public_id}/set_cover', [CollectibleImageController::class, 'set_cover'])->name('collection.images.set_cover')->middleware('auth');
