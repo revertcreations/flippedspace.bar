@@ -34,25 +34,29 @@ class CollectibleController extends Controller
     //     return view('users.collection.index', ['collectibles' => $artisans]);
     // }
 
-    public function store(Request $request)
+    public function store($category, $catalog_key)
     {
         // dd($request->all());
         // $request->validate([
         //     'artisan_colorway_id' => 'required|integer',
         // ]);
         $collection_key = 'users:'.Auth::user()->id.':collection';
-        $item = 'catalog:'.$request->category.':'.$request->catalog_key;
+        $item = 'catalog:'.$category.':'.$catalog_key;
 
-        // Redis::sAdd($collection_key, $item);
-        // Redis::sAdd($collection_key.':'.$request->category, $item);
-        // dd(url()->previous().'#artisan_card_'.$request->catalog_key);
+        Redis::sAdd($collection_key, $item);
+        Redis::sAdd($collection_key.':'.$category, $item);
+        // dd(url()->previous().'#artisan_card_'.$catalog_key);
 
-        return back()->withInput(['id' => $request->catalog_key]);
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Added to your Collection!',
+            'catalog_key' => $catalog_key
+        ]);
 
-        return redirect(url()->previous().'#artisan_card_'.$request->catalog_key)->with('id', $request->catalog_key);
+        // return redirect(url()->previous().'#artisan_card_'.$catalog_key)->with('id', $catalog_key);
     }
 
-    public function destroy(Request $request)
+    public function destroy($category, $catalog_key)
     {
 
         // $request->validate([
@@ -64,6 +68,11 @@ class CollectibleController extends Controller
         Redis::sRem($collection_key, $item);
         $status = Redis::sRem($collection_key.':'.$category,  $item);
 
-        return back()->with('status', $status);
+        return response()->json([
+            'status' => 'success',
+            'type' => 'destroy',
+            'message' => 'Removed from your Collection!',
+            'catalog_key' => $catalog_key
+        ]);
     }
 }

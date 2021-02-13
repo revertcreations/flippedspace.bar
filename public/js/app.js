@@ -103,6 +103,35 @@ window.toggle_user_nav = function (el) {
   if (user_nav.classList.contains('opened')) user_nav.classList.remove('opened');else user_nav.classList.add('opened');
 };
 
+window.post = function (url) {
+  var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+  fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json, text-plain, */*",
+      "X-Requested-With": "XMLHttpRequest",
+      "X-CSRF-TOKEN": token
+    },
+    method: 'post',
+    credentials: "same-origin"
+  }).then(function (response) {
+    return response.json();
+  }).then(function (data) {
+    console.log(data);
+    var card = document.getElementById('artisan_card_' + data.catalog_key);
+    var card_status_bar = document.getElementById('artisan_card_status_bar_' + data.catalog_key);
+
+    if (card_status_bar) {
+      card_status_bar.childNodes[0].innerHTML = data.message;
+      card_status_bar.classList.remove('hidden');
+    }
+
+    if (data.type && data.type == 'destroy') card.parentNode.removeChild(card);
+  })["catch"](function (error) {
+    console.log(error);
+  });
+};
+
 /***/ }),
 
 /***/ "./resources/css/app.css":

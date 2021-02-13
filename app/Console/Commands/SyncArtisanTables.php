@@ -53,6 +53,7 @@ class SyncArtisanTables extends Command
         $this->info(' Syncing Artisan Tables...');
         $this->info('                 ');
 
+        // TODO: a much better sku system
         $artisan_id = 0;
         foreach ($all_artisans as $artisan)
         {
@@ -82,6 +83,7 @@ class SyncArtisanTables extends Command
 
                     Redis::hSet('catalog:artisans:search', strtolower($artisan['name'].' '.$sculpt['name'].' '.$colorway['name']), $artisan_id);
                     Redis::hSet('catalog:search', strtolower($artisan['name'].' '.$sculpt['name'].' '.$colorway['name']), 'artisans:'.$artisan_id);
+
                     $artisan_id++;
                 }
             }

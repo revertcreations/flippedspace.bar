@@ -21,7 +21,7 @@
     <div class="items-container">
         @forelse ($collectibles as $item)
 
-        <div class="card-wrap">
+        <div id="artisan_card_{{ $item["id"] }}" class="card-wrap">
             <div class="card">
 
             <x-card-img-wrap
@@ -43,29 +43,26 @@
                             class="large"
                             type="button"
                             value="Edit Listing"
-                            onclick="window.location='{{ route('listings.edit', ['artisan_colorway_listing' => $item->artisan_colorway_listing->id]) }}'"
+                            onclick="window.location='{{ route('listings.edit', ['catalog_key' => $item['id']]) }}'"
                         />
                     @else
                         <input
                             class="large"
                             type="button"
                             value="List For Sale"
-                            onclick="window.location='{{ route('listings.create', ['users_artisan_colorway' => $item['id']]) }}'"
+                            onclick="window.location='{{ route('listings.create', ['catalog_key' => $item['id']]) }}'"
                         />
 
-                        <form action="{{ route('collection.destroy', ['catalog_key' => $item['id']]) }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="catalog_key" value="{{ $item['id'] }}">
-                            <input
-                                class="no-m-top large destroy"
-                                type="submit"
-                                value="Remove From Collection"
-                                onclick="event.preventDefault();
-                                            if(confirm('Are you sure you want to delete this from your artisans collection?'))
-                                                this.closest('form').submit();"
-                                value="&times;" />
 
-                        </form>
+                        <input
+                            class="no-m-top large destroy"
+                            type="submit"
+                            value="Remove From Collection"
+                            onclick="event.preventDefault();
+                                        if(confirm('Are you sure you want to delete this from your artisans collection?'))
+                                            post('{{ route('collection.destroy', ['category' => $item['category'], 'catalog_key' => $item['id']]) }}');"
+                        />
+
                     @endif
                 </div>
 

@@ -4,15 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 
 class CatalogController extends Controller
 {
+
+    private $allowed_categories;
+
+    public function __construct()
+    {
+
+        $this->allowed_categories = array('', 'keyboards', 'keycaps', 'artisans', 'switches', 'pcbs', 'other');
+
+    }
+
     public function index($category = '')
     {
-        $allowed_filters = array('all', 'keyboards', 'keycaps', 'artisans', 'switches', 'pcbs', 'other');
-        $category = ($category && in_array($category, $allowed_filters) ? $category : '');
+        if(!empty($category) && !in_array($category, $this->allowed_categories))
+            return redirect()->route('catalog.index');
 
         return view('catalog.index', ['category' => $category]);
 
@@ -21,18 +30,18 @@ class CatalogController extends Controller
     public function search($category = '')
     {
 
+        if(!empty($category) && !in_array($category, $this->allowed_categories))
+            return redirect()->route('catalog.index');
+
+        $search_results = collect([]);
+        $match_results = [];
+        $combined_results = [];
+
         $search = request('search');
-        $allowed_filters = array('keyboards', 'keycaps', 'artisans', 'switches', 'pcbs', 'other');
-
-        $category = in_array($category, $allowed_filters) ? $category : '';
-        $category_key = $category.':';
-
         $lower_search = strtolower(request('search'));
         $search_terms = preg_split('/\s+/', $lower_search, -1, PREG_SPLIT_NO_EMPTY);
 
-        $match_results = [];
-        $combined_results = [];
-        $search_results = collect([]);
+        $category_key = !empty($category) ? $category.':' : $category;
 
         if(!empty($search_terms)) {
             foreach($search_terms as $term)
@@ -55,4 +64,5 @@ class CatalogController extends Controller
         return view('catalog.index', ['search_results' => $search_results])->with(compact('category'));
 
     }
+
 }
