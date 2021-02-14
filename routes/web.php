@@ -2,6 +2,8 @@
 
 
 use App\Models\Listing;
+
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,17 +19,25 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
 
-    $artisans = Listing::all();
+    // $collection = 'users:'.Auth::user()->id.':collection:';
+    $listings = Listing::all();
 
-    // $home_categories = [
-    //     'Watch List' => $artisans->random(10),
-    //     'Popular' => $artisans->random(10),
-    //     'Newest'=> $artisans->random(10)
-    // ];
+    //attach the details of the collectible for sale
+    foreach ($listings as $listing) {
+        // dd($collection.$listing->catalog_key);
+        $current_listing = Redis::hGetAll('catalog:'.$listing->catalog_key);
 
-    // dd($home_categories);
+        $listing_images_set = Redis::sMembers('users:'.$listing->user_id.':collection:'.$listing->catalog_key.':images');
+        $current_listing['images'] = collect([]);
 
-    return view('home',['artisans'=>$artisans]);
+        foreach($listing_images_set as $image_set)
+            $current_listing['images']->push(Redis::hGetAll($image_set));
+
+        $listing['item'] = $current_listing;
+        // dd($listing);
+    }
+
+    return view('home', compact('listings'));
 });
 
 // Route::get('/search/artisans', [ArtisanColorwaysController::class, 'show']);

@@ -4,7 +4,19 @@
     @foreach($images as $i => $image)
 
     <div class="top-left-btn img-delete {{ ($i == 0 ? "current-img-delete" : "") }}">
-        <form action="{{ route('collection.images.destroy', ['category' => $category, 'catalog_key' => $catalogKey, 'cloudinary_public_id' => str_replace('/', '_', $image['cloudinary_public_id'])]) }}" method="POST">
+        <form
+            action="{{
+                route(
+                    'collection.images.destroy',
+                    [
+                        'category' => $category,
+                        'catalog_key' => $catalogKey,
+                        'cloudinary_public_id' => str_replace( '/', '_', $image['cloudinary_public_id'] )
+                    ]
+                )
+            }}"
+            method="POST"
+        >
             @csrf
             <input type="hidden" name="cloudinary_public_id" value="{{ $image['cloudinary_public_id'] }}">
             <input

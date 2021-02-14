@@ -17,7 +17,6 @@ class ListingController extends Controller
         $collection = 'users:'.Auth::user()->id.':collection:';
         $listings = Listing::where('user_id', Auth::user()->id)->get();
 
-
         //attach the details of the collectible for sale
         foreach ($listings as $listing) {
             // dd($collection.$listing->catalog_key);
