@@ -54,7 +54,7 @@
                         Condition
                     </label>
 
-                    <select id="condition" name="condition" type="text"  value="{{ $type == 'update' && $artisan['listing']->condition ?: '' }}">
+                    <select id="condition" name="condition_id" type="text"  value="{{ $type == 'update' && $artisan['listing']->condition ?: '' }}">
                         @foreach($artisan['conditions'] as $condition)
                         <option value="{{ $condition->id }}" {{ $type == 'update' && $artisan['listing']->condition == $condition->name ? 'selected' : ''}}>{{ $condition->name }}</option>
                         @endforeach

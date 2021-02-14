@@ -12,6 +12,16 @@ use Illuminate\Support\Facades\Redis;
 
 class ListingController extends Controller
 {
+
+    private $allowed_categories;
+
+    public function __construct()
+    {
+
+        $this->allowed_categories = array('', 'keyboards', 'keycaps', 'artisans', 'switches', 'pcbs', 'other');
+
+    }
+
     public function index()
     {
         $collection = 'users:'.Auth::user()->id.':collection:';
@@ -94,10 +104,17 @@ class ListingController extends Controller
     }
 
     public function store(Request $request)
+
     {
-        // dd(request()->all());
-        if(request('published') && Redis::sMembers($request->redis_key.':images'))
+        $collection_key = 'users:'.Auth::user()->id.':collection';
+        $listing_key = 'users:'.Auth::user()->id.':listings';
+        // dd(Redis::sMembers($collection_key.':'.$request->category.':'.$request->catalog_key.':images'));
+        // dd($request->all());
+
+        if($request->published == 'on' && empty(Redis::sMembers($collection_key.':'.$request->category.':'.$request->catalog_key.':images'))){
+            dd('here');
             return back()->withErrors(['images_required', 'Before publishing your listing live, it must have images attached.']);
+        }
 
         $validated_attributes = request()->validate([
             'price' => 'required|numeric',
@@ -113,10 +130,21 @@ class ListingController extends Controller
 
         $listing = Listing::create($validated_attributes);
 
-        // Listing::create([
-        //     'users_artisan_colorway_id' => request('users_artisan_colorway_id'),
-        //     'listing_id' => $listing->id,
-        // ]);
+        //once created lets move that user collection smember over to listings members
+        if($listing->id) {
+            $item_key = 'catalog:'.$request->category.':'.$request->catalog_key;
+            $item = Redis::hGetAll($item_key);
+
+            Redis::sRem($collection_key, $item_key);
+            Redis::sRem($collection_key.':'.$request->category,  $item_key);
+
+            Redis::hSet('listings:'.$request->cateogry.':search', $item['search_string'], $listing->id);
+            Redis::hSet('listings:search', $item['search_string'], $item['category'].':'.$listing->id);
+
+            // Do we really need this? probably for ease of search?
+            Redis::sAdd($listing_key, $item_key);
+            Redis::sAdd($listing_key.$request->category, $item_key);
+        }
 
         return redirect()->route('listings', ['category', $request->category]);
 
@@ -157,6 +185,44 @@ class ListingController extends Controller
     public function destroy()
     {
         # code...
+    }
+
+    public function search($category = '')
+    {
+        if(!empty($category) && !in_array($category, $this->allowed_categories))
+            return redirect()->route('home');
+
+        $search_results = collect([]);
+        $match_results = [];
+        $combined_results = [];
+
+        $search = request('search');
+        $lower_search = strtolower(request('search'));
+        $search_terms = preg_split('/\s+/', $lower_search, -1, PREG_SPLIT_NO_EMPTY);
+
+        $category_key = !empty($category) ? $category.':' : '';
+
+        if(!empty($search_terms)) {
+            foreach($search_terms as $term)
+                array_push($match_results, Redis::command('hscan', ['listings:'.$category_key.'search', "0", '*'.$term.'*', "1000000"]));
+
+            for($i=0; $i <= (count($search_terms)-2);$i++)
+                $combined_results = array_intersect($match_results[$i], $match_results[$i+1]);
+        }
+
+        if(!empty($match_results) && empty($combined_results))
+            $combined_results = $match_results[0];
+
+        foreach($combined_results as $key)
+            $search_results->push(Redis::hGetAll('listings:'.$category_key.$key));
+
+        $listings = $search_results->take(100);
+
+        dd($listings);
+
+        session()->flashInput(request()->all());
+
+        return view('listings.index', ['category', $category])->with(compact('listings'));
     }
 
     public function publish(Listing $listing)

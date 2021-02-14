@@ -64,7 +64,7 @@
 
 @if (count($images) > 1)
 
-<input onclick="next_listing_img(this)" class="img-arrow right" type="button" value="&rarr;">
-<input onclick="previous_listing_img(this)" class="img-arrow left" type="button" value="&larr;">
+<input onclick="next_listing_img(this, '{{ $type }}')" class="img-arrow right" type="button" value="&rarr;">
+<input onclick="previous_listing_img(this, '{{ $type }}')" class="img-arrow left" type="button" value="&larr;">
 
 @endif

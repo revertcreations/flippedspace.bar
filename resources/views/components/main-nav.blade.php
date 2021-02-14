@@ -4,10 +4,13 @@
 
     <div class="search-cart-wrap">
 
-        <div class="search-bar">
-            <label for="site-search" class="search-icon">&#9906;</label for="site-search">
-            <input name="site-search" type="text" placeholder="search &amp; watch the wallet burn...">
-        </div>
+        <form class="listing-search-form" action="{{ route('listings.search') }}" method="POST">
+            <div class="search-bar">
+                @csrf
+                <input name="search" type="text" placeholder="search &amp; watch the wallet burn...">
+                <button type="submit">&#9906;</button>
+            </div>
+        </form>
 
         <div class="cart-wrap">
             <input type="button" value="cart 0 $0.00" />

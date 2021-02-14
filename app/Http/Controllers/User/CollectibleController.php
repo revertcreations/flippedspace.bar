@@ -66,7 +66,7 @@ class CollectibleController extends Controller
         $item = 'catalog:'.$category.':'.$catalog_key;
 
         Redis::sRem($collection_key, $item);
-        $status = Redis::sRem($collection_key.':'.$category,  $item);
+        Redis::sRem($collection_key.':'.$category,  $item);
 
         return response()->json([
             'status' => 'success',

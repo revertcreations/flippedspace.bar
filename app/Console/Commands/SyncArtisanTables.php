@@ -60,6 +60,7 @@ class SyncArtisanTables extends Command
                 {
 
                     // $sku = strtolower(substr($artisan['name'],0,1)).strtolower(substr($sculpt['name'],0,1)).strtolower(substr($colorway['name'],0,1)).'-'.$artisan_id;
+                    $search_string = strtolower($artisan['name'].' '.$sculpt['name'].' '.$colorway['name']);
 
                     $collectible = [
                         'id' => $artisan_id,
@@ -73,13 +74,14 @@ class SyncArtisanTables extends Command
                         'artisan_instagram' => $artisan['instagram'],
                         'instagram' => $artisan['instagram'],
                         'website' => $artisan['website'],
-                        'discord' => $artisan['discord']
+                        'discord' => $artisan['discord'],
+                        'search_string' => $search_string
                     ];
 
                     Redis::hMSet('catalog:artisans:'.$artisan_id, $collectible);
 
-                    Redis::hSet('catalog:artisans:search', strtolower($artisan['name'].' '.$sculpt['name'].' '.$colorway['name']), $artisan_id);
-                    Redis::hSet('catalog:search', strtolower($artisan['name'].' '.$sculpt['name'].' '.$colorway['name']), 'artisans:'.$artisan_id);
+                    Redis::hSet('catalog:artisans:search', $search_string, $artisan_id);
+                    Redis::hSet('catalog:search', $search_string, 'artisans:'.$artisan_id);
 
                     $artisan_id++;
                 }

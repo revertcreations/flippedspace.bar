@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/listings', [ListingController::class, 'index'])->name('listings')->middleware('auth');
 Route::post('/listings', [ListingController::class, 'store'])->name('listings.store')->middleware('auth');
+
+Route::post('/listings/search/{category?}', [ListingController::class, 'search'])->name('listings.search');
 Route::get('/listings/create/{category?}/{catalog_key?}', [ListingController::class, 'create'])->name('listings.create')->middleware('auth');
 
 Route::put('/listings/{listing}', [ListingController::class, 'update'])->name('listings.update')->middleware('auth');
