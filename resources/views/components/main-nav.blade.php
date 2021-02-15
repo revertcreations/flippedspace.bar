@@ -7,7 +7,7 @@
         <form class="listing-search-form" action="{{ route('listings.search') }}" method="POST">
             <div class="search-bar">
                 @csrf
-                <input name="search" type="text" placeholder="search &amp; watch the wallet burn...">
+                <input name="search" type="text" value="{{request('search')?:''}}" placeholder="search &amp; watch the wallet burn...">
                 <button type="submit">&#9906;</button>
             </div>
         </form>

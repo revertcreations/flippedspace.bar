@@ -66,6 +66,11 @@
                 value="Edit Listing"
                 onclick="window.location='{{ route('listings.edit', ['listing' => $artisan['id']]) }}'"
             />
+
+            <form action="{{ route('listings.destroy', ['listing' => $artisan->id]) }}" method="POST">
+                @csrf
+                <input type="submit" value="Delete Listing"}/>
+            </form>
             @else
                 <form action="{{ route('cart.add', ['listing' => $artisan->id]) }}" method="POST">
                     @csrf

@@ -40,7 +40,8 @@ Route::get('/', function () {
     return view('home', compact('listings'));
 });
 
-// Route::get('/search/artisans', [ArtisanColorwaysController::class, 'show']);
+Route::get('/all');
+Route::get('/artisans');
 
 require __DIR__.'/auth.php';
 require __DIR__.'/users.php';

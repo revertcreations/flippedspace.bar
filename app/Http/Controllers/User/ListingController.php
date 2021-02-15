@@ -108,13 +108,9 @@ class ListingController extends Controller
     {
         $collection_key = 'users:'.Auth::user()->id.':collection';
         $listing_key = 'users:'.Auth::user()->id.':listings';
-        // dd(Redis::sMembers($collection_key.':'.$request->category.':'.$request->catalog_key.':images'));
-        // dd($request->all());
 
-        if($request->published == 'on' && empty(Redis::sMembers($collection_key.':'.$request->category.':'.$request->catalog_key.':images'))){
-            dd('here');
+        if($request->published == 'on' && empty(Redis::sMembers($collection_key.':'.$request->category.':'.$request->catalog_key.':images')))
             return back()->withErrors(['images_required', 'Before publishing your listing live, it must have images attached.']);
-        }
 
         $validated_attributes = request()->validate([
             'price' => 'required|numeric',
@@ -130,7 +126,7 @@ class ListingController extends Controller
 
         $listing = Listing::create($validated_attributes);
 
-        //once created lets move that user collection smember over to listings members
+        // once listing is created lets remove the collection reference.
         if($listing->id) {
             $item_key = 'catalog:'.$request->category.':'.$request->catalog_key;
             $item = Redis::hGetAll($item_key);
@@ -138,12 +134,12 @@ class ListingController extends Controller
             Redis::sRem($collection_key, $item_key);
             Redis::sRem($collection_key.':'.$request->category,  $item_key);
 
-            Redis::hSet('listings:'.$request->cateogry.':search', $item['search_string'], $listing->id);
-            Redis::hSet('listings:search', $item['search_string'], $item['category'].':'.$listing->id);
-
             // Do we really need this? probably for ease of search?
-            Redis::sAdd($listing_key, $item_key);
-            Redis::sAdd($listing_key.$request->category, $item_key);
+            Redis::sAdd($listing_key, $listing->id);
+            Redis::sAdd($listing_key.$request->category, $listing->id);
+
+            Redis::hSet('listings:'.$request->category.':search', $item['search_string'], $listing->id);
+            Redis::hSet('listings:search', $item['search_string'], $listing->id);
         }
 
         return redirect()->route('listings', ['category', $request->category]);
@@ -182,9 +178,11 @@ class ListingController extends Controller
 
     }
 
-    public function destroy()
+    public function destroy(Listing $listing)
     {
-        # code...
+        $listing->delete();
+
+        return back();
     }
 
     public function search($category = '')
@@ -195,6 +193,7 @@ class ListingController extends Controller
         $search_results = collect([]);
         $match_results = [];
         $combined_results = [];
+        $where_in = [];
 
         $search = request('search');
         $lower_search = strtolower(request('search'));
@@ -213,16 +212,28 @@ class ListingController extends Controller
         if(!empty($match_results) && empty($combined_results))
             $combined_results = $match_results[0];
 
-        foreach($combined_results as $key)
-            $search_results->push(Redis::hGetAll('listings:'.$category_key.$key));
+        foreach($combined_results as $id)
+            array_push($where_in, $id);
 
-        $listings = $search_results->take(100);
+        $listings = Listing::whereIn('id', $where_in)->get();
 
-        dd($listings);
+        foreach ($listings as $listing) {
+
+            $current_listing = Redis::hGetAll('catalog:'.$listing->catalog_key);
+
+            $listing_images_set = Redis::sMembers('users:'.$listing->user_id.':collection:'.$listing->catalog_key.':images');
+            $current_listing['images'] = collect([]);
+
+            foreach($listing_images_set as $image_set)
+                $current_listing['images']->push(Redis::hGetAll($image_set));
+
+            $listing['item'] = $current_listing;
+
+        }
 
         session()->flashInput(request()->all());
 
-        return view('listings.index', ['category', $category])->with(compact('listings'));
+        return view('home', ['category', $category])->with(compact('listings'));
     }
 
     public function publish(Listing $listing)
