@@ -40,12 +40,10 @@ Route::get('/', function () {
     return view('home', compact('listings'));
 });
 
-Route::get('/all');
-Route::get('/artisans');
-
+require __DIR__.'/listings.php';
 require __DIR__.'/auth.php';
 require __DIR__.'/users.php';
-require __DIR__.'/listings.php';
+require __DIR__.'/users_listings.php';
 require __DIR__.'/products.php';
 require __DIR__.'/collection.php';
 require __DIR__.'/cart.php';

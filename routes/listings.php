@@ -1,19 +1,15 @@
 <?php
 
-use App\Http\Controllers\User\ListingController;
+use App\Http\Controllers\ListingController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/listings', [ListingController::class, 'index'])->name('listings')->middleware('auth');
-Route::post('/listings', [ListingController::class, 'store'])->name('listings.store')->middleware('auth');
+Route::get('/all', [ListingController::class, 'index'])->name('all');
+Route::get('/artisans', [ListingController::class, 'index'])->name('artisans');
+Route::get('/keyboards', [ListingController::class, 'index'])->name('keyboards');
+Route::get('/keycaps', [ListingController::class, 'index'])->name('keycaps');
+Route::get('/switches', [ListingController::class, 'index'])->name('switches');
+Route::get('/pcbs', [ListingController::class, 'index'])->name('pcbs');
+Route::get('/other', [ListingController::class, 'index'])->name('other');
 
-Route::post('/listings/search/{category?}', [ListingController::class, 'search'])->name('listings.search');
-Route::get('/listings/create/{category?}/{catalog_key?}', [ListingController::class, 'create'])->name('listings.create')->middleware('auth');
-
-Route::put('/listings/{listing}', [ListingController::class, 'update'])->name('listings.update')->middleware('auth');
-Route::post('/listings/{listing}', [ListingController::class, 'destroy'])->name('listings.destroy')->middleware('auth');
-
-Route::get('/listings/{listing}', [ListingController::class, 'show'])->name('listings.show')->middleware('auth');
-Route::get('/listings/{listing}/edit', [ListingController::class, 'edit'])->name('listings.edit')->middleware('auth');
-
-Route::put('/listings/{listing}/publish', [ListingController::class, 'publish'])->name('listings.publish')->middleware('auth');
-Route::put('/listings/{listing}/unpublish', [ListingController::class, 'unpublish'])->name('listings.unpublish')->middleware('auth');
+Route::post('/search/{category?}', [ListingController::class, 'search'])->name('search');
+Route::get('/listing/{listing}', [ListingController::class, 'show'])->name('listing.show');

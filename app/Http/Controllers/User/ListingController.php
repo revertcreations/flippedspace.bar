@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Condition;
 use App\Models\Listing;
 
@@ -106,6 +107,7 @@ class ListingController extends Controller
     public function store(Request $request)
 
     {
+
         $collection_key = 'users:'.Auth::user()->id.':collection';
         $listing_key = 'users:'.Auth::user()->id.':listings';
 
@@ -123,6 +125,7 @@ class ListingController extends Controller
         $validated_attributes['published'] = request('published') == "on";
         $validated_attributes['catalog_key'] = $request->category.':'.$request->catalog_key;
         $validated_attributes['user_id'] = Auth::user()->id;
+        $validated_attributes['category_id'] = Category::where('name', $request->category)->first()->id;
 
         $listing = Listing::create($validated_attributes);
 

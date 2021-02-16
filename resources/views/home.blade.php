@@ -1,6 +1,6 @@
 <x-layout>
 
-    <h1 class="title">Current Listings</h1>
+    {{-- <h1 class="title">Current Listings</h1> --}}
 
     <div class="category-container">
 

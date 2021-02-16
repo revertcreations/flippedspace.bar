@@ -1,7 +1,5 @@
 <div class="flex-form">
 
-    <x-images-edit-card :images="$artisan['images']" :category="$artisan['category']" :catalogKey="$artisan['id']" />
-
     <div class="card-wrap">
 
         <div class="card">
@@ -113,5 +111,7 @@
     @endif
 
     </div>
+
+    <x-images-edit-card :images="$artisan['images']" :category="$artisan['category']" :catalogKey="$artisan['id']" />
 
 </div>

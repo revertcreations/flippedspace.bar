@@ -20,4 +20,9 @@ class Listing extends Model
     {
         return $this->belongsTo(Condition::class);
     }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

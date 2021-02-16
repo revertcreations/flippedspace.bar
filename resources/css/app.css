@@ -244,14 +244,21 @@ header {
     padding: 15px;
 }
 
-.content > .title {
+.content > .title, .content > .title-status-bar {
     max-width: 500px;
-    margin: 50px auto 50px auto;
     padding: 20px;
     background-color: #ffffff;
     color: #212121;
     text-align: center;
     border-bottom: 5px solid #212121;
+}
+.content > .title {
+    margin: 25px auto 0px auto;
+}
+.content > .title-status-bar {
+    margin: 0 auto;
+    background-color: #212121;
+    color: #f1f1f1;
 }
 
 /***** ITEM CARD *****/

@@ -4,7 +4,7 @@
 
     <div class="search-cart-wrap">
 
-        <form class="listing-search-form" action="{{ route('listings.search') }}" method="POST">
+        <form class="listing-search-form" action="{{ route('search') }}" method="POST">
             <div class="search-bar">
                 @csrf
                 <input name="search" type="text" value="{{request('search')?:''}}" placeholder="search &amp; watch the wallet burn...">

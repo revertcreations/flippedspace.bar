@@ -18,6 +18,7 @@ class CreateListingsTable extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->string('catalog_key');
             $table->text('description');
+            $table->foreignId('category_id')->constrained('categories');
             $table->foreignId('condition_id')->constrained('conditions');
             $table->decimal('price', 9,2);
             $table->decimal('shipping_cost', 9,2);
