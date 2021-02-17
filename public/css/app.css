@@ -13,6 +13,9 @@ h1,h2,h3,h4,h5,h6,b {
     font-family: Lato,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
     font-weight: 700;
 }
+.h-mb-0 {
+    margin-bottom: 0;
+}
 pre {
     font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
 }
@@ -191,13 +194,67 @@ header {
 }
 
 .main-nav .search-cart-wrap .cart-wrap {
-    color: #f1f1f1;
+    color: #212121;
     margin-left: 20px;
     height: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
+.main-nav .search-cart-wrap .cart-wrap .count {
+    color: #f1f1f1;
+    position: absolute;
+    top: -10px;
+    right: -15px;
+    padding: 3px 8px;
+    border-radius: 100%;
+    background: #212121
+}
+
+.main-nav .search-cart-wrap .cart-wrap .cart-details {
+    display: none;
+    min-width: 300px;
+    flex-direction: column;
+    position: absolute;
+    background: #f1f1f1;
+    padding: 20px;
+    top: 50px;
+    right: 0px;
+    box-shadow: 0px 10px 13px 0px rgba(33,33,33,0.26);
+}
+.main-nav .search-cart-wrap .cart-wrap .cart-details.opened {
+    display: flex;
+}
+.main-nav .search-cart-wrap .cart-wrap .cart-details .total {
+    align-self: flex-end;
+    margin: 10px;
+    font-weight: 800;
+}
+.main-nav .search-cart-wrap .cart-wrap .cart-details .cart-item-wrap * {
+    margin: 0 10px;
+}
+
+.main-nav .search-cart-wrap .cart-wrap .cart-details .cart-item-wrap {
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background: #ffffff;
+    border-bottom: 4px solid #212121;
+}
+
+.main-nav .search-cart-wrap .cart-wrap .cart-details .cart-item-wrap .title {
+    white-space: nowrap;
+    font-weight: 800;
+    flex: 2;
+}
+
+.main-nav .search-cart-wrap .cart-wrap .cart-details .cart-item-wrap .remove-cart-item {
+    height: auto;
+}
+
 
 .sub-nav {
     background: #212121;

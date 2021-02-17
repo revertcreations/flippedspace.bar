@@ -150,3 +150,31 @@ window.post = function(url){
             console.log(error);
         });
  }
+
+ window.toggle_cart_details = function(){
+
+    var cart_details = document.getElementById('cart_details')
+
+    if (cart_details.classList.contains('opened')) {
+        cart_details.classList.remove('opened')
+    } else {
+        cart_details.classList.add('opened')
+        // document.body.addEventListener('mousedown', close_cart_details);
+    }
+
+ }
+
+ window.close_cart_details = function(click) {
+
+    var cart_details = document.getElementById('cart_details')
+
+    console.log('event listeners: ', click)
+
+    if(cart_details.classList.contains('opened')) {
+        cart_details.classList.remove('opened')
+        setTimeout(() => {
+            document.body.removeEventListener('mousedown', close_cart_details)
+        }, 10);
+    }
+
+ }

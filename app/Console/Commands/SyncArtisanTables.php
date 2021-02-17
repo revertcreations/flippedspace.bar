@@ -75,7 +75,8 @@ class SyncArtisanTables extends Command
                         'instagram' => $artisan['instagram'],
                         'website' => $artisan['website'],
                         'discord' => $artisan['discord'],
-                        'search_string' => $search_string
+                        'search_string' => $search_string,
+                        'title' => $artisan['name'].' '.$sculpt['name'].' '.$colorway['name']
                     ];
 
                     Redis::hMSet('catalog:artisans:'.$artisan_id, $collectible);
