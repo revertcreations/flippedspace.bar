@@ -39,7 +39,7 @@ class CartController extends Controller
             $request->session()->put('cart.'.$listing->id, $item);
             // $request->session()->push('cart.'.$listing->id, $item);
 
-            foreach (session('cart') as $listing_id => $cart_item)
+            foreach (session('cart') as $cart_item)
                     $cart_total += $cart_item['price'];
 
             $request->session()->put('cart_total', $cart_total);
@@ -51,12 +51,17 @@ class CartController extends Controller
 
     public function destroy(Request $request, Listing $listing)
     {
-        foreach ($request->session()->get('cart') as $key => $cart_item) {
-            if($cart_item['listing_id'] == $listing->id)
-                $request->session()->pull('cart', $key);
-        }
+
+        $request->session()->pull('cart.'.$listing->id);
+
+        $cart_total = 0;
+        foreach (session('cart') as $cart_item)
+            $cart_total += $cart_item['price'];
+
+        $request->session()->put('cart_total', $cart_total);
 
         return back();
+
     }
 
     public function checkout()

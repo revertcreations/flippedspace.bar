@@ -42,7 +42,7 @@
                 </div>
 
                 <div class="checkout">
-                    <input type="button" value="Checkout" onclick="window.location='{{ route('checkout') }}'">
+                    <input class="checkout-btn" type="button" value="Checkout" onclick="window.location='{{ route('checkout') }}'">
                 </div>
 
             </div>
