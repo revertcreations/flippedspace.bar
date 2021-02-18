@@ -3,11 +3,11 @@
     <div class="card-wrap">
 
         <div class="card">
-
-            <h2 class="title">{{ $artisan['artisan_name'] }} - {{ $artisan['sculpt_name'] }} ({{ $artisan['colorway_name'] }})</h2>
+            {{-- {{dd($artisan)}} --}}
+            <h2 class="title">{{ $artisan->item['artisan_name'] }} - {{ $artisan->item['sculpt_name'] }} ({{ $artisan->item['colorway_name'] }})</h2>
 
         @if ($type == 'update')
-            <form action="{{ route('listings.update', [ 'listing' => $artisan['listing_id'] ]) }}" method="POST">
+            <form action="{{ route('listings.update', [ 'listing' => $artisan['id'] ]) }}" method="POST">
                 @method('PUT')
         @else
             <form action="{{ route('listings.store') }}" method="POST">
@@ -16,12 +16,11 @@
         @endif
 
                 @csrf
-
                 <div class="form-group">
                     <input type="checkbox"
                         name="allow_offers"
                         id="allow_offers"
-                        {{ $type == 'update' && $artisan['listing']->allow_offers ? 'checked' : (old('allow_offers') ? 'checked' : '') }} />
+                        {{ $type == 'update' && $artisan->allow_offers ? 'checked' : (old('allow_offers') ? 'checked' : '') }} />
                     <label for="allow_offers">Allow Offers?</label>
                 </div>
 
@@ -29,7 +28,7 @@
                     <input type="checkbox"
                         name="published"
                         id="published"
-                        {{ $type == 'update' && $artisan['listing']->published ? 'checked' : (old('published') ? 'checked' : '') }} />
+                        {{ $type == 'update' && $artisan->published ? 'checked' : (old('published') ? 'checked' : '') }} />
                     <label for="published">Publish?</label>
                 </div>
 
@@ -41,7 +40,7 @@
                         style="width: 100%; max-width: 100%;"
                         id="description"
                         name="description"
-                        type="text">{{ $type == 'update' ? $artisan['listing']->description : old('description') }}</textarea>
+                        type="text">{{ $type == 'update' ? $artisan->description : old('description') }}</textarea>
                 @error('description')
                     <small class="error input-error">{{ $message }}</small>
                 @enderror
@@ -52,9 +51,9 @@
                         Condition
                     </label>
 
-                    <select id="condition" name="condition_id" type="text"  value="{{ $type == 'update' && $artisan['listing']->condition ?: '' }}">
+                    <select id="condition" name="condition_id" type="text"  value="{{ $type == 'update' && $artisan->condition ?: '' }}">
                         @foreach($artisan['conditions'] as $condition)
-                        <option value="{{ $condition->id }}" {{ $type == 'update' && $artisan['listing']->condition == $condition->name ? 'selected' : ''}}>{{ $condition->name }}</option>
+                        <option value="{{ $condition->id }}" {{ $type == 'update' && $artisan->condition == $condition->name ? 'selected' : ''}}>{{ $condition->name }}</option>
                         @endforeach
                     </select>
                 @error('condition')
@@ -71,7 +70,7 @@
                         type="number"
                         min="1"
                         step="any"
-                        value="{{ $type == 'update' ? $artisan['listing']->price : old('price') }}" />
+                        value="{{ $type == 'update' ? $artisan->price : old('price') }}" />
                 @error('price')
                     <small class="error input-error">{{ $message }}</small>
                 @enderror
@@ -86,7 +85,7 @@
                         type="number"
                         min="1"
                         step="any"
-                        value="{{ ($type == 'update' ? $artisan['listing']->shipping_cost : old('shipping_cost')) }}" />
+                        value="{{ ($type == 'update' ? $artisan->shipping_cost : old('shipping_cost')) }}" />
                 @error('shipping_cost')
                     <small class="error input-error">{{ $message }}</small>
                 @enderror
@@ -112,6 +111,6 @@
 
     </div>
 
-    <x-images-edit-card :images="$artisan['images']" :category="$artisan['category']" :catalogKey="$artisan['id']" />
+    <x-images-edit-card :images="$artisan->item['images']" :category="$artisan['category']" :catalogKey="$artisan['id']" />
 
 </div>

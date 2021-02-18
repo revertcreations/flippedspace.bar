@@ -40,7 +40,6 @@ class ListingController extends Controller
                 $current_listing['images']->push(Redis::hGetAll($image_set));
 
             $listing['item'] = $current_listing;
-            // dd($listing);
 
         }
 
@@ -88,7 +87,6 @@ class ListingController extends Controller
                 foreach($collectible_image_set as $image_key)
                     $item['images']->push(Redis::hGetAll($image_key));
 
-                // TODO attach all categories...
                 $item['conditions'] = Condition::all();
             }
 
@@ -101,7 +99,20 @@ class ListingController extends Controller
 
     public function edit(Listing $listing)
     {
-        return view('users.listings.edit', ['artisan' => $listing]);
+        $collection = 'users:'.Auth::user()->id.':collection';
+
+        $current_listing = Redis::hGetAll('catalog:'.$listing->catalog_key);
+
+        $listing_images_set = Redis::sMembers($collection.':'.$listing->catalog_key.':images');
+        $current_listing['images'] = collect([]);
+
+        foreach($listing_images_set as $image_set)
+            $current_listing['images']->push(Redis::hGetAll($image_set));
+
+        $listing['item'] = $current_listing;
+
+        $listing['conditions'] = Condition::all();
+        return view('users.listings.artisans.edit', ['artisan' => $listing]);
     }
 
     public function store(Request $request)

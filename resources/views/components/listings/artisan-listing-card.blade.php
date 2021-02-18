@@ -1,6 +1,6 @@
 <div class="card-wrap">
 
-    <div class="card">
+    <div id="listing_{{ $artisan->id }}" class="card">
 
     @if ($type == "users")
 
@@ -74,7 +74,11 @@
             @else
                 <form action="{{ route('cart.add', ['listing' => $artisan->id]) }}" method="POST">
                     @csrf
-                    <input type="submit" value="Add To Cart" {{ (Auth::check() && Auth::user()->id == $artisan->user_id ? 'disabled' : '') }}/>
+                    <input
+                        type="submit"
+                        value="{{ session()->exists('cart.'.$artisan->id) ? 'In Cart' : 'Add To Cart' }}"
+                        {{ ((Auth::check() && Auth::user()->id == $artisan->user_id) || (session()->exists('cart.'.$artisan->id)) ? 'disabled' : '') }}
+                    />
                 </form>
             @endif
 
@@ -82,10 +86,21 @@
 
     </div>
 
-    {{-- @if (session('status') && session('status')->artisan_colorway_id == $artisan->id)
-    <div class="card-status-bar success">
-        <div class="message">Successfully added to your collection!</div>
+    @if (session('status') && session('listing_id') == $artisan->id)
+    <div class="auto-remove card-status-bar success">
+        <div class="message">{{ session('status') }}</div>
     </div>
-    @endif --}}
+    @endif
 
 </div>
+
+
+<script>
+    var auto_remove_status_bars = document.querySelectorAll('.auto-remove.card-status-bar')
+    var clear_status_bar_message = setTimeout(() => {
+        for (let i = 0; i < auto_remove_status_bars.length; i++) {
+            const element = auto_remove_status_bars[i].remove();
+        }
+    }, 5000);
+
+</script>

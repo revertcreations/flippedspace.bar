@@ -145,6 +145,9 @@ window.toggle_cart_details = function () {
 
   if (cart_details.classList.contains('opened')) {
     cart_details.classList.remove('opened');
+    setTimeout(function () {
+      document.body.removeEventListener('mousedown', close_cart_details);
+    }, 10);
   } else {
     cart_details.classList.add('opened');
     document.body.addEventListener('mousedown', close_cart_details);
@@ -152,10 +155,11 @@ window.toggle_cart_details = function () {
 };
 
 window.close_cart_details = function (click) {
+  console.log('click: ', click);
   var target = click.target;
   var target_parent = click.target.parentElement;
   var target_parent_parent = click.target.parentElement.parentElement;
-  if (target.classList && target.classList.contains('cart-details') || target.classList && target.classList.contains('remove-cart-item') || target_parent.classList && target_parent.classList.contains('cart-details') || target_parent_parent.classList && target_parent_parent.classList.contains('cart-details')) return;
+  if (target.classList && target.classList.contains('cart-details') || target.classList && target.classList.contains('toggle-cart-btn') || target.classList && target.classList.contains('remove-cart-item') || target_parent.classList && target_parent.classList.contains('cart-details') || target_parent_parent.classList && target_parent_parent.classList.contains('cart-details')) return;
   var cart_details = document.getElementById('cart_details');
 
   if (cart_details.classList.contains('opened')) {

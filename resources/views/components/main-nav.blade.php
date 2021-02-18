@@ -17,7 +17,7 @@
         <div class="cart-wrap" style="position: relative">
 
             <span class="count">{{ !empty(session('cart')) ? count(session('cart')) : 0 }}</span>
-            <input type="button" value="&#128722;" onclick="toggle_cart_details()" />
+            <input class="toggle-cart-btn" type="button" value="&#128722;" onclick="toggle_cart_details()" />
 
 
             <div id="cart_details" class="cart-details">

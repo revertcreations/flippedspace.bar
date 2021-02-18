@@ -45,7 +45,14 @@ class CartController extends Controller
             $request->session()->put('cart_total', $cart_total);
         }
 
-        return back()->with(['status' => 'Added to Cart']);
+        if($in_cart)
+            session()->flash('status', 'Already in Your Cart.');
+        else
+            session()->flash('status', 'Added to Cart!');
+
+        session()->flash('listing_id', $listing->id);
+
+        return back();
 
     }
 

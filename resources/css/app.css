@@ -565,7 +565,7 @@ header {
     padding: 8px 20px 12px 20px;
 }
 .card-status-bar .message {
-    text-align: left;
+    text-align: center;
 }
 
 /***** DASHBOARD  *****/
