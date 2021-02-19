@@ -17,28 +17,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+// Route::get('/', function () {
 
-    // $collection = 'users:'.Auth::user()->id.':collection:';
-    $listings = Listing::all();
+//     // $collection = 'users:'.Auth::user()->id.':collection:';
+//     $listings = Listing::all();
 
-    //attach the details of the collectible for sale
-    foreach ($listings as $listing) {
-        // dd($collection.$listing->catalog_key);
-        $current_listing = Redis::hGetAll('catalog:'.$listing->catalog_key);
+//     //attach the details of the collectible for sale
+//     foreach ($listings as $listing) {
+//         // dd($collection.$listing->catalog_key);
+//         $current_listing = Redis::hGetAll('catalog:'.$listing->catalog_key);
 
-        $listing_images_set = Redis::sMembers('users:'.$listing->user_id.':collection:'.$listing->catalog_key.':images');
-        $current_listing['images'] = collect([]);
+//         $listing_images_set = Redis::sMembers('users:'.$listing->user_id.':collection:'.$listing->catalog_key.':images');
+//         $current_listing['images'] = collect([]);
 
-        foreach($listing_images_set as $image_set)
-            $current_listing['images']->push(Redis::hGetAll($image_set));
+//         foreach($listing_images_set as $image_set)
+//             $current_listing['images']->push(Redis::hGetAll($image_set));
 
-        $listing['item'] = $current_listing;
-        // dd($listing);
-    }
+//         $current_listing['images'] = $current_listing['images']->sortByDesc('is_cover')->values();
 
-    return view('home', compact('listings'));
-});
+//         $listing['item'] = $current_listing;
+
+//     }
+
+//     return view('home', compact('listings'));
+// });
 
 require __DIR__.'/listings.php';
 require __DIR__.'/auth.php';

@@ -111,6 +111,6 @@
 
     </div>
 
-    <x-images-edit-card :images="$artisan->item['images']" :category="$artisan['category']" :catalogKey="$artisan['id']" />
+    <x-images-edit-card :images="$artisan->item['images']" :category="$artisan['category']" :catalogKey="$artisan['catalog_key']" />
 
 </div>

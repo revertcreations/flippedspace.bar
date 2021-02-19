@@ -25,13 +25,15 @@ class ListingController extends Controller
     {
 
         $listings = collect([]);
-
-        if($request->path() !== 'all') {
+        // dd($request->path());
+        if($request->path() !== 'all' && $request->path() !== '/') {
             $category = Category::where('name', $request->path())->first();
-            if($category->id)
-                $listings = Listing::where('category_id', $category->id)->get();
+            if($category && $category->id)
+                $listings = Listing::where('category_id', $category->id)
+                ->where('published', 'y')
+                ->get();
         } else {
-            $listings = Listing::all();
+            $listings = Listing::where('published', true)->get();
         }
 
         //attach the details of the collectible for sale
@@ -44,6 +46,8 @@ class ListingController extends Controller
 
             foreach($listing_images_set as $image_set)
                 $current_listing['images']->push(Redis::hGetAll($image_set));
+
+            $current_listing['images'] = $current_listing['images']->sortByDesc('is_cover')->values();
 
             $listing['item'] = $current_listing;
         }

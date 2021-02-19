@@ -36,6 +36,7 @@
 @endif
 
 <div class="img-wrap">
+
 @foreach ($images as $i => $image)
 
     <img class="{{ ($i == 0 ? "current-img" : "") }}"

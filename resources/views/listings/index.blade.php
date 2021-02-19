@@ -1,11 +1,13 @@
 <x-layout>
 
+    @if(request()->path() !== '/' && request()->path() !== 'all')
     <h1 class="title">{{ ucfirst(request()->path()) }}</h1>
+    @endif
 
     @if($listings->isEmpty())
 
     <div class="title-status-bar">
-        <div>No {{  request('search') ? '"'.request('search').'"' : "" }} {{ request()->path() }} {{ request('search') ? 'found' : 'right now, check back later...'}}</div>
+        <div>No {{  request('search') ? '"'.request('search').'"' : "" }} {{ (request()->path() !== '/' && request()->path() !== 'all') ? request()->path() : 'listings'}} {{ request('search') ? 'found' : 'right now, check back later...'}}</div>
     </div>
     @endif
 

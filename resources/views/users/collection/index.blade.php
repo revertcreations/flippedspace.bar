@@ -5,21 +5,26 @@
 <x-layout>
 
     <h1 class="title">Collection</h1>
+    @if(count($collectibles) < 1)
+    <div class="card search-container">
+        <div class="info">
+            <h2 style="text-align: center;">You don't have {{!empty($category) ? 'any '.$category : 'anything'}} in your collection yet.</h2>
+        </div>
+    </div>
+    @endif
 
     @if (!empty(request()->category) && request()->category == 'artisans')
-    <div class="card-wrap">
-        <div class="card search-container">
-            <div class="info">
-                <h2 class="title">Artisans</h2>
-                <h3 class="title">Add artisans to your collection. Once added you are able to list for sale, and more...</h3>
-                <input type="submit" onclick="window.location=('{{ route('catalog.index', ['filter' => 'artisans']) }}')" value="&#43; Add Artisans" />
-            </div>
+    <div class="card search-container">
+        <div class="info">
+            <h2 class="title">Artisans</h2>
+            <h3 class="title">Add artisans to your collection. Once added you are able to list for sale, and more...</h3>
+            <input type="submit" onclick="window.location=('{{ route('catalog.index', ['filter' => 'artisans']) }}')" value="&#43; Add Artisans" />
         </div>
     </div>
     @endif
 
     <div class="items-container">
-        @forelse ($collectibles as $item)
+        @foreach ($collectibles as $item)
 
         <div id="artisan_card_{{ $item["id"] }}" class="card-wrap">
             <div class="card">
@@ -72,17 +77,6 @@
             @enderror
         </div>
 
-        @empty
-
-        <div class="card-wrap">
-            <div class="card search-container">
-                <div class="info">
-                    <h2 style="text-align: center;">You don't have {{!empty($category) ? 'any '.$category : 'anything'}} in your collection yet.</h2>
-                </div>
-            </div>
-        </div>
-
-        @endforelse
-
+        @endforeach
     </div>
 </x-layout>

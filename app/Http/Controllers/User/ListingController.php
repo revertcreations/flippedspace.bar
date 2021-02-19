@@ -39,6 +39,8 @@ class ListingController extends Controller
             foreach($listing_images_set as $image_set)
                 $current_listing['images']->push(Redis::hGetAll($image_set));
 
+            $current_listing['images'] = $current_listing['images']->sortByDesc('is_cover')->values();
+
             $listing['item'] = $current_listing;
 
         }
@@ -253,18 +255,18 @@ class ListingController extends Controller
     public function publish(Listing $listing)
     {
 
-        $listing->listing->published = true;
+        $listing->published = true;
 
-        $listing->listing->save();
+        $listing->save();
 
         return back();
     }
 
     public function unpublish(Listing $listing)
     {
-        $listing->listing->published = false;
+        $listing->published = false;
 
-        $listing->listing->save();
+        $listing->save();
 
         return back();
     }

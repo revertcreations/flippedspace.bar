@@ -3,6 +3,7 @@
 use App\Http\Controllers\ListingController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/', [ListingController::class, 'index'])->name('home');
 Route::get('/all', [ListingController::class, 'index'])->name('all');
 Route::get('/artisans', [ListingController::class, 'index'])->name('artisans');
 Route::get('/keyboards', [ListingController::class, 'index'])->name('keyboards');
