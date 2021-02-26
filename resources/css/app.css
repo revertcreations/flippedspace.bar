@@ -346,11 +346,13 @@ header {
     display: flex;
     position: relative;
     flex-direction: column;
-    max-width: 300px;
     margin: 0 auto;
     padding: 20px;
     background: #fff;
     border-bottom: 5px solid #212121;
+}
+.card.listing {
+    max-width: 300px;
 }
 .card.clickable:hover {
     -webkit-box-shadow: 0px 10px 13px 0px rgba(33,33,33,0.26);
@@ -580,6 +582,48 @@ form.dashboard .card {
 }
 form.dashboard .card img {
     display: block;
+}
+
+
+/***** CART & CHECKOUT  *****/
+
+/* .cart-container {
+    display: flex;
+    flex-direction: column;
+} */
+
+.cart-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    border-bottom: 5px solid #212121;
+}
+
+.cart-container .cart-item {
+    display: flex;
+    flex-direction: row;
+}
+
+.cart-container .cart-item > div {
+    padding: 20px;
+}
+
+.cart-container .cart-item .image-wrap {
+    width: 150px;
+}
+
+.cart-container .cart-item .item-details {
+    display: flex;
+    flex-direction: column;
+}
+.cart-container .cart-item .item-details .item-title{
+    margin-bottom: unset;
+}
+.cart-container .cart-item .item-details .price {
+    align-self: flex-end;
 }
 
 /***** MEDIA QUERIES *****/

@@ -38,18 +38,17 @@ class CollectibleImageController extends Controller
         return back();
     }
 
-    public function destroy($category, $catalog_key, $cloudinary_public_id)
+    public function destroy($catalog_key, $cloudinary_public_id)
     {
 
         $collection = 'users:'.Auth::user()->id.':collection';
-        $category_key = Category::where('id', $category)->pluck('name')[0];
 
         $cloudinary_public_id = str_replace('_', '/', $cloudinary_public_id);
         $cloudinary_image = Cloudinary::destroy($cloudinary_public_id);
 
         if($cloudinary_image) {
 
-            $image_key = $collection.':'.$category_key.':'.$catalog_key.':images';
+            $image_key = $collection.':'.$catalog_key.':images';
             // remove image member from the set
             Redis::sRem($image_key, $image_key.':'.$cloudinary_public_id);
             // remove the hash since cloud is deleted
@@ -60,7 +59,7 @@ class CollectibleImageController extends Controller
         return back();
     }
 
-    public function set_cover($category, $catalog_key, $cloudinary_public_id)
+    public function set_cover($catalog_key, $cloudinary_public_id)
     {
 
         $collection = 'users:'.Auth::user()->id.':collection';

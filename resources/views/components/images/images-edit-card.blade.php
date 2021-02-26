@@ -11,7 +11,7 @@
             @if ($image['is_cover'])
                 <input class="no-m-top auto" type="submit" value="cover photo" disabled>
             @else
-                <form action="{{ route('collection.images.set_cover', ['category' => $category, 'catalog_key' => $catalogKey, 'cloudinary_public_id' => str_replace( '/', '_', $image['cloudinary_public_id'] ) ]) }}" method="POST">
+                <form action="{{ route('collection.images.set_cover', ['catalog_key' => $catalogKey, 'cloudinary_public_id' => str_replace( '/', '_', $image['cloudinary_public_id'] ) ]) }}" method="POST">
                     @csrf
                     @method('PUT')
                     <input

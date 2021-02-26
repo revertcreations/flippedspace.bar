@@ -9,7 +9,6 @@
                 route(
                     'collection.images.destroy',
                     [
-                        'category' => $category,
                         'catalog_key' => $catalogKey,
                         'cloudinary_public_id' => str_replace( '/', '_', $image['cloudinary_public_id'] )
                     ]

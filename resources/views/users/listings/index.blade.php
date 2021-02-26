@@ -8,8 +8,8 @@
 
     <div class="items-container">
 
-    @forelse ($listings as $artisan)
-        <x-artisan-listing-card :artisan="$artisan" type="users" />
+    @forelse ($listings as $listing)
+        <x-artisan-listing-card :artisan="$listing" type="users" />
     @empty
         <div class="card-wrap">
 

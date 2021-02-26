@@ -41,15 +41,16 @@ class ListingController extends Controller
 
             $current_listing['images'] = $current_listing['images']->sortByDesc('is_cover')->values();
 
-            $listing['item'] = $current_listing;
+            $listing->push($current_listing);
 
         }
-
+        dd($listings);
         return view('users.listings.index', ['listings' => $listings]);
     }
 
     public function create($category = '', $catalog_key = '')
     {
+
         // NEED TO VALIDE THIS YO!!!
         $collection = 'users:'.Auth::user()->id.':collection';
         $lower_search = strtolower(request('search'));
@@ -95,12 +96,16 @@ class ListingController extends Controller
         if(empty($item))
             return view('users.listings.create');
 
-        return view('users.listings.'.$category.'.create', [substr($category, 0, -1) => $item ]);
+        $listing = (object) array('item' => $item);
+        $listing->catalog_key = $item['category'].':'.$item['id'];
+
+        return view('users.listings.'.$category.'.create', [substr($category, 0, -1) => $listing ]);
 
     }
 
     public function edit(Listing $listing)
     {
+
         $collection = 'users:'.Auth::user()->id.':collection';
 
         $current_listing = Redis::hGetAll('catalog:'.$listing->catalog_key);
@@ -111,20 +116,24 @@ class ListingController extends Controller
         foreach($listing_images_set as $image_set)
             $current_listing['images']->push(Redis::hGetAll($image_set));
 
+        $current_listing['conditions'] = Condition::all();
+
+        $listing['catalog_key'] = $current_listing['category'].':'.$current_listing['id'];
         $listing['item'] = $current_listing;
 
-        $listing['conditions'] = Condition::all();
-        return view('users.listings.artisans.edit', ['artisan' => $listing]);
+        // dd($listing);
+        return view('users.listings.artisans.edit', [substr($listing->category->name, 0, -1) => $listing]);
+
     }
 
     public function store(Request $request)
 
     {
-
+        // dd($request->all());
         $collection_key = 'users:'.Auth::user()->id.':collection';
         $listing_key = 'users:'.Auth::user()->id.':listings';
 
-        if($request->published == 'on' && empty(Redis::sMembers($collection_key.':'.$request->category.':'.$request->catalog_key.':images')))
+        if($request->published == 'on' && empty(Redis::sMembers($collection_key.':'.$request->catalog_key.':images')))
             return back()->withErrors(['images_required', 'Before publishing your listing live, it must have images attached.']);
 
         $validated_attributes = request()->validate([
@@ -144,7 +153,7 @@ class ListingController extends Controller
 
         // once listing is created lets remove the collection reference.
         if($listing->id) {
-            $item_key = 'catalog:'.$request->category.':'.$request->catalog_key;
+            $item_key = 'catalog:'.$request->catalog_key;
             $item = Redis::hGetAll($item_key);
 
             Redis::sRem($collection_key, $item_key);

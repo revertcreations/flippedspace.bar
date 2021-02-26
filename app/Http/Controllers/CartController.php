@@ -23,26 +23,20 @@ class CartController extends Controller
 
         // $request->session()->forget('cart');
         // return back();
-        // check to see if cart already contains listing->id
-        // dd($request->session()->get('cart'));
-        if($request->session()->exists('cart.'.$listing->id))
-            $in_cart = true;
 
-            // foreach ($request->session()->get('cart.'.$listing->id) as $cart_item) {
-            //     // dd($cart_item);
-            //     if($cart_item['listing_id'] == $listing->id)
-            // }
-        // if no, add.
-        if (!$in_cart) {
+        // check to see if cart already contains listing->id
+        if(!$request->session()->exists('cart.'.$listing->id)) {
+
             $item = Redis::hGetAll('catalog:'.$listing->catalog_key);
             $item['price'] = $listing->price;
+
             $request->session()->put('cart.'.$listing->id, $item);
-            // $request->session()->push('cart.'.$listing->id, $item);
 
             foreach (session('cart') as $cart_item)
                     $cart_total += $cart_item['price'];
 
             $request->session()->put('cart_total', $cart_total);
+
         }
 
         if($in_cart)
@@ -71,8 +65,25 @@ class CartController extends Controller
 
     }
 
-    public function checkout()
+    public function checkout(Request $request)
     {
-        return view('cart.index');
+
+        $cart_listing_ids = collect($request->session()->get('cart'))->keys();
+        $listings = Listing::whereIn('id', $cart_listing_ids)->get();
+
+        foreach ($listings as $listing) {
+            $listing->item = Redis::hGetAll('catalog:'.$listing->catalog_key);
+
+            $listing_images_set = Redis::sMembers('users:'.$listing->user_id.':collection:'.$listing->catalog_key.':images');
+            $current_listing_images = collect([]);
+
+            foreach($listing_images_set as $image_set)
+                $current_listing_images->push(Redis::hGetAll($image_set));
+
+            $listing->image = 'https://res.cloudinary.com/flippedspace-bar/image/upload/t_thumbnail/v1611702681/'.$current_listing_images->where('is_cover', true)->pluck('cloudinary_public_id')->first();
+
+        }
+
+        return view('cart.index', ['cart_items' => $listings]);
     }
 }

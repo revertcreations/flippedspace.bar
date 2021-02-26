@@ -7,7 +7,9 @@
     @if($listings->isEmpty())
 
     <div class="title-status-bar">
-        <div>No {{  request('search') ? '"'.request('search').'"' : "" }} {{ (request()->path() !== '/' && request()->path() !== 'all') ? request()->path() : 'listings'}} {{ request('search') ? 'found' : 'right now, check back later...'}}</div>
+        <div>
+            No {{  request('search') ? '"'.request('search').'"' : "" }} {{ (request()->path() !== '/' && request()->path() !== 'all') ? request()->path() : 'listings'}} {{ request('search') ? 'found' : 'right now, check back later...'}}
+        </div>
     </div>
     @endif
 
@@ -20,5 +22,8 @@
             <x-artisan-listing-card :artisan="$listing" type="public" />
             @endif
         @endforeach
+
+        </div>
+    </div>
 
 </x-layout>

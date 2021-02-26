@@ -27,7 +27,7 @@
         @foreach ($collectibles as $item)
 
         <div id="artisan_card_{{ $item["id"] }}" class="card-wrap">
-            <div class="card">
+            <div class="card listing">
 
             <x-card-img-wrap
                     :images="$item['images']"

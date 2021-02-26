@@ -11,8 +11,8 @@
                 @method('PUT')
         @else
             <form action="{{ route('listings.store') }}" method="POST">
-                <input type="hidden" name="category" value="{{ $artisan['category'] }}">
-                <input type="hidden" name="catalog_key" value="{{ $artisan['id'] }}">
+                <input type="hidden" name="category" value="{{ $type == 'update' ? $artisan['category'] : $artisan->item['category'] }}">
+                <input type="hidden" name="catalog_key" value="{{ $type == 'update' ? $artisan['catalog_key'] : $artisan->catalog_key }}">
         @endif
 
                 @csrf
@@ -52,7 +52,7 @@
                     </label>
 
                     <select id="condition" name="condition_id" type="text"  value="{{ $type == 'update' && $artisan->condition ?: '' }}">
-                        @foreach($artisan['conditions'] as $condition)
+                        @foreach($artisan->item['conditions'] as $condition)
                         <option value="{{ $condition->id }}" {{ $type == 'update' && $artisan->condition == $condition->name ? 'selected' : ''}}>{{ $condition->name }}</option>
                         @endforeach
                     </select>
@@ -110,7 +110,7 @@
     @endif
 
     </div>
-
-    <x-images-edit-card :images="$artisan->item['images']" :category="$artisan['category']" :catalogKey="$artisan['catalog_key']" />
+    {{-- {{dd($artisan)}} --}}
+    <x-images-edit-card :images="$artisan->item['images']" :catalogKey="$artisan->catalog_key" />
 
 </div>
