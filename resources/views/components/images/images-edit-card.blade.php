@@ -23,7 +23,7 @@
             </div>
 
             <div class="top-right-btn">
-                <form action="{{ route('collection.images.destroy', ['category' => $category, 'catalog_key' => $catalogKey,  'cloudinary_public_id' => str_replace( '/', '_', $image['cloudinary_public_id'] ) ]) }}" method="POST">
+                <form action="{{ route('collection.images.destroy', ['catalog_key' => $catalogKey,  'cloudinary_public_id' => str_replace( '/', '_', $image['cloudinary_public_id'] ) ]) }}" method="POST">
                     @csrf
                     <input
                         class="no-m-top xx-large"
@@ -44,7 +44,7 @@
         @endforeach
     @endif
         <br>
-        <form action="{{ route('collection.images.store', ['category' => $category, 'catalog_key' => $catalogKey]) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('collection.images.store', ['catalog_key' => $catalogKey]) }}" method="POST" enctype="multipart/form-data">
 
             @csrf
             <input class="no-m-top" name="artisan_images[]" type="file" multiple accept="image/*">

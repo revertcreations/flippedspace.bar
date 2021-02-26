@@ -41,10 +41,10 @@ class ListingController extends Controller
 
             $current_listing['images'] = $current_listing['images']->sortByDesc('is_cover')->values();
 
-            $listing->push($current_listing);
+            $listing->setItem($current_listing);
 
         }
-        dd($listings);
+
         return view('users.listings.index', ['listings' => $listings]);
     }
 
