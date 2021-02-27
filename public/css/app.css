@@ -16,6 +16,9 @@ h1,h2,h3,h4,h5,h6,b {
 .h-mb-0 {
     margin-bottom: 0;
 }
+hr {
+    width: 100%;
+}
 pre {
     font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
 }
@@ -592,14 +595,35 @@ form.dashboard .card img {
     flex-direction: column;
 } */
 
-.cart-container {
+/* .cart-container {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    margin: 0 auto;
+    margin: 25px;
     padding: 20px;
     background: #fff;
     border-bottom: 5px solid #212121;
+} */
+
+.items-container.checkout .card {
+    min-width: 300px;
+    margin: 20px;
+}
+
+.items-container.checkout .card.shipping-address {
+    max-width: 500px;
+}
+
+.items-container.checkout .card.totals > div {
+    display: flex;
+    flex-direction: row;
+}
+
+.items-container.checkout .card.totals > div > div {
+    flex-basis: 100%;
+    flex: 2;
+    align-self: center;
+    text-align: right;
 }
 
 .cart-container .cart-item {
@@ -625,6 +649,16 @@ form.dashboard .card img {
 .cart-container .cart-item .item-details .price {
     align-self: flex-end;
 }
+
+.items-container .card.submit {
+    flex-grow: 1;
+    justify-content: space-between;
+}
+
+.tos-wrap input, .tos-wrap label {
+    display: inline;
+}
+
 
 /***** MEDIA QUERIES *****/
 @media only screen and (max-width: 824px) {
