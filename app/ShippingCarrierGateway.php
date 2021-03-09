@@ -18,7 +18,7 @@ class ShippingCarrierGateway
 
     }
 
-    public function validateAddress(Carrier $carrier)
+    public function validateAddress($address)
     {
 
     }

@@ -9,10 +9,10 @@ class Usps extends ShippingCarrierGateway
     protected $user_id;
     protected $url = 'https://secure.shippingapis.com/ShippingAPI.dll?API=verifyXML=';
 
-    public function __construct($client)
+    public function __construct()
     {
         $this->user_id = config('shipping.carriers.usps.userid');
-        parent::__construct( $client );
+        parent::__construct();
     }
 
     public function validateTracking()
@@ -74,7 +74,6 @@ class Usps extends ShippingCarrierGateway
 
         // </AddressValidateRequest>
         $xw->endElement();
-        dd($this);
 
        $response = $this->client->request('GET', $this->url);
 
