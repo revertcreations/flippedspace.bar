@@ -89,7 +89,10 @@
 
             <h2>Shipping Address</h2>
 
-            <form action="">
+            <form action="{{ route('address.validate') }}" method="POST">
+
+                @csrf
+
                 <label for="address1">Address</label>
                 <input type="text" name="address1">
 
@@ -104,6 +107,8 @@
 
                 <label for="zip">Zip</label>
                 <input type="text" name="zip">
+
+                <button type="submit">ValidateAddress</button>
             </form>
 
         </div>

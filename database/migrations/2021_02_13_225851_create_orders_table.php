@@ -18,7 +18,7 @@ class CreateOrdersTable extends Migration
             $table->foreignId('user_id')->constrained('users')->nullable();
             $table->string('session_id');
             $table->string('token');
-            $table->enum('status', ['paid', 'failed', 'shipped', 'delivered', 'returned', 'complete']);
+            $table->enum('status', ['checkout', 'paid', 'failed', 'shipped', 'delivered', 'returned', 'complete']);
             $table->decimal('shipping',9,2);
             $table->decimal('sub_total',9,2);
             $table->float('tax');
