@@ -62,11 +62,13 @@ class ListingController extends Controller
         $current_listing = Redis::hGetAll('catalog:'.$listing->catalog_key);
 
         $listing_images_set = Redis::sMembers('users:'.$listing->user_id.':collection:'.$listing->catalog_key.':images');
+        // dd($listing_images_set);
         $current_listing['images'] = collect([]);
 
-        foreach($listing_images_set as $image_set)
+        foreach($listing_images_set as $image_set) {
             $current_listing['images']->push(Redis::hGetAll($image_set));
-
+            // dd($current_listing['images']);
+        }
         $listing['item'] = $current_listing;
 
         return view('listings.show',  compact('listing'));

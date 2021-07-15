@@ -15,6 +15,7 @@ class SyncArtisanTables extends Command
      */
     protected $signature = 'sync:artisan-tables';
     protected $keycap_archvist_url = 'https://raw.githubusercontent.com/keycap-archivist/database/master/db/catalog.json';
+                                 //   https://raw.githubusercontent.com/keycap-archivist/database/master/db/catalog.json
 
     /**
      * The console command description.
@@ -43,12 +44,20 @@ class SyncArtisanTables extends Command
 
         $response = Http::get($this->keycap_archvist_url);
         $all_artisans = $response->json();
+
+        // I don't think we ever want to flush?
+        // Right now we are just adding artisans to the catalog and incrementing.
+        // So just check for the archivist_id, and move on if found
+
         Redis::flushDb();
+
+        // We need some sort of way to have user submitted id's and checks as well
 
         $this->info(date("F j, Y, g:i a"));
         $this->info('(.....)0000o(=._.=)o0000(.....)');
         $this->info(' Syncing Artisan Tables...');
         $this->info('                 ');
+        // $this->info(var_dump($all_artisans));
 
         // TODO: a much better sku system
         $artisan_id = 0;

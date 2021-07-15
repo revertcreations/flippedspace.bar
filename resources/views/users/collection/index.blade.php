@@ -2,18 +2,52 @@
 <x-category-nav route="collection" />
 @endsection
 
+
+{{-- <x-layout>
+
+    <h1 class="title">Listings</h1>
+
+    <div class="items-container">
+
+    @forelse ($listings as $listing)
+        <x-artisan-listing-card :artisan="$listing" type="users" />
+    @empty
+        <div class="card-wrap">
+
+            <div class="card search-container">
+                <h2 class="title"><pre>( ಠ益ಠ)</pre>You don't have any listings for sell right now.</h2>
+            </div>
+
+            <div class="card-status-bar search-container">
+                <p>
+                    Got something you want to sell? Listings are totally free. A 3.25% selling fee in addition to 2.9%+$0.25
+                    payment processing fee will be deducted from final selling price.
+                </p>
+
+                <input type="button" value="Create Listing" onclick="window.location='{{ route('listings.create') }}'">
+
+                <input type="button" value="Learn More" onclick="window.location='{{ route('listings.create') }}'">
+            </div>
+        </div>
+    @endforelse
+    </div>[[[[[[]]]]]]
+
+</x-layout> --}}
+
 <x-layout>
 
     <h1 class="title">Collection</h1>
+    <div class="items-container">
     @if(count($collectibles) < 1)
     <div class="card search-container">
         <div class="info">
+            <h2 class="title">Artisans</h2>
             <h2 style="text-align: center;">You don't have {{!empty($category) ? 'any '.$category : 'anything'}} in your collection yet.</h2>
+            <h3 class="title">Add artisans to your collection. Once added you are able to list for sale, and more...</h3>
+            <input type="submit" onclick="window.location=('{{ route('catalog.index', ['filter' => 'artisans']) }}')" value="&#43; Add Artisans" />
         </div>
     </div>
-    @endif
-
-    @if (!empty(request()->category) && request()->category == 'artisans')
+    @elseif (!empty(request()->category) && request()->category == 'artisans')
     <div class="card search-container">
         <div class="info">
             <h2 class="title">Artisans</h2>
@@ -23,8 +57,9 @@
     </div>
     @endif
 
-    <div class="items-container">
+        {{-- {{ dd($collectibles) }} --}}
         @foreach ($collectibles as $item)
+        @if(!empty($item) && isset($item["id"]))
 
         <div id="artisan_card_{{ $item["id"] }}" class="card-wrap">
             <div class="card listing">
@@ -76,7 +111,7 @@
                 <div class="card-status-bar">{{ $message }}</div>
             @enderror
         </div>
-
+        @endif
         @endforeach
     </div>
 </x-layout>

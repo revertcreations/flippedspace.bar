@@ -17,6 +17,7 @@ class CreateListingsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->string('catalog_key');
+            $table->string('title');
             $table->text('description');
             $table->foreignId('category_id')->constrained('categories');
             $table->foreignId('condition_id')->constrained('conditions');

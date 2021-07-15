@@ -17,9 +17,10 @@
         @else
             <img width="32" height="32" class="avatar" src="{{ asset('img/avatar.jpeg') }}" />
         @endif --}}
-        <li class="{{ str_contains(request()->route()->uri,'settings') ? 'current' : '' }}">
+        <li style="background: #fff;" class="{{ str_contains(request()->route()->uri,'settings') ? 'current' : '' }}">
             <a href="/settings">
-                {{ Auth::user()->username }} <span style="position: absolute; margin-left: 5px; bottom: 4px; font-size: 40px;">&#9787;</span>
+                {{-- <span style="position: absolute; margin-left: 5px; bottom: 4px; font-size: 40px;">&#9787;</span> --}}
+                <span style="font-weight: 800;">{{ Auth::user()->username }}</span>
             </a>
         </li>
         <li class="{{ str_contains(request()->route()->uri,'collection') ? 'current' : '' }}"><a href="/collection">collection</a></li>
@@ -27,7 +28,6 @@
         <li class="{{ str_contains(request()->route()->uri,'watch-lists') ? 'current' : '' }}"><a href="/watch-lists">watch lists</a></li>
         <li class="{{ str_contains(request()->route()->uri,'wish-lists') ? 'current' : '' }}"><a href="/wish-lists">wish lists</a></li>
         <li class="{{ str_contains(request()->route()->uri,'catalog') ? 'current' : '' }}"><a href="/catalog">catalog</a></li>
-
 
         <li>
             <form class="logout" method="POST" action="{{ route('logout') }}">

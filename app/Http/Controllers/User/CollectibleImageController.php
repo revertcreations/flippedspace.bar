@@ -12,8 +12,9 @@ use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 class CollectibleImageController extends Controller
 {
 
-    public function store(Request $request, $category, $catalog_key)
+    public function store(Request $request, $catalog_key)
     {
+        // dd('here');
         if(empty($request->file()))
             return back()->withErrors(['empty_file' => 'No images were attached.']);
 
@@ -21,8 +22,9 @@ class CollectibleImageController extends Controller
 
         foreach($request->file('artisan_images') as $image) {
 
-            $cloudinary_result = $image->storeOnCloudinary($category);
-            $images_key = $collection.':'.$category.':'.$catalog_key.':images';
+            $cloudinary_result = $image->storeOnCloudinary('artisans');
+            $images_key = $collection.':artisans:'.$catalog_key.':images';
+            // dd($images_key);
 
             Redis::hMSet($images_key.':'.$cloudinary_result->getPublicId(), [
                 'cloudinary_secure_path' => $cloudinary_result->getSecurePath(),

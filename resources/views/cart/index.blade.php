@@ -78,6 +78,9 @@
             <label for="email">Email</label>
             <input type="text" name="email">
 
+            <label for="password">Password</label>
+            <input type="password" name="password">
+
             <div class="tos-wrap">
                 <input type="checkbox" name="tos" id="tos">
                 <label for="tos">by checking this box you agree to flippedspace.bar's <a onclick="">terms of use</a> and <a onclick="">privacy policy</a></label>
@@ -101,6 +104,10 @@
 
                 <label for="state">State</label>
                 <input type="text" name="state">
+
+
+                <label for="city">City</label>
+                <input type="text" name="city">
 
                 <label for="country">Country</label>
                 <input type="text" name="country">

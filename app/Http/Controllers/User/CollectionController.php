@@ -28,8 +28,10 @@ class CollectionController extends Controller
             $current = Redis::hGetAll($collectible);
             // get id of artisans from key that belong to user [collection:artisans:2899]
             preg_match('/.*:(.*)/', $collectible, $matches);
+            // dd($matches[1]);
 
             $artisan_images_set = Redis::sMembers('users:'.Auth::user()->id.':collection:artisans:'.$matches[1].':images');
+            // dd('users:'.Auth::user()->id.':collection:artisans:'.$matches[1].':images');
             $current['images'] = array();
 
             foreach($artisan_images_set as $image_set)

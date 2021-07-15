@@ -53,7 +53,7 @@ class CollectibleController extends Controller
             'catalog_key' => $catalog_key
         ]);
 
-        // return redirect(url()->previous().'#artisan_card_'.$catalog_key)->with('id', $catalog_key);
+        return redirect(url()->previous().'#artisan_card_'.$catalog_key)->with('id', $catalog_key);
     }
 
     public function destroy($category, $catalog_key)

@@ -22,21 +22,23 @@
 
         </div>
     @endif
-
+        {{-- {{dd($artisan->item)}} --}}
         <x-card-img-wrap
             :images="$artisan->item['images']"
-            :category="$artisan->item['category']"
+            category="artisans"
             :catalog_key="$artisan->item['id']"
             :alt="$artisan->item['colorway_name']"
             :type="$type"
         />
 
         <div class="info">
-            <div class="title">
-                <h2>{{ $artisan->item['artisan_name'] }}</h2>
-                <h3>{{ $artisan->item['sculpt_name'] }}</h3>
-                <h3>{{ $artisan->item['colorway_name'] }}</h3>
-            </div>
+            <a href="{{ route('listing.show', ['listing' => $artisan->id]) }}">
+                <div class="title">
+                    <h2>{{ $artisan->item['artisan_name'] }}</h2>
+                    <h3>{{ $artisan->item['sculpt_name'] }}</h3>
+                    <h3>{{ $artisan->item['colorway_name'] }}</h3>
+                </div>
+            </a>
 
             <h4 class="seller">sold by <a href="/users/{{ $artisan->user_id }}">{{ $artisan->user->username }}</a></h4>
 

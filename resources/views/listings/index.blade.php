@@ -1,8 +1,6 @@
 <x-layout>
 
-    @if(request()->path() !== '/' && request()->path() !== 'all')
-    <h1 class="title">{{ ucfirst(request()->path()) }}</h1>
-    @endif
+    <h1 class="title">{{ (request()->path() !== '/' && request()->path() !== 'all') ? ucfirst(request()->path()) : 'Classifieds' }}</h1>
 
     @if($listings->isEmpty())
 

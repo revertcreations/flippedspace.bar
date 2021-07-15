@@ -30,16 +30,18 @@ class ListingController extends Controller
 
         //attach the details of the collectible for sale
         foreach ($listings as $listing) {
-            // dd($collection.$listing->catalog_key);
+            // dd($listing->category);
             $current_listing = Redis::hGetAll('catalog:'.$listing->catalog_key);
 
             $listing_images_set = Redis::sMembers($collection.$listing->catalog_key.':images');
+            // dd($listing->catalog_key);
             $current_listing['images'] = collect([]);
 
             foreach($listing_images_set as $image_set)
                 $current_listing['images']->push(Redis::hGetAll($image_set));
 
             $current_listing['images'] = $current_listing['images']->sortByDesc('is_cover')->values();
+            $current_listing['catalog'] = $listing->category->name;
 
             $listing->setItem($current_listing);
 
@@ -145,7 +147,7 @@ class ListingController extends Controller
 
         $validated_attributes['allow_offers'] = request('allow_offers') == "on";
         $validated_attributes['published'] = request('published') == "on";
-        $validated_attributes['catalog_key'] = $request->category.':'.$request->catalog_key;
+        $validated_attributes['catalog_key'] = $request->catalog_key;
         $validated_attributes['user_id'] = Auth::user()->id;
         $validated_attributes['category_id'] = Category::where('name', $request->category)->first()->id;
 

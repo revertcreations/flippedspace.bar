@@ -39,8 +39,8 @@
 @foreach ($images as $i => $image)
 
     <img class="{{ ($i == 0 ? "current-img" : "") }}"
-        width="300px"
-        height="300px"
+        width="225px"
+        height="225px"
         src="https://res.cloudinary.com/flippedspace-bar/image/upload/t_thumbnail/v1611702681/{{ $image['cloudinary_public_id'] }}"
     />
 
@@ -49,7 +49,7 @@
 @if ($type=="users")
 
     <span class="img {{ count($images) == 0 ? 'current-img' : ''}}">
-        <form class="" action="{{ route('collection.images.store', ['category' => $category, 'catalog_key' => $catalogKey]) }}"
+        <form class="" action="{{ route('collection.images.store', ['catalog_key' => $catalogKey]) }}"
             method="POST"
             enctype="multipart/form-data">
             @csrf

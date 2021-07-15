@@ -55,7 +55,7 @@ input:not([type="checkbox"]), select {
     margin: 10px 0;
 }
 input[type="submit"] {
-    margin-top: 40px;
+    /* margin-top: 40px; */
     font-size: large;
 }
 input.no-m-top {
@@ -102,7 +102,7 @@ input[type="text"], input[type="password"], input[type="email"] {
 input.img-arrow {
     width: 30px;
     position: absolute;
-    top: 270px;
+    top: 195px;
 }
 input.img-arrow.right {
     right: 20px;
@@ -273,36 +273,52 @@ header {
     text-align: center;
     padding: 18px;
 }
+.sub-nav ul li.current {
+    background: #f1f1f1;
+}
 .sub-nav ul li a {
     color: #ffffff;
+}
+.sub-nav ul li.current a {
+    color: #212121;
 }
 .sub-nav ul li a:hover {
     border-bottom: 2px solid white;
 }
 
-.user-nav {
+.user-nav ul li {
     background: #f1f1f1;;
 }
 .user-nav ul li.current {
-    background: #fff;
+    background: #C8C8C8;
 }
 .user-nav ul li.current a {
     font-weight: 800;
 }
 .category-nav {
-    background: #fff;
+    position: absolute;
+}
+.category-nav ul {
+    flex-direction: column;
+    align-content: flex-end;
+    align-items: flex-start;
+}
+.category-nav ul li {
+    background-color: white;
+    margin: 10px;
 }
 .category-nav ul li.current {
-    background: #C8C8C8;
+    background: #212121;
 }
 .category-nav ul li.current a {
     font-weight: 800;
+    color: #f1f1f1;
 }
 
 
 /***** CONTENT *****/
 .content {
-    padding: 20px;
+    padding: 20px 70px;
 }
 .content p {
     padding: 15px;
@@ -330,8 +346,8 @@ header {
     display: flex;
     flex-wrap: wrap;
     padding: 20px;
-    justify-content: space-around;
-    max-width: 1440px;
+    justify-content: space-evenly;
+    max-width: 1080px;
     margin: 0 auto;
 }
 .items-container.row-scroll {
@@ -349,6 +365,7 @@ header {
 }
 .card {
     display: flex;
+    width: 225px;
     position: relative;
     flex-direction: column;
     margin: 0 auto;
@@ -383,8 +400,8 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 300px;
-    height: 300px;
+    width: 225px;
+    height: 225px;
     color: #212121;
     background-color: #f1f1f1;
 }
@@ -505,6 +522,7 @@ header {
     color: #4d4d4d;
 }
 .card.search-container, .card-status-bar {
+    width: auto;
     max-width: 500px;
     min-width: 320px;
 }
