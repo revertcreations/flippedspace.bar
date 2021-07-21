@@ -1,3 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+  h1 {
+    @apply text-3xl;
+  }
+  h2 {
+    @apply text-2xl;
+  }
+  h3 {
+    @apply text-xl;
+  }
+  h4 {
+    @apply text-lg;
+  }
+}
 /***** MAIN STUFF *****/
 @import url(https://fonts.googleapis.com/css?family=Noto+Sans:700i&display=swap);
 @import url(https://fonts.googleapis.com/css?family=Inconsolata&display=swap);
@@ -9,9 +28,8 @@ body {
     /* background: #F5F5F5; */
     background: #C8C8C8;
 }
-h1,h2,h3,h4,h5,h6,b {
+h1,h2,h3,h4,h5,h6 {
     font-family: Lato,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-    font-weight: 700;
 }
 .h-mb-0 {
     margin-bottom: 0;
@@ -345,7 +363,6 @@ header {
     flex-wrap: wrap;
     padding: 20px;
     justify-content: space-evenly;
-    max-width: 1080px;
     margin: 0 auto;
 }
 .items-container.row-scroll {

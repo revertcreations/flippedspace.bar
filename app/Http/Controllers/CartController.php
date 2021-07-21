@@ -12,7 +12,6 @@ class CartController extends Controller
     public function index()
     {
         $cart_items = session('cart');
-        dd($cart_items);
         return view('cart.index', ['cart_items' => $cart_items]);
     }
 
@@ -84,6 +83,6 @@ class CartController extends Controller
 
         }
 
-        return view('cart.index', ['cart_items' => $listings]);
+        return view('checkout.index', ['cart_items' => $listings]);
     }
 }

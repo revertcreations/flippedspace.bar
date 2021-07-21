@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\ShippingCarrierGateway;
+use App\Services\Shipping;
 use App\Usps;
 use Illuminate\Http\Request;
 
 class AddressController extends Controller
 {
-    public function validateAddress(Request $request)
+  public function validateAddress(Shipping $shipping, Request $request)
     {
 
         // $address = collect([
@@ -22,8 +22,8 @@ class AddressController extends Controller
 
         // dd($address->address1);
 
-
-        $shippingCarrier = new Usps();
-        $shippingCarrier->validateAddress($request);
+      $validated_address = $shipping->validateAddress($request);
+      
+      return $validated_address;
     }
 }

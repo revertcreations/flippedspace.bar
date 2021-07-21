@@ -10,7 +10,7 @@ class Listing extends Model
     use HasFactory;
 
     protected $guarded = [];
-    protected $appends = ['item'];
+    // protected $appends = ['item'];
 
     public function user()
     {
@@ -27,14 +27,14 @@ class Listing extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function setItem($item)
-    {
-        $this->attributes['item'] = $item;
-    }
+    // public function setItem($item)
+    // {
+    //     return $this->attributes['item'] = $item;
+    // }
 
-    public function getItem()
-    {
-        return $this->attributes['item'];
-    }
+    // public function getItem()
+    // {
+    //     return $this->attributes['item'];
+    // }
 
 }

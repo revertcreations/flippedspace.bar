@@ -1,19 +1,18 @@
 <?php
 
-namespace App;
+namespace App\Services;
 
 use GuzzleHttp\Exception\RequestException;
 use XMLWriter;
 
-class Usps extends ShippingCarrierGateway
+class UspsShipping implements Shipping
 {
-    protected $user_id;
     protected $url = 'https://secure.shippingapis.com/ShippingAPI.dll?API=Verify&XML=';
-
-    public function __construct()
+  
+    public function __construct(protected string $user_id, $client)
     {
-        $this->user_id = config('shipping.carriers.usps.userid');
-        parent::__construct();
+      $this->user_id = $user_id;
+      $this->client = $client;
     }
 
     public function validateTracking()
@@ -93,14 +92,9 @@ class Usps extends ShippingCarrierGateway
         // </AddressValidateRequest>
         $xw->endElement();
 
-
-        // dd($this->url.$xw->outputMemory());
-        // dd('\n done');
         try {
             $response = $this->client->get($this->url.$xw->outputMemory());
         } catch(RequestException $e) {
-            dd($e);
-            dd($e->getRequest());
             if($e->hasResponse()) {
                 dd($e->getResponse());
             }
@@ -109,12 +103,7 @@ class Usps extends ShippingCarrierGateway
         // $response
        $xml = simplexml_load_string($response->getBody()->read(1024));
 
-
        return json_encode($xml);
-
-    //    $validated_address = json_decode($json);
-
-    //    dd($validated_address);
 
     }
 
