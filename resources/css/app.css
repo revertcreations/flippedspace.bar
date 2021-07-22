@@ -241,7 +241,7 @@ header {
     -webkit-box-shadow: 0px 10px 13px 0px rgba(33,33,33,0.26);
     -moz-box-shadow: 0px 10px 13px 0px rgba(33,33,33,0.26);
     box-shadow: 0px 10px 13px 0px rgba(33,33,33,0.26);
-}
+  }
 .main-nav .search-cart-wrap .cart-wrap .cart-details.opened {
     display: flex;
 }
