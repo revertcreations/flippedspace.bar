@@ -60,37 +60,14 @@
                 ${{ $artisan->price }} + ${{ $artisan->shipping_cost }} <small>shipping</small>
             </div>
 
-            @if ($type == "users")
-            <input
-                class="large"
-                type="submit"
-                value="Edit Listing"
-                onclick="window.location='{{ route('listings.edit', ['listing' => $artisan['id']]) }}'"
-            />
-
-            <form action="{{ route('listings.destroy', ['listing' => $artisan->id]) }}" method="POST">
-                @csrf
-                <input type="submit" value="Delete Listing"}/>
-            </form>
-            @else
-                <form action="{{ route('cart.add', ['listing' => $artisan->id]) }}" method="POST">
-                    @csrf
-                    <input
-                        type="submit"
-                        value="{{ session()->exists('cart.'.$artisan->id) ? 'In Cart' : 'Add To Cart' }}"
-                        {{ ((Auth::check() && Auth::user()->id == $artisan->user_id) || (session()->exists('cart.'.$artisan->id)) ? 'disabled' : '') }}
-                    />
-                </form>
-            @endif
-
         </div>
 
     </div>
 
     @if (session('status') && session('listing_id') == $artisan->id)
-    <div class="auto-remove card-status-bar success">
-        <div class="message">{{ session('status') }}</div>
-    </div>
+        <div class="auto-remove card-status-bar success">
+            <div class="message">{{ session('status') }}</div>
+        </div>
     @endif
 
 </div>

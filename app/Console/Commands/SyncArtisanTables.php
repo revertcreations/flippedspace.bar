@@ -89,7 +89,7 @@ class SyncArtisanTables extends Command
                         'title' => $title
                     ];
 
-                    Redis::hMSet('catalog:artisans:'.$artisan_id, $collectible);
+                    Redis::hSet('catalog:artisans:'.$artisan_id, $collectible);
 
                     Redis::hSet('catalog:artisans:search', $search_string, $artisan_id);
                     Redis::hSet('catalog:search', $search_string, 'artisans:'.$artisan_id);
