@@ -49,7 +49,7 @@ class ListingController extends Controller
 
             $current_listing['images'] = $current_listing['images']->sortByDesc('is_cover')->values();
 
-            $listing['item'] = $current_listing;
+            $listing->item = $current_listing;
         }
 
         return view('listings.index', ['listings' => $listings]);
@@ -69,7 +69,7 @@ class ListingController extends Controller
             $current_listing['images']->push(Redis::hGetAll($image_set));
             // dd($current_listing['images']);
         }
-        $listing['item'] = $current_listing;
+        $listing->item = $current_listing;
 
         return view('listings.show',  compact('listing'));
 

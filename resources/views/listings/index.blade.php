@@ -16,7 +16,7 @@
         <div class="items-container">
 
         @foreach ($listings as $listing)
-            @if($listing->item['category'] == 'artisans')
+            @if($listing->category->name == 'artisans')
             <x-artisan-listing-card :artisan="$listing" type="public" />
             @endif
         @endforeach

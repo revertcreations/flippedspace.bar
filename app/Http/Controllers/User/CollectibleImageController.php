@@ -24,7 +24,7 @@ class CollectibleImageController extends Controller
 
             $cloudinary_result = $image->storeOnCloudinary('artisans');
             $images_key = $collection.':artisans:'.$catalog_key.':images';
-            // dd($images_key);
+            dd($image->getRealPath());
 
             Redis::hMSet($images_key.':'.$cloudinary_result->getPublicId(), [
                 'cloudinary_secure_path' => $cloudinary_result->getSecurePath(),
@@ -34,6 +34,11 @@ class CollectibleImageController extends Controller
             ]);
 
             Redis::sAdd($images_key, $images_key.':'.$cloudinary_result->getPublicId());
+
+
+            // TODO
+            // check to see if user allows cover image to be used by flippedspace.bar
+            // store image in Redis catalog (catalog:artisan:`id`:images)
 
         }
 
@@ -48,6 +53,7 @@ class CollectibleImageController extends Controller
         $cloudinary_public_id = str_replace('_', '/', $cloudinary_public_id);
         $cloudinary_image = Cloudinary::destroy($cloudinary_public_id);
 
+        // once we start using user's images for collectibles check to see if we should actually keep
         if($cloudinary_image) {
 
             $image_key = $collection.':'.$catalog_key.':images';
@@ -68,14 +74,13 @@ class CollectibleImageController extends Controller
         $cloudinary_public_id = str_replace('_', '/', $cloudinary_public_id);
         $images_key = $collection.':'.$catalog_key.':images';
 
-        // dd($images_key);
-
         // loop through all collectibe images, and set is_cover to false
+        // where the image !== image key, else is cover true
         $current_images =  Redis::sMembers($images_key);
+
         foreach ($current_images as $image) {
             if($image == $images_key.':'.$cloudinary_public_id) {
                 Redis::hSet($image, 'is_cover', true);
-                // dd($image);
             } else {
                 Redis::hSet($image, 'is_cover', false);
             }

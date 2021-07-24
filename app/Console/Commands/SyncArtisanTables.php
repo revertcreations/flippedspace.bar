@@ -60,12 +60,12 @@ class SyncArtisanTables extends Command
         // $this->info(var_dump($all_artisans));
 
         // TODO: a much better sku system
-        $artisan_id = 0;
+        $artisan_id = 1;
         foreach ($all_artisans as $artisan)
         {
-            foreach ($artisan["sculpts"] as $sculpt)
+            foreach ($artisan['sculpts'] as $sculpt)
             {
-                foreach ($sculpt["colorways"] as $colorway)
+                foreach ($sculpt['colorways'] as $colorway)
                 {
 
                     // $sku = strtolower(substr($artisan['name'],0,1)).strtolower(substr($sculpt['name'],0,1)).strtolower(substr($colorway['name'],0,1)).'-'.$artisan_id;
@@ -89,10 +89,9 @@ class SyncArtisanTables extends Command
                         'title' => $title
                     ];
 
-                    Redis::hSet('catalog:artisans:'.$artisan_id, $collectible);
-
-                    Redis::hSet('catalog:artisans:search', $search_string, $artisan_id);
-                    Redis::hSet('catalog:search', $search_string, 'artisans:'.$artisan_id);
+                    $colorway = Redis::hmSet('catalog:artisans:'.$artisan_id, $collectible);
+                    Redis::hSet('catalog:artisans', $search_string, $artisan_id);
+                    Redis::hSet('catalog', $search_string, 'artisans:'.$artisan_id);
 
                     $artisan_id++;
                 }
@@ -101,8 +100,9 @@ class SyncArtisanTables extends Command
 
             $this->info('^^^^^^^^^^^^^^^');
             $this->info('((xx)) x ((xx))');
-            $this->info('     (----)     ');
+            $this->info('     (----)     '.$artisan_id);
 
-    }
+
+        }
 
 }
