@@ -4,13 +4,13 @@
 
     <x-logo></x-logo>
 
-    <div class="search-cart-wrap">
+    <div class="flex flex-row items-center justify-center flex-wrap mb-5 md:mb-5">
 
         <form class="" action="{{ route('search') }}" method="POST">
             <div class="flex flex-row self-center relative w-80 h-12">
                 @csrf
                 <input
-                    class="border border-b-2 border-gray-700"
+                    class="border border-b-2 border-gray-700 place text-xs"
                     name="search"
                     type="text"
                     value="{{request('search')?:''}}"

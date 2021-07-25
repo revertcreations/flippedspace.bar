@@ -13,7 +13,7 @@
 
     <div class="category-container">
 
-        <div class="items-container">
+        <div class="flex flex-wrap justify-between mx-auto">
 
         @foreach ($listings as $listing)
             @if($listing->category->name == 'artisans')

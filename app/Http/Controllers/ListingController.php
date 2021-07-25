@@ -33,7 +33,7 @@ class ListingController extends Controller
                 ->where('published', 'y')
                 ->get();
         } else {
-            $listings = Listing::where('published', true)->get();
+            $listings = Listing::where('published', true)->with('category', 'user', 'condition')->get();
         }
 
         //attach the details of the collectible for sale

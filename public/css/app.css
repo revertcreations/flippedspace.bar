@@ -19285,7 +19285,7 @@ ul, ol {
 
 a {
   color: #212121;
-  text-decoration: underline;
+  /* text-decoration: underline; */
 }
 
 a:hover {
@@ -19683,7 +19683,6 @@ header {
   position: relative;
   flex-direction: column;
   margin: 0 auto;
-  padding: 20px;
   background: #fff;
   border-bottom: 5px solid #212121;
 }

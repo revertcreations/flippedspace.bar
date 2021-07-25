@@ -31,16 +31,16 @@
             :type="$type"
         />
 
-        <div class="info">
-            <a href="{{ route('listing.show', ['listing' => $artisan->id]) }}">
-                <div class="title">
-                    <h2>{{ $artisan->artisan_name }}</h2>
-                    <h3>{{ $artisan->sculpt_name }}</h3>
-                    <h3>{{ $artisan->colorway_name }}</h3>
-                </div>
-            </a>
+        <div class="w-56 info p-4">
+            <div class="">
+                    <a href="{{ route('listing.show', ['listing' => $artisan->id]) }}">
+                    <h2>{{ $artisan->item['artisan_name'] }}</h2>
+                    <h3>{{ $artisan->item['sculpt_name'] }}</h3>
+                    <h3>{{ $artisan->item['colorway_name'] }}</h3>
+                </a>
+            </div>
 
-            <h4 class="seller">sold by <a href="/users/{{ $artisan->user_id }}">{{ $artisan->user->username }}</a></h4>
+            <small class="text-gray-500">sold by <a href="/users/{{ $artisan->user_id }}">{{ $artisan->user->username }}</a></small>
 
             <div class="condition-wrap">
                 <div>{{ $artisan->condition->name }}</div>
