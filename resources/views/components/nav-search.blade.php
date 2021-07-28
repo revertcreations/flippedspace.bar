@@ -1,4 +1,4 @@
-<div class="flex-1 h-12 mx-5">
+<div class="w-full md:w-4/6 lg:w-2/6 h-12 mx-5">
     <form class="flex flex-row self-center" action="{{ route('search') }}" method="POST">
         @csrf
         

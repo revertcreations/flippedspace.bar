@@ -1,4 +1,4 @@
-<div class="mx-auto"
+<div class=""
      x-data="{ open : false }"
 >
         @guest
@@ -7,7 +7,7 @@
         @else
 
     <button
-        class="ml-2 text-black bg-gray-100 cursor-pointer transform"
+        class="text-black bg-gray-100 cursor-pointer transform p-3"
         value=""
         x-bind:class="open ? '-rotate-45' : 'hover:rotate-12'"
         x-on:click="open = !open"
@@ -34,7 +34,7 @@
             </li>
             --}} 
 
-            <li class="p-3 hover:font-bold"><a href="/listings">classifieds</a></li>
+            <li class="p-3 hover:font-bold"><a href="/listings">★ classifieds</a></li>
             <li class="p-3 hover:font-bold"><a href="/catalog">catalog</a></li>
             <hr />
             <li class="p-3 hover:font-bold"><a href="/collection">collection</a></li>

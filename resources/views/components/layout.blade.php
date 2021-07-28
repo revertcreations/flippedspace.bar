@@ -11,7 +11,7 @@
         <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
         <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     </head>
-    <body class="font-mono">
+    <body class="font-mono overflow-hidden">
         <header>
             <x-main-nav />
             {{-- <x-sub-nav /> --}}

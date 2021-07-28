@@ -1,6 +1,6 @@
 <div
     x-data="{ open : false }"
-    class="flex justify-center align-center ml-4 relative"
+    class="flex justify-center align-center relative ml-auto lg:ml-0 "
 >
 
     <span
@@ -10,7 +10,7 @@
     </span>
 
     <button
-        class="bg-gray-100 cursor-pointer text-4xl transform"
+        class="bg-gray-100 cursor-pointer p-3 text-4xl transform"
         value=""
         x-bind:class="open ? '-rotate-45' : 'hover:rotate-12'"
         x-on:click="open = !open"
