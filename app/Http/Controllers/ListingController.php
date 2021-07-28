@@ -25,7 +25,7 @@ class ListingController extends Controller
     {
 
         $listings = collect([]);
-        // dd($request->path());
+        
         if($request->path() !== 'all' && $request->path() !== '/') {
             $category = Category::where('name', $request->path())->first();
             if($category && $category->id)

@@ -1,7 +1,8 @@
 <div id="artisan_card_{{ $artisan["id"] }}" class="card-wrap">
 
     <div class="card">
-        <img class="current-img" src="{{ $artisan['keycap_archivist_img'] }}" alt="{{ $artisan['artisan_name'] }} : {{ $artisan['sculpt_name'] }} - {{ $artisan['artisan_name'] }}"></img>
+        <img class="current-img"
+            src="{{ $artisan['keycap_archivist_img'] }}" alt="{{ $artisan['artisan_name'] }} : {{ $artisan['sculpt_name'] }} - {{ $artisan['artisan_name'] }}"></img>
         <div class="info">
             <h2 class="title">
                 @if (!empty($artisan['website']))

@@ -1,6 +1,12 @@
 <x-layout>
 
-    <h1 class="bg-white border-b-4 border-gray-900 w-11/12 md:w-1/2 xl:w-1/3 mx-auto p-8 text-center">{{ (request()->path() !== '/' && request()->path() !== 'all') ? ucfirst(request()->path()) : 'Classifieds' }}</h1>
+    <h1 class="my-10">
+      {{ 
+        (request()->path() !== '/' && request()->path() !== 'all') ? 
+        ucfirst(request()->path()) : 
+        'Classifieds' 
+      }}
+    </h1>
 
     @if($listings->isEmpty())
 
@@ -24,4 +30,14 @@
         </div>
     </div>
 
+
+<script>
+    var auto_remove_status_bars = document.querySelectorAll('.auto-remove.card-status-bar')
+    var clear_status_bar_message = setTimeout(() => {
+        for (let i = 0; i < auto_remove_status_bars.length; i++) {
+            const element = auto_remove_status_bars[i].remove();
+        }
+    }, 5000);
+
+</script>
 </x-layout>

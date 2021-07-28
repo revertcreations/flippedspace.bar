@@ -1,4 +1,4 @@
-<nav id="user_nav" class="nav-bar user-nav">
+<nav id="user_nav" class="inline-flex">
     <ul>
 
         @guest

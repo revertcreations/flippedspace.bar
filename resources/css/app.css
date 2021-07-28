@@ -23,6 +23,14 @@
 html * {
     font-family: "Inconsolata", Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
 } */
+
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Xanh+Mono&display=swap');
+@font-face {
+        font-family: 'Terminus';
+        src: url('/fonts/ter-u18n.otb');
+}
 body {
     margin: unset;
     /* background: #F5F5F5; */
@@ -46,7 +54,7 @@ a {
     /* text-decoration: underline; */
 }
 a:hover {
-    border-bottom: 2px solid #212121;
+    /* border-bottom: 2px solid #212121; */
     cursor: pointer;
 }
 a.disable-underline:hover{
@@ -175,7 +183,6 @@ header {
 }
 .main-nav .logo-link .logo {
     font-size: 8px;
-    margin: 10px 0;
 }
 .main-nav .search-cart-wrap {
     display: flex;

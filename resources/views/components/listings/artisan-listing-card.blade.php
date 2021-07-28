@@ -56,8 +56,8 @@
                 </div>
             </div>
 
-            <div class="price">
-                ${{ $artisan->price }} + ${{ $artisan->shipping_cost }} <small>shipping</small>
+            <div class="font-bold text-right mt-4">
+                ${{ $artisan->price }}
             </div>
 
         </div>
@@ -72,13 +72,3 @@
 
 </div>
 
-
-<script>
-    var auto_remove_status_bars = document.querySelectorAll('.auto-remove.card-status-bar')
-    var clear_status_bar_message = setTimeout(() => {
-        for (let i = 0; i < auto_remove_status_bars.length; i++) {
-            const element = auto_remove_status_bars[i].remove();
-        }
-    }, 5000);
-
-</script>

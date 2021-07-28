@@ -59,8 +59,11 @@ class SyncArtisanTables extends Command
         $this->info('                 ');
         // $this->info(var_dump($all_artisans));
 
-        // TODO: a much better sku system
+        // TODO: a much better sku system??
+        // Not sure if incrementing ids are enough
+        
         $artisan_id = 1;
+        
         foreach ($all_artisans as $artisan)
         {
             foreach ($artisan['sculpts'] as $sculpt)
@@ -68,7 +71,6 @@ class SyncArtisanTables extends Command
                 foreach ($sculpt['colorways'] as $colorway)
                 {
 
-                    // $sku = strtolower(substr($artisan['name'],0,1)).strtolower(substr($sculpt['name'],0,1)).strtolower(substr($colorway['name'],0,1)).'-'.$artisan_id;
                     $title = $artisan['name'].' '.$sculpt['name'].' '.$colorway['name'];
                     $search_string = strtolower($artisan['name'].' '.$sculpt['name'].' '.$colorway['name']);
 
